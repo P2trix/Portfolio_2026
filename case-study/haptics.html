@@ -197,6 +197,43 @@
     </div>
   </div>
 
+  <!-- Insight card: Feel -->
+  <div class="container">
+    <div class="cs-process" data-reveal style="border:none;padding:32px 0">
+      <div class="cs-process__card hp-anim-card">
+        <div class="hp-bg" aria-hidden="true">
+          <canvas id="hpFeelCanvas"></canvas>
+        </div>
+        <script>(function(){
+          var c=document.getElementById('hpFeelCanvas'),ctx=c.getContext('2d');
+          var W,H;
+          function resize(){var r=c.parentElement.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height;}
+          resize();new ResizeObserver(resize).observe(c.parentElement);
+          var PERIOD=1.3,N=3;
+          function frame(ts){var t=ts/1000;
+            ctx.clearRect(0,0,W,H);
+            var maxR=Math.min(W,H)*.44;
+            for(var i=0;i<N;i++){
+              var p=((t+i*PERIOD/N)%PERIOD)/PERIOD;
+              var r=p*maxR,op=(1-p)*.65;
+              ctx.beginPath();ctx.arc(W/2,H/2,r,0,Math.PI*2);
+              ctx.strokeStyle='rgba(26,28,35,'+op+')';ctx.lineWidth=1.5;ctx.stroke();
+            }
+            var pulse=(Math.sin(t*Math.PI*2/PERIOD)+1)/2;
+            ctx.beginPath();ctx.arc(W/2,H/2,4+pulse*2.5,0,Math.PI*2);
+            ctx.fillStyle='#1A1C23';ctx.fill();
+            requestAnimationFrame(frame);}
+          requestAnimationFrame(frame);
+        })();</script>
+        <span class="cs-process__badge">01</span>
+        <div class="cs-process__body">
+          <h3>Feel</h3>
+          <p>Haptic response · Sensory design · Physical confirmation</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 0a: Intro -->
   <div class="container">
     <div class="cs-section" data-reveal id="s-0a">
@@ -223,6 +260,52 @@
         <p>That's not a gimmick. That's a different sensory channel being used for input — one that doesn't compete with your vision.</p>
         <p>The BlackBerry Storm took a different approach: the entire touchscreen was a physical button. You could tap anywhere and the whole surface clicked down. It was weird, it was slightly ridiculous, and it worked — because it gave you confirmation that something happened. Not a visual flash, not a sound, something physical. The oldest form of feedback there is.</p>
         <p>These were imperfect solutions to a real problem. Companies were trying to figure out how to make flat glass feel like something. Some got closer than others.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insight card: Click -->
+  <div class="container">
+    <div class="cs-process" data-reveal style="border:none;padding:32px 0">
+      <div class="cs-process__card hp-anim-card">
+        <div class="hp-bg" aria-hidden="true">
+          <canvas id="hpClickCanvas"></canvas>
+        </div>
+        <script>(function(){
+          var c=document.getElementById('hpClickCanvas'),ctx=c.getContext('2d');
+          var W,H;
+          function resize(){var r=c.parentElement.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height;}
+          resize();new ResizeObserver(resize).observe(c.parentElement);
+          var TICKS=24;
+          function frame(ts){var t=ts/1000;
+            ctx.clearRect(0,0,W,H);
+            var cx=W/2,cy=H/2,r=Math.min(W,H)*.38;
+            ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+            ctx.strokeStyle='#D0D3DB';ctx.lineWidth=3;ctx.stroke();
+            var cur=Math.floor(t*4)%TICKS;
+            for(var i=0;i<TICKS;i++){
+              var a=i/TICKS*Math.PI*2-Math.PI/2,active=i===cur;
+              ctx.strokeStyle=active?'#1A1C23':'#C5CAD4';
+              ctx.lineWidth=active?2.5:1;
+              ctx.beginPath();
+              ctx.moveTo(cx+Math.cos(a)*(r-9),cy+Math.sin(a)*(r-9));
+              ctx.lineTo(cx+Math.cos(a)*(r-1),cy+Math.sin(a)*(r-1));
+              ctx.stroke();
+            }
+            var pa=cur/TICKS*Math.PI*2-Math.PI/2;
+            ctx.beginPath();ctx.arc(cx+Math.cos(pa)*(r-16),cy+Math.sin(pa)*(r-16),5,0,Math.PI*2);
+            ctx.fillStyle='#1A1C23';ctx.fill();
+            ctx.beginPath();ctx.arc(cx,cy,r*.34,0,Math.PI*2);
+            ctx.fillStyle='rgba(255,255,255,0.8)';ctx.fill();
+            ctx.strokeStyle='#D0D3DB';ctx.lineWidth=1.5;ctx.stroke();
+            requestAnimationFrame(frame);}
+          requestAnimationFrame(frame);
+        })();</script>
+        <span class="cs-process__badge">02</span>
+        <div class="cs-process__body">
+          <h3>Click</h3>
+          <p>Click wheel · Eyes-free navigation · Physical memory</p>
+        </div>
       </div>
     </div>
   </div>
@@ -267,6 +350,57 @@
     </div>
   </div>
 
+  <!-- Insight card: Signal -->
+  <div class="container">
+    <div class="cs-process" data-reveal style="border:none;padding:32px 0">
+      <div class="cs-process__card hp-anim-card">
+        <div class="hp-bg" aria-hidden="true">
+          <canvas id="hpSignalCanvas"></canvas>
+        </div>
+        <script>(function(){
+          var c=document.getElementById('hpSignalCanvas'),ctx=c.getContext('2d');
+          var W,H;
+          function resize(){var r=c.parentElement.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height;}
+          resize();new ResizeObserver(resize).observe(c.parentElement);
+          var PERIOD=2.6;
+          function sig(t){
+            var ph=t%PERIOD/PERIOD;
+            if(ph<0.08) return Math.sin(ph/.08*Math.PI);
+            if(ph<0.14) return -0.28*Math.sin((ph-.08)/.06*Math.PI);
+            return 0;
+          }
+          function frame(ts){var t=ts/1000;
+            ctx.clearRect(0,0,W,H);
+            var cy=H/2,WIN=3.5;
+            ctx.beginPath();
+            for(var x=0;x<=W;x+=2){
+              var xt=t-(W-x)/W*WIN,y=cy-sig(xt)*H*.36;
+              x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+            }
+            ctx.strokeStyle='#1A1C23';ctx.lineWidth=1.5;ctx.stroke();
+            var spk=sig(t);
+            if(Math.abs(spk)>0.05){
+              ctx.save();ctx.globalAlpha=Math.abs(spk)*.8;
+              ctx.beginPath();
+              for(var x2=W*.72;x2<=W;x2+=2){
+                var xt2=t-(W-x2)/W*WIN,y2=cy-sig(xt2)*H*.36;
+                x2===W*.72?ctx.moveTo(x2,y2):ctx.lineTo(x2,y2);
+              }
+              ctx.strokeStyle='#1A1C23';ctx.lineWidth=3;ctx.stroke();
+              ctx.restore();
+            }
+            requestAnimationFrame(frame);}
+          requestAnimationFrame(frame);
+        })();</script>
+        <span class="cs-process__badge">03</span>
+        <div class="cs-process__body">
+          <h3>Signal</h3>
+          <p>Haptic channel · Tactile confirmation · Parallel to vision</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 3a: Not everyone's fingers work the same way -->
   <div class="container">
     <div class="cs-section" data-reveal id="s-3a">
@@ -279,6 +413,51 @@
         <p>Capacitive touchscreens depend on conductivity. Sweaty hands. Cold hands. Gloves. Worn fingerprints — a real condition, more common than you'd think, that affects elderly users, people who work with their hands, certain chemotherapy patients. For these users, a flat glass surface isn't just less satisfying. It literally doesn't work.</p>
         <p>Voice control solves some of this. But voice has its own failure modes: accents, ambient noise, the social discomfort of talking to your car in a parking garage. It's an additional channel, not a replacement.</p>
         <p>The pattern here is the same one that shows up everywhere in design when you mistake preference for universal truth. "Touch is better" is a preference, held by people with typical hands, in typical conditions, who made the decision. Physical feedback isn't a legacy constraint — it's a human one.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insight card: Memory -->
+  <div class="container">
+    <div class="cs-process" data-reveal style="border:none;padding:32px 0">
+      <div class="cs-process__card hp-anim-card">
+        <div class="hp-bg" aria-hidden="true">
+          <canvas id="hpMemCanvas"></canvas>
+        </div>
+        <script>(function(){
+          var c=document.getElementById('hpMemCanvas'),ctx=c.getContext('2d');
+          var W,H;
+          var WP=[{x:.12,y:.5},{x:.28,y:.28},{x:.46,y:.62},{x:.64,y:.22},{x:.84,y:.5}];
+          function resize(){var r=c.parentElement.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height;}
+          resize();new ResizeObserver(resize).observe(c.parentElement);
+          var CYCLE=3.2;
+          function frame(ts){var t=ts/1000;
+            ctx.clearRect(0,0,W,H);
+            var N=WP.length-1,ph=t%CYCLE,prog=Math.min(ph/(CYCLE*.82),1);
+            var fade=prog>=1?Math.max(0,1-(ph-CYCLE*.82)/(CYCLE*.18)):1;
+            WP.forEach(function(wp){
+              ctx.beginPath();ctx.arc(wp.x*W,wp.y*H,5,0,Math.PI*2);
+              ctx.fillStyle='#D0D3DB';ctx.fill();
+            });
+            ctx.save();ctx.globalAlpha=fade;
+            ctx.setLineDash([6,5]);ctx.strokeStyle='#1A1C23';ctx.lineWidth=2;
+            ctx.beginPath();ctx.moveTo(WP[0].x*W,WP[0].y*H);
+            var full=Math.floor(prog*N),partial=(prog*N)-full;
+            for(var i=1;i<=Math.min(full,N);i++) ctx.lineTo(WP[i].x*W,WP[i].y*H);
+            if(full<N){ctx.lineTo((WP[full].x+(WP[full+1].x-WP[full].x)*partial)*W,(WP[full].y+(WP[full+1].y-WP[full].y)*partial)*H);}
+            ctx.stroke();ctx.setLineDash([]);
+            WP.forEach(function(wp,i){
+              if(prog*N>=i){ctx.beginPath();ctx.arc(wp.x*W,wp.y*H,5,0,Math.PI*2);ctx.fillStyle='rgba(26,28,35,'+fade+')';ctx.fill();}
+            });
+            ctx.restore();
+            requestAnimationFrame(frame);}
+          requestAnimationFrame(frame);
+        })();</script>
+        <span class="cs-process__badge">04</span>
+        <div class="cs-process__body">
+          <h3>Memory</h3>
+          <p>Muscle memory · Blind navigation · Physical affordance</p>
+        </div>
       </div>
     </div>
   </div>

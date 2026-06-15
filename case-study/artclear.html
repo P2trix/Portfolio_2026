@@ -91,6 +91,14 @@
       .ac-takeaways__card { padding: 20px 16px; }
       .ac-takeaways__card p { font-size: 0.9rem; }
     }
+
+    /* ─── Animated card backgrounds ─── */
+    .ac-anim-card { position: relative; overflow: hidden; }
+    .ac-anim-card.cs-process__card { background: rgba(255,255,255,0.88); }
+    .ac-anim-card .ac-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; border-radius: inherit; }
+    .ac-anim-card .ac-bg canvas { display: block; position: absolute; inset: 0; width: 100%; height: 100%; }
+    .ac-anim-card .cs-process__badge,
+    .ac-anim-card .cs-process__body { position: relative; z-index: 1; }
   </style>
 </head>
 <body class="cs-page">
@@ -256,7 +264,36 @@
   <!-- Single process card: Research -->
   <div class="container">
     <div class="cs-process" data-reveal style="border:none;padding:32px 0">
-      <div class="cs-process__card">
+      <div class="cs-process__card ac-anim-card">
+        <div class="ac-bg" aria-hidden="true">
+          <canvas id="acScanCanvas"></canvas>
+        </div>
+        <script>(function(){
+          var c=document.getElementById('acScanCanvas'),ctx=c.getContext('2d');
+          var W,H,SPACE=40,BW=55,dots=[];
+          function buildDots(){dots=[];for(var y=SPACE/2;y<H+SPACE;y+=SPACE)for(var x=SPACE/2;x<W+SPACE;x+=SPACE)dots.push({x:x,y:y,g:0});}
+          function resize(){var r=c.parentElement.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height;buildDots();}
+          resize();new ResizeObserver(resize).observe(c.parentElement);
+          function frame(ts){var t=ts/1000;
+            ctx.clearRect(0,0,W,H);
+            var by=(t*H/3.5)%(H+BW*2)-BW;
+            dots.forEach(function(d){
+              var dist=Math.abs(d.y-by);
+              d.g=dist<BW?Math.pow(1-dist/BW,2):Math.max(0,d.g-0.03);
+              ctx.beginPath();ctx.arc(d.x,d.y,2,0,Math.PI*2);
+              ctx.fillStyle=d.g>0.05?'rgba(28,78,254,'+(0.2+d.g*0.8)+')':'#DDE5FF';
+              ctx.fill();
+            });
+            var g=ctx.createLinearGradient(0,by-BW,0,by+BW);
+            g.addColorStop(0,'rgba(28,78,254,0)');g.addColorStop(0.5,'rgba(28,78,254,0.10)');g.addColorStop(1,'rgba(28,78,254,0)');
+            ctx.fillStyle=g;ctx.fillRect(0,by-BW,W,BW*2);
+            ctx.strokeStyle='rgba(28,78,254,0.75)';ctx.lineWidth=1.5;
+            ctx.shadowColor='#1C4EFE';ctx.shadowBlur=12;
+            ctx.beginPath();ctx.moveTo(0,by);ctx.lineTo(W,by);ctx.stroke();
+            ctx.shadowBlur=0;
+            requestAnimationFrame(frame);}
+          requestAnimationFrame(frame);
+        })();</script>
         <span class="cs-process__badge">1</span>
         <div class="cs-process__body">
           <h3>Research</h3>
@@ -333,7 +370,36 @@
   <!-- Single process card: Define -->
   <div class="container">
     <div class="cs-process" data-reveal style="border:none;padding:32px 0">
-      <div class="cs-process__card">
+      <div class="cs-process__card ac-anim-card">
+        <div class="ac-bg" aria-hidden="true">
+          <canvas id="acPersonaCanvas"></canvas>
+        </div>
+        <script>(function(){
+          var c=document.getElementById('acPersonaCanvas'),ctx=c.getContext('2d');
+          var W,H;
+          var LBL=['A','B','C','D','E'];
+          var ang0=[0,1.26,2.51,3.77,5.03],spd=[0.28,0.35,0.22,0.30,0.25],rFrac=[0.32,0.24,0.38,0.27,0.20];
+          function resize(){var r=c.parentElement.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height;}
+          resize();new ResizeObserver(resize).observe(c.parentElement);
+          function pos(i,t){var r=rFrac[i]*Math.min(W,H)*0.66;var a=ang0[i]+t*spd[i];return{x:W/2+Math.cos(a)*r,y:H/2+Math.sin(a)*r*0.7};}
+          function frame(ts){var t=ts/1000;
+            ctx.clearRect(0,0,W,H);
+            var P=LBL.map(function(_,i){return pos(i,t);});
+            for(var i=0;i<5;i++)for(var j=i+1;j<5;j++){
+              var dx=P[j].x-P[i].x,dy=P[j].y-P[i].y,d=Math.sqrt(dx*dx+dy*dy),md=H*.65;
+              if(d<md){var op=(1-d/md)*0.5;ctx.strokeStyle='rgba(28,78,254,'+op+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P[i].x,P[i].y);ctx.lineTo(P[j].x,P[j].y);ctx.stroke();}
+            }
+            LBL.forEach(function(l,i){
+              var p=P[i];
+              ctx.beginPath();ctx.arc(p.x,p.y,17,0,Math.PI*2);
+              ctx.fillStyle='rgba(240,244,255,0.92)';ctx.fill();
+              ctx.strokeStyle='rgba(28,78,254,0.65)';ctx.lineWidth=1.5;ctx.stroke();
+              ctx.fillStyle='rgba(28,78,254,0.85)';ctx.font='bold 10px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';
+              ctx.fillText(l,p.x,p.y);
+            });
+            requestAnimationFrame(frame);}
+          requestAnimationFrame(frame);
+        })();</script>
         <span class="cs-process__badge">2</span>
         <div class="cs-process__body">
           <h3>Define</h3>
@@ -407,7 +473,41 @@
   <!-- Single process card: Design -->
   <div class="container">
     <div class="cs-process" data-reveal style="border:none;padding:32px 0">
-      <div class="cs-process__card">
+      <div class="cs-process__card ac-anim-card">
+        <div class="ac-bg" aria-hidden="true">
+          <canvas id="acWireCanvas"></canvas>
+        </div>
+        <script>(function(){
+          var c=document.getElementById('acWireCanvas'),ctx=c.getContext('2d');
+          var W,H;
+          var BOXES=[
+            {x:.08,y:.08,w:.84,h:.84},
+            {x:.11,y:.11,w:.40,h:.38},{x:.53,y:.11,w:.40,h:.38},
+            {x:.11,y:.53,w:.19,h:.38},{x:.32,y:.53,w:.18,h:.38},
+            {x:.52,y:.53,w:.19,h:.38},{x:.73,y:.53,w:.18,h:.38}
+          ];
+          var CYCLE=5,FADE_START=4;
+          function resize(){var r=c.parentElement.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height;}
+          resize();new ResizeObserver(resize).observe(c.parentElement);
+          function frame(ts){var t=ts/1000,ph=t%CYCLE;
+            ctx.clearRect(0,0,W,H);
+            BOXES.forEach(function(b,i){
+              var appear=i*(FADE_START/BOXES.length);
+              var op=ph<FADE_START?Math.min(1,Math.max(0,(ph-appear)*3)):Math.max(0,1-(ph-FADE_START)/(CYCLE-FADE_START));
+              if(op<0.01)return;
+              ctx.save();ctx.globalAlpha=op;
+              var bx=b.x*W,by=b.y*H,bw=b.w*W,bh=b.h*H;
+              ctx.fillStyle='rgba(28,78,254,0.04)';ctx.fillRect(bx,by,bw,bh);
+              ctx.strokeStyle='rgba(28,78,254,0.7)';ctx.lineWidth=1.5;ctx.strokeRect(bx,by,bw,bh);
+              [[0,0],[1,0],[1,1],[0,1]].forEach(function(co){
+                ctx.beginPath();ctx.arc(bx+co[0]*bw,by+co[1]*bh,3,0,Math.PI*2);
+                ctx.fillStyle='rgba(28,78,254,0.8)';ctx.fill();
+              });
+              ctx.restore();
+            });
+            requestAnimationFrame(frame);}
+          requestAnimationFrame(frame);
+        })();</script>
         <span class="cs-process__badge">3</span>
         <div class="cs-process__body">
           <h3>Design</h3>
@@ -494,7 +594,39 @@
   <!-- Single process card: Iterate -->
   <div class="container">
     <div class="cs-process" data-reveal style="border:none;padding:32px 0">
-      <div class="cs-process__card">
+      <div class="cs-process__card ac-anim-card">
+        <div class="ac-bg" aria-hidden="true">
+          <canvas id="acLoopCanvas"></canvas>
+        </div>
+        <script>(function(){
+          var c=document.getElementById('acLoopCanvas'),ctx=c.getContext('2d');
+          var W,H;
+          var ICON=new Path2D('M28.2216 14.3148C29.597 10.7578 34.6297 10.7578 36.0051 14.3148L49.4235 49.0177C50.8188 52.6262 46.9771 56.0261 43.5649 54.2024L34.0802 49.1329C32.8512 48.476 31.3755 48.476 30.1465 49.1329L20.6617 54.2023C17.2496 56.0261 13.4079 52.6262 14.8032 49.0177L28.2216 14.3148Z');
+          function resize(){var r=c.parentElement.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height;}
+          resize();new ResizeObserver(resize).observe(c.parentElement);
+          function frame(ts){var t=ts/1000;
+            ctx.clearRect(0,0,W,H);
+            var cx=W*.5,cy=H*.5,rx=W*.38,ry=H*.28;
+            ctx.beginPath();ctx.ellipse(cx,cy,rx,ry,0,0,Math.PI*2);
+            ctx.strokeStyle='#DDE5FF';ctx.lineWidth=2;ctx.stroke();
+            var a=(t*.8)%(Math.PI*2)-Math.PI/2;
+            var px=cx+Math.cos(a)*rx,py=cy+Math.sin(a)*ry;
+            var ta=Math.atan2(ry*Math.cos(a),-rx*Math.sin(a))+Math.PI/2;
+            ctx.save();ctx.translate(px,py);ctx.rotate(ta);
+            var s=H*.048/32;ctx.scale(s,s);ctx.translate(-32,-32);
+            ctx.fillStyle='#1C4EFE';ctx.shadowColor='#1C4EFE';ctx.shadowBlur=18;
+            ctx.fill(ICON);ctx.restore();
+            var loopPh=((t*.8)%(Math.PI*2))/(Math.PI*2);
+            if(loopPh>0.82){
+              var op=Math.sin((loopPh-.82)/.18*Math.PI);
+              ctx.save();ctx.globalAlpha=op;ctx.strokeStyle='#1C4EFE';ctx.lineWidth=2;
+              var mx=cx,my=cy-ry-22;
+              ctx.beginPath();ctx.moveTo(mx-10,my-5);ctx.lineTo(mx-3,my+3);ctx.lineTo(mx+10,my-8);ctx.stroke();
+              ctx.restore();
+            }
+            requestAnimationFrame(frame);}
+          requestAnimationFrame(frame);
+        })();</script>
         <span class="cs-process__badge">4</span>
         <div class="cs-process__body">
           <h3>Iterate</h3>

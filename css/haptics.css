@@ -211,3 +211,11 @@
   .hp-hero__visual { min-height: 200px; }
   .hp-topo { border-radius: 16px; }
 }
+
+/* ─── Animated insight cards ─── */
+.hp-anim-card { position: relative; overflow: hidden; }
+.hp-anim-card.cs-process__card { background: rgba(255,255,255,0.88); }
+.hp-anim-card .hp-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; border-radius: inherit; }
+.hp-anim-card .hp-bg canvas { display: block; position: absolute; inset: 0; width: 100%; height: 100%; }
+.hp-anim-card .cs-process__badge,
+.hp-anim-card .cs-process__body { position: relative; z-index: 1; }
