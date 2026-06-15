@@ -162,10 +162,42 @@
     </div>
   </div>
 
+  <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="f2Icon" viewBox="0 0 64 64">
+        <path d="M28.2216 14.3148C29.597 10.7578 34.6297 10.7578 36.0051 14.3148L49.4235 49.0177C50.8188 52.6262 46.9771 56.0261 43.5649 54.2024L34.0802 49.1329C32.8512 48.476 31.3755 48.476 30.1465 49.1329L20.6617 54.2023C17.2496 56.0261 13.4079 52.6262 14.8032 49.0177L28.2216 14.3148Z" fill="#EEFF2F" transform="rotate(90,32,32)"/>
+      </symbol>
+    </defs>
+  </svg>
+
   <!-- Single process card: Research -->
   <div class="container">
     <div class="cs-process" data-reveal style="border:none;padding:32px 0">
-      <div class="cs-process__card">
+      <div class="cs-process__card f2-anim-card">
+        <div class="f2-tubes" aria-hidden="true">
+          <canvas id="f2RadarCanvas"></canvas>
+        </div>
+        <script>(function(){
+          var c=document.getElementById('f2RadarCanvas'),ctx=c.getContext('2d');
+          var ICON=new Path2D('M28.2216 14.3148C29.597 10.7578 34.6297 10.7578 36.0051 14.3148L49.4235 49.0177C50.8188 52.6262 46.9771 56.0261 43.5649 54.2024L34.0802 49.1329C32.8512 48.476 31.3755 48.476 30.1465 49.1329L20.6617 54.2023C17.2496 56.0261 13.4079 52.6262 14.8032 49.0177L28.2216 14.3148Z');
+          var W,H,cx,cy,mR;
+          var pts=[{x:.72,y:.30},{x:.42,y:.65},{x:.83,y:.55},{x:.28,y:.40},{x:.60,y:.22}];
+          function resize(){var r=c.parentElement.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height;cx=W*.5;cy=H*.5;mR=Math.sqrt(W*W+H*H)*.75;}
+          resize();new ResizeObserver(resize).observe(c.parentElement);
+          function icon(x,y,a,op){ctx.save();ctx.translate(x,y);ctx.rotate(a);var s=H*.06/32;ctx.scale(s,s);ctx.translate(-32,-32);ctx.fillStyle='rgba(238,255,47,'+op+')';ctx.shadowColor='#EEFF2F';ctx.shadowBlur=25;ctx.fill(ICON);ctx.restore();}
+          function frame(ts){var t=ts/1000;ctx.clearRect(0,0,W,H);
+            ctx.strokeStyle='#2F343D';ctx.lineWidth=1.2;
+            for(var i=1;i<=5;i++){ctx.beginPath();ctx.arc(cx,cy,(mR/5)*i,0,Math.PI*2);ctx.stroke();}
+            ctx.lineWidth=.6;ctx.beginPath();ctx.moveTo(cx,0);ctx.lineTo(cx,H);ctx.stroke();
+            ctx.beginPath();ctx.moveTo(0,cy);ctx.lineTo(W,cy);ctx.stroke();
+            var sa=(t*.7)%(Math.PI*2);
+            for(var j=0;j<25;j++){var a=sa-j*.025;ctx.strokeStyle='rgba(238,255,47,'+(0.10*(1-j/25))+')';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*mR,cy+Math.sin(a)*mR);ctx.stroke();}
+            ctx.strokeStyle='#EEFF2F';ctx.lineWidth=2;ctx.shadowColor='#EEFF2F';ctx.shadowBlur=14;
+            ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(sa)*mR,cy+Math.sin(sa)*mR);ctx.stroke();ctx.shadowBlur=0;
+            pts.forEach(function(d){var dx=cx+(d.x-.5)*W*1.5,dy=cy+(d.y-.5)*H*2;var da=Math.atan2(dy-cy,dx-cx);var diff=((sa-da)%(Math.PI*2)+Math.PI*2)%(Math.PI*2);var op=diff<.2?1:Math.max(0,1-(diff-.2)*3);if(op>.02)icon(dx,dy,da+Math.PI/2,op);});
+            requestAnimationFrame(frame);}
+          requestAnimationFrame(frame);
+        })();</script>
         <span class="cs-process__badge">1</span>
         <div class="cs-process__body">
           <h3>Research</h3>
@@ -223,49 +255,35 @@
   <!-- Single process card: Define -->
   <div class="container">
     <div class="cs-process" data-reveal style="border:none;padding:32px 0">
-      <div class="cs-process__card f2-define-card">
+      <div class="cs-process__card f2-anim-card f2-define-card">
         <div class="f2-tubes" aria-hidden="true">
-          <svg viewBox="0 0 1838 1895" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <radialGradient id="f2Glow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#EEFF2F" stop-opacity="0.45"/>
-                <stop offset="40%" stop-color="#EEFF2F" stop-opacity="0.25"/>
-                <stop offset="100%" stop-color="#EEFF2F" stop-opacity="0"/>
-              </radialGradient>
-              <radialGradient id="f2Dot" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="#EEFF2F" stop-opacity="1"/>
-                <stop offset="20%" stop-color="#EEFF2F" stop-opacity="0.8"/>
-                <stop offset="50%" stop-color="#EEFF2F" stop-opacity="0.15"/>
-                <stop offset="100%" stop-color="#EEFF2F" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
-            <path class="hp-tube hp-tube--6" d="M1400,2000 V920 C1400,970 1500,950 1600,950 H2000" stroke="#2F343D" stroke-width="85" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M1400,2000 V920 C1400,970 1500,950 1600,950 H2000" dur="5s" repeatCount="indefinite" begin="0s"/></circle>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M1400,2000 V920 C1400,970 1500,950 1600,950 H2000" dur="5s" repeatCount="indefinite" begin="-1.67s"/></circle>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M1400,2000 V920 C1400,970 1500,950 1600,950 H2000" dur="5s" repeatCount="indefinite" begin="-3.33s"/></circle>
-            <path class="hp-tube hp-tube--4" d="M-200,1641 H1800" stroke="#2F343D" stroke-width="85" stroke-linecap="round"/>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M-200,1641 H1800" dur="4s" repeatCount="indefinite" begin="0s"/></circle>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M-200,1641 H1800" dur="4s" repeatCount="indefinite" begin="-1.33s"/></circle>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M-200,1641 H1800" dur="4s" repeatCount="indefinite" begin="-2.67s"/></circle>
-            <circle cx="1014" cy="1641" r="85" fill="url(#f2Glow)"/>
-            <path class="hp-tube hp-tube--3" d="M1014,2000 V1403 C1014,1328 1075,1267 1150,1267 H2000" stroke="#2F343D" stroke-width="85" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M1014,2000 V1403 C1014,1328 1075,1267 1150,1267 H2000" dur="5s" repeatCount="indefinite" begin="0s"/></circle>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M1014,2000 V1403 C1014,1328 1075,1267 1150,1267 H2000" dur="5s" repeatCount="indefinite" begin="-1.67s"/></circle>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M1014,2000 V1403 C1014,1328 1075,1267 1150,1267 H2000" dur="5s" repeatCount="indefinite" begin="-3.33s"/></circle>
-            <circle cx="848" cy="628" r="85" fill="url(#f2Glow)"/>
-            <path class="hp-tube hp-tube--2" d="M848,244 V736 C848,811 787,872 712,872 H-200" stroke="#2F343D" stroke-width="85" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M848,244 V736 C848,811 787,872 712,872 H-200" dur="5s" repeatCount="indefinite" begin="0s"/></circle>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M848,244 V736 C848,811 787,872 712,872 H-200" dur="5s" repeatCount="indefinite" begin="-1.67s"/></circle>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M848,244 V736 C848,811 787,872 712,872 H-200" dur="5s" repeatCount="indefinite" begin="-3.33s"/></circle>
-            <circle cx="1208" cy="628" r="85" fill="url(#f2Glow)"/>
-            <path class="hp-tube hp-tube--1" d="M585,-200 V492 C585,567 646,628 721,628 H2000" stroke="#2F343D" stroke-width="85" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M585,-200 V492 C585,567 646,628 721,628 H2000" dur="5s" repeatCount="indefinite" begin="0s"/></circle>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M585,-200 V492 C585,567 646,628 721,628 H2000" dur="5s" repeatCount="indefinite" begin="-1.67s"/></circle>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M585,-200 V492 C585,567 646,628 721,628 H2000" dur="5s" repeatCount="indefinite" begin="-3.33s"/></circle>
-            <path class="hp-tube hp-tube--5" d="M1208,-200 V857 C1208,932 1147,993 1072,993 H884.819 C844.091,993 806.456,1015 786.092,1050 L660.41,1268 C640.046,1303 602.411,1325 561.683,1325 H-200" stroke="#2F343D" stroke-width="85" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M1208,-200 V857 C1208,932 1147,993 1072,993 H884.819 C844.091,993 806.456,1015 786.092,1050 L660.41,1268 C640.046,1303 602.411,1325 561.683,1325 H-200" dur="7s" repeatCount="indefinite" begin="0s"/></circle>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M1208,-200 V857 C1208,932 1147,993 1072,993 H884.819 C844.091,993 806.456,1015 786.092,1050 L660.41,1268 C640.046,1303 602.411,1325 561.683,1325 H-200" dur="7s" repeatCount="indefinite" begin="-2.33s"/></circle>
-            <circle r="80" fill="url(#f2Dot)"><animateMotion path="M1208,-200 V857 C1208,932 1147,993 1072,993 H884.819 C844.091,993 806.456,1015 786.092,1050 L660.41,1268 C640.046,1303 602.411,1325 561.683,1325 H-200" dur="7s" repeatCount="indefinite" begin="-4.67s"/></circle>
+          <svg viewBox="0 0 4333 1895" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2850,-300 V492 C2850,567 2910.89,628 2986,628 H4500" stroke="#2F343D" stroke-width="85" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3343,-300 V736 C3343,811 3282.11,872 3207,872 H1000" stroke="#2F343D" stroke-width="85" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3509,2200 V1403 C3509,1328 3569.89,1267 3645,1267 H4500" stroke="#2F343D" stroke-width="85" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M-900,1641 H4500" stroke="#2F343D" stroke-width="85" stroke-linecap="round"/>
+            <path d="M3813.5,-300 V857 C3813.5,932 3752.61,993 3677.5,993 H3490.32 C3449.59,993 3411.96,1015 3391.59,1050 L3265.91,1268 C3245.55,1303 3207.91,1325 3167.18,1325 H2971 C2880.43,1325 2807,1398 2807,1489 V2200" stroke="#2F343D" stroke-width="85" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="2272.5" cy="869.5" r="246.5" stroke="#2F343D" stroke-width="85" fill="none"/>
+            <path d="M2284.5,1116 V2200" stroke="#2F343D" stroke-width="85" stroke-linecap="round"/>
+            <path d="M2026,869.5 H-900" stroke="#2F343D" stroke-width="85" stroke-linecap="round"/>
+            <path d="M2284,-300 V623" stroke="#2F343D" stroke-width="85" stroke-linecap="round"/>
+            <!-- path 1: top→right -->
+            <g><animateMotion path="M2850,0 V492 C2850,567 2910.89,628 2986,628 H4333" dur="4s" repeatCount="indefinite" begin="0s" rotate="auto"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="4s" repeatCount="indefinite" begin="0s"/><use href="#f2Icon" x="-55" y="-55" width="110" height="110" style="filter:drop-shadow(0 0 8px #EEFF2F) drop-shadow(0 0 16px #EEFF2F)"/></g>
+            <g><animateMotion path="M2850,0 V492 C2850,567 2910.89,628 2986,628 H4333" dur="4s" repeatCount="indefinite" begin="-2s" rotate="auto"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="4s" repeatCount="indefinite" begin="-2s"/><use href="#f2Icon" x="-55" y="-55" width="110" height="110" style="filter:drop-shadow(0 0 8px #EEFF2F) drop-shadow(0 0 16px #EEFF2F)"/></g>
+            <!-- path 2: top→left -->
+            <g><animateMotion path="M3343,0 V736 C3343,811 3282.11,872 3207,872 H0" dur="4s" repeatCount="indefinite" begin="0s" rotate="auto"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="4s" repeatCount="indefinite" begin="0s"/><use href="#f2Icon" x="-55" y="-55" width="110" height="110" style="filter:drop-shadow(0 0 8px #EEFF2F) drop-shadow(0 0 16px #EEFF2F)"/></g>
+            <g><animateMotion path="M3343,0 V736 C3343,811 3282.11,872 3207,872 H0" dur="4s" repeatCount="indefinite" begin="-2s" rotate="auto"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.08;0.92;1" dur="4s" repeatCount="indefinite" begin="-2s"/><use href="#f2Icon" x="-55" y="-55" width="110" height="110" style="filter:drop-shadow(0 0 8px #EEFF2F) drop-shadow(0 0 16px #EEFF2F)"/></g>
+            <!-- path 5: winding top→bottom -->
+            <g><animateMotion path="M3813.5,0 V857 C3813.5,932 3752.61,993 3677.5,993 H3490.32 C3449.59,993 3411.96,1015 3391.59,1050 L3265.91,1268 C3245.55,1303 3207.91,1325 3167.18,1325 H2971 C2880.43,1325 2807,1398 2807,1489 V1895" dur="7s" repeatCount="indefinite" begin="0s" rotate="auto"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.95;1" dur="7s" repeatCount="indefinite" begin="0s"/><use href="#f2Icon" x="-55" y="-55" width="110" height="110" style="filter:drop-shadow(0 0 8px #EEFF2F) drop-shadow(0 0 16px #EEFF2F)"/></g>
+            <g><animateMotion path="M3813.5,0 V857 C3813.5,932 3752.61,993 3677.5,993 H3490.32 C3449.59,993 3411.96,1015 3391.59,1050 L3265.91,1268 C3245.55,1303 3207.91,1325 3167.18,1325 H2971 C2880.43,1325 2807,1398 2807,1489 V1895" dur="7s" repeatCount="indefinite" begin="-3.5s" rotate="auto"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.95;1" dur="7s" repeatCount="indefinite" begin="-3.5s"/><use href="#f2Icon" x="-55" y="-55" width="110" height="110" style="filter:drop-shadow(0 0 8px #EEFF2F) drop-shadow(0 0 16px #EEFF2F)"/></g>
+            <!-- rondo — bez fade, zawsze widoczne -->
+            <g><animateMotion path="M2272.5,623 A246.5,246.5 0 0 1 2519,869.5 A246.5,246.5 0 0 1 2272.5,1116 A246.5,246.5 0 0 1 2026,869.5 A246.5,246.5 0 0 1 2272.5,623" dur="4s" repeatCount="indefinite" begin="0s" rotate="auto"/><use href="#f2Icon" x="-55" y="-55" width="110" height="110" style="filter:drop-shadow(0 0 8px #EEFF2F) drop-shadow(0 0 16px #EEFF2F)"/></g>
+            <!-- path 7: rondo→lewa krawędź -->
+            <g><animateMotion path="M2026,869.5 H0" dur="3.5s" repeatCount="indefinite" begin="0s" rotate="auto"/><animate attributeName="opacity" values="1;1;0" keyTimes="0;0.88;1" dur="3.5s" repeatCount="indefinite" begin="0s"/><use href="#f2Icon" x="-55" y="-55" width="110" height="110" style="filter:drop-shadow(0 0 8px #EEFF2F) drop-shadow(0 0 16px #EEFF2F)"/></g>
+            <!-- path 8: rondo→górna krawędź (odwrócony kierunek, fade out na końcu) -->
+            <g><animateMotion path="M2284,623 V0" dur="2.5s" repeatCount="indefinite" begin="0s" rotate="auto"/><animate attributeName="opacity" values="1;1;0" keyTimes="0;0.85;1" dur="2.5s" repeatCount="indefinite" begin="0s"/><use href="#f2Icon" x="-55" y="-55" width="110" height="110" style="filter:drop-shadow(0 0 8px #EEFF2F) drop-shadow(0 0 16px #EEFF2F)"/></g>
+            <!-- path 6: rondo→dolna krawędź -->
+            <g><animateMotion path="M2284.5,1116 V1895" dur="3s" repeatCount="indefinite" begin="0s" rotate="auto"/><animate attributeName="opacity" values="1;1;0" keyTimes="0;0.88;1" dur="3s" repeatCount="indefinite" begin="0s"/><use href="#f2Icon" x="-55" y="-55" width="110" height="110" style="filter:drop-shadow(0 0 8px #EEFF2F) drop-shadow(0 0 16px #EEFF2F)"/></g>
           </svg>
         </div>
         <span class="cs-process__badge">2</span>
@@ -323,7 +341,26 @@
   <!-- Single process card: Design -->
   <div class="container">
     <div class="cs-process" data-reveal style="border:none;padding:32px 0">
-      <div class="cs-process__card">
+      <div class="cs-process__card f2-anim-card">
+        <div class="f2-tubes" aria-hidden="true">
+          <svg viewBox="0 0 1400 500" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><pattern id="dsGrid" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="2" fill="#2F343D"/></pattern></defs>
+            <rect width="1400" height="500" fill="url(#dsGrid)"/>
+            <rect x="220" y="150" width="210" height="140" rx="8" stroke="#2F343D" stroke-width="2" fill="#171B21"/>
+            <rect x="590" y="85" width="160" height="105" rx="8" stroke="#2F343D" stroke-width="2" fill="#171B21"/>
+            <rect x="590" y="250" width="160" height="105" rx="8" stroke="#2F343D" stroke-width="2" fill="#171B21"/>
+            <rect x="920" y="150" width="210" height="140" rx="8" stroke="#2F343D" stroke-width="2" fill="#171B21"/>
+            <line x1="430" y1="220" x2="590" y2="137" stroke="#2F343D" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <line x1="430" y1="220" x2="590" y2="302" stroke="#2F343D" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <line x1="750" y1="137" x2="920" y2="200" stroke="#2F343D" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <line x1="750" y1="302" x2="920" y2="255" stroke="#2F343D" stroke-width="1.5" stroke-dasharray="6,4"/>
+            <circle cx="430" cy="220" r="5" fill="#EEFF2F" style="filter:drop-shadow(0 0 8px #EEFF2F) drop-shadow(0 0 16px #EEFF2F)"/>
+            <g><animateMotion path="M430,220 L590,137" dur="1.8s" repeatCount="indefinite" begin="0s" rotate="auto"/><use href="#f2Icon" x="-13" y="-13" width="26" height="26" style="filter:drop-shadow(0 0 6px #EEFF2F) drop-shadow(0 0 12px #EEFF2F)"/></g>
+            <g><animateMotion path="M430,220 L590,302" dur="1.8s" repeatCount="indefinite" begin="-0.9s" rotate="auto"/><use href="#f2Icon" x="-13" y="-13" width="26" height="26" style="filter:drop-shadow(0 0 6px #EEFF2F) drop-shadow(0 0 12px #EEFF2F)"/></g>
+            <g><animateMotion path="M750,137 L920,200" dur="2s" repeatCount="indefinite" begin="-0.4s" rotate="auto"/><use href="#f2Icon" x="-13" y="-13" width="26" height="26" style="filter:drop-shadow(0 0 6px #EEFF2F) drop-shadow(0 0 12px #EEFF2F)"/></g>
+            <g><animateMotion path="M750,302 L920,255" dur="2s" repeatCount="indefinite" begin="-1.1s" rotate="auto"/><use href="#f2Icon" x="-13" y="-13" width="26" height="26" style="filter:drop-shadow(0 0 6px #EEFF2F) drop-shadow(0 0 12px #EEFF2F)"/></g>
+          </svg>
+        </div>
         <span class="cs-process__badge">3</span>
         <div class="cs-process__body">
           <h3>Design</h3>
@@ -391,7 +428,29 @@
   <!-- Single process card: Iterate -->
   <div class="container">
     <div class="cs-process" data-reveal style="border:none;padding:32px 0">
-      <div class="cs-process__card">
+      <div class="cs-process__card f2-anim-card">
+        <div class="f2-tubes" aria-hidden="true">
+          <canvas id="f2WaveCanvas"></canvas>
+        </div>
+        <script>(function(){
+          var c=document.getElementById('f2WaveCanvas'),ctx=c.getContext('2d');
+          var ICON=new Path2D('M28.2216 14.3148C29.597 10.7578 34.6297 10.7578 36.0051 14.3148L49.4235 49.0177C50.8188 52.6262 46.9771 56.0261 43.5649 54.2024L34.0802 49.1329C32.8512 48.476 31.3755 48.476 30.1465 49.1329L20.6617 54.2023C17.2496 56.0261 13.4079 52.6262 14.8032 49.0177L28.2216 14.3148Z');
+          var W,H;
+          function resize(){var r=c.parentElement.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height;}
+          resize();new ResizeObserver(resize).observe(c.parentElement);
+          function icon(x,y,a,op){ctx.save();ctx.translate(x,y);ctx.rotate(a);var s=H*.065/32;ctx.scale(s,s);ctx.translate(-32,-32);ctx.fillStyle='rgba(238,255,47,'+op+')';ctx.shadowColor='#EEFF2F';ctx.shadowBlur=22;ctx.fill(ICON);ctx.restore();}
+          function wv(x,amp,freq,ph){return H/2+amp*Math.sin(freq*x/W*Math.PI*2+ph);}
+          function frame(ts){var t=ts/1000,ph=t*1.4;
+            ctx.clearRect(0,0,W,H);
+            [[H*.09,4.8,ph*.5+2,'rgba(47,52,61,.3)',1.2],[H*.17,3.2,ph*.7+1,'rgba(47,52,61,.6)',1.8],[H*.27,2,ph,'#2F343D',2.5]].forEach(function(w){
+              ctx.beginPath();for(var x=0;x<=W;x+=2){var y=wv(x,w[0],w[1],w[2]);x?ctx.lineTo(x,y):ctx.moveTo(x,y);}
+              ctx.strokeStyle=w[3];ctx.lineWidth=w[4];ctx.stroke();
+            });
+            var dx=(t*110)%W,dy=wv(dx,H*.27,2,ph),nx=dx+1,ny=wv(nx,H*.27,2,ph);
+            icon(dx,dy,Math.atan2(ny-dy,1)+Math.PI/2,1);
+            requestAnimationFrame(frame);}
+          requestAnimationFrame(frame);
+        })();</script>
         <span class="cs-process__badge">4</span>
         <div class="cs-process__body">
           <h3>Iterate</h3>
