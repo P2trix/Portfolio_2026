@@ -38,7 +38,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: start;
-  background: #040e0e;
+  background: url('../Figma/placeholder_hero1.webp') center/cover no-repeat;
   border-radius: 28px;
   padding: 80px 0 80px 80px;
   min-height: 500px;
