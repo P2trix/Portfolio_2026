@@ -7,9 +7,9 @@
   --cs-text-muted:   rgba(255,255,255,0.45);
   --cs-border:       rgba(255,255,255,0.08);
   --cs-border-nav:   rgba(255,255,255,0.08);
-  --cs-tag-bg:       rgba(31,136,133,0.15);
-  --cs-tag-text:     #1F8885;
-  --cs-accent:       #1F8885;
+  --cs-tag-bg:       rgba(0,234,228,0.15);
+  --cs-tag-text:     #00EAE4;
+  --cs-accent:       #00EAE4;
   --cs-card-bg:      rgba(255,255,255,0.04);
   background: #1B181D;
   color: #ffffff;
@@ -18,7 +18,6 @@
 /* ─── Nav ─── */
 .iv-page .cs-nav {
   background: rgba(27,24,29,0.85);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
   backdrop-filter: blur(16px);
 }
 
@@ -34,7 +33,7 @@
 }
 
 .iv-page .cs-nav__links a:hover {
-  color: #1F8885;
+  color: #00EAE4;
 }
 
 .iv-page .cs-nav__cv {
@@ -43,14 +42,14 @@
 }
 
 .iv-page .cs-nav__cv:hover {
-  background: #1F8885;
-  border-color: #1F8885;
+  background: #00EAE4;
+  border-color: #00EAE4;
 }
 
 /* ─── Hero Bento ─── */
 .iv-page .hm-hero__bento {
   background: #141218 !important;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
 }
 
 .iv-page .hm-hero__bento::before {
@@ -58,7 +57,7 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 80% at -5% 50%, rgba(31,136,133,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 80% at -5% 50%, rgba(0,234,228,0.22) 0%, transparent 60%),
     radial-gradient(ellipse 55% 65% at 105% 35%, rgba(37,54,235,0.18) 0%, transparent 60%);
   pointer-events: none;
   z-index: 1;
@@ -75,7 +74,7 @@
 }
 
 .iv-page .cs-details__col-label {
-  color: #1F8885;
+  color: #00EAE4;
 }
 
 .iv-page .cs-details__col-value {
@@ -102,9 +101,9 @@
 }
 
 .iv-page .cs-process__badge {
-  background: rgba(31,136,133,0.15);
-  color: #1F8885;
-  border-color: rgba(31,136,133,0.3);
+  background: rgba(0,234,228,0.15);
+  color: #00EAE4;
+  border-color: rgba(0,234,228,0.3);
 }
 
 .iv-page .cs-process__body h3 {
@@ -117,16 +116,16 @@
 
 /* ─── Pills / tags ─── */
 .iv-page .hm-hero__pill {
-  background: rgba(31,136,133,0.12);
-  color: #1F8885;
-  border: 1px solid rgba(31,136,133,0.25);
+  background: rgba(0,234,228,0.12);
+  color: #00EAE4;
+  border: 1px solid rgba(0,234,228,0.25);
 }
 
 /* ─── Buttons ─── */
 .iv-page .hm-btn--primary {
-  background: #1F8885;
+  background: #00EAE4;
   color: #fff;
-  border-color: #1F8885;
+  border-color: #00EAE4;
 }
 
 .iv-page .hm-btn--primary:hover {
@@ -166,13 +165,13 @@
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: #1F8885;
+  color: #00EAE4;
   margin-bottom: 10px;
 }
 
 .iv-project-block__type {
   font-size: 0.85rem;
-  color: #1F8885;
+  color: #00EAE4;
   margin-bottom: 20px;
   font-weight: 500;
 }
@@ -216,7 +215,7 @@
   padding: 0;
   border: none;
   background: none;
-  color: rgba(31,136,133,0.4);
+  color: rgba(0,234,228,0.4);
   line-height: 1;
   margin-bottom: 8px;
 }
@@ -257,7 +256,7 @@
   gap: 8px;
   font-weight: 600;
   font-size: 0.9rem;
-  color: #1F8885;
+  color: #00EAE4;
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color 0.2s;
@@ -265,7 +264,7 @@
   margin-top: 24px;
 }
 
-.iv-link:hover { border-color: #1F8885; }
+.iv-link:hover { border-color: #00EAE4; }
 
 /* ─── Takeaways ─── */
 .iv-takeaways-grid {
@@ -284,8 +283,8 @@
   width: 36px;
   height: 36px;
   border-radius: 8px;
-  background: rgba(31,136,133,0.12);
-  border: 1px solid rgba(31,136,133,0.25);
+  background: rgba(0,234,228,0.12);
+  border: 1px solid rgba(0,234,228,0.25);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -305,7 +304,7 @@
   padding: 80px;
   text-align: center;
   background:
-    radial-gradient(ellipse 65% 80% at -5% 50%, rgba(31,136,133,0.45) 0%, transparent 60%),
+    radial-gradient(ellipse 65% 80% at -5% 50%, rgba(0,234,228,0.45) 0%, transparent 60%),
     radial-gradient(ellipse 55% 70% at 105% 40%, rgba(37,54,235,0.4) 0%, transparent 60%),
     #141218;
 }
@@ -326,7 +325,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #1F8885;
+  color: #00EAE4;
   margin-bottom: 14px;
 }
 
@@ -363,15 +362,15 @@
   font-size: 0.95rem;
   text-decoration: none;
   transition: all 0.2s;
-  background: #1F8885;
+  background: #00EAE4;
   color: #fff;
-  box-shadow: 0 0 24px rgba(31,136,133,0.3);
+  box-shadow: 0 0 24px rgba(0,234,228,0.3);
 }
 
 .iv-btn--teal:hover {
   background: #178480;
   transform: translateY(-2px);
-  box-shadow: 0 4px 32px rgba(31,136,133,0.45);
+  box-shadow: 0 4px 32px rgba(0,234,228,0.45);
 }
 
 .iv-btn--ghost {
