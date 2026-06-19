@@ -48,17 +48,12 @@
 }
 
 /* ─── Hero Bento ─── */
-.iv-hero__bento {
+.iv-page .hm-hero__bento {
   background: #141218 !important;
   border: 1px solid rgba(255,255,255,0.08);
-  position: relative;
-  overflow: hidden;
-  min-height: 420px;
-  display: flex;
-  align-items: flex-start;
 }
 
-.iv-hero__bento::before {
+.iv-page .hm-hero__bento::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -66,18 +61,7 @@
     radial-gradient(ellipse 70% 80% at -5% 50%, rgba(31,136,133,0.22) 0%, transparent 60%),
     radial-gradient(ellipse 55% 65% at 105% 35%, rgba(37,54,235,0.18) 0%, transparent 60%);
   pointer-events: none;
-  z-index: 0;
-}
-
-.iv-hero__bento > * { position: relative; z-index: 1; }
-
-/* hide the right visual panel for this hero — text only layout */
-.iv-hero__bento .hm-hero__visual {
-  display: none;
-}
-
-.iv-hero__bento .hm-hero__text {
-  max-width: 780px;
+  z-index: 1;
 }
 
 /* ─── Details card ─── */
