@@ -100,6 +100,10 @@
   outline: 1px solid #393D44;
 }
 
+.iv-page .cs-process__card:hover {
+  outline-color: #00EAE4;
+}
+
 .iv-page .cs-process__badge {
   background: rgba(0,234,228,0.15);
   color: #00EAE4;
