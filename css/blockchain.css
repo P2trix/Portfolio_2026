@@ -157,12 +157,27 @@
 
 /* ─── Project blocks ─── */
 .iv-project-block {
-  padding: 64px 0;
-  border-top: 1px solid var(--cs-border);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: center;
+  align-items: stretch;
+  background: var(--cs-card-bg);
+  outline: 1px solid #393D44;
+  border-radius: 28px;
+  overflow: hidden;
+  margin-top: 40px;
+  transition: outline-color 0.3s ease;
+}
+
+.iv-project-block:hover {
+  outline-color: #00EAE4;
+}
+
+.iv-project-block__body {
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: space-between;
 }
 
 .iv-project-block--reverse {
@@ -190,20 +205,23 @@
 }
 
 .iv-project-block__visual {
-  background: var(--cs-card-bg);
-  outline: 1px solid #393D44;
-  border-radius: 20px;
   overflow: hidden;
-  aspect-ratio: 4/3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  background: rgba(255,255,255,0.02);
+  min-height: 300px;
 }
 
 .iv-project-block__visual img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transform: translateY(100%);
+  transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+[data-reveal].revealed .iv-project-block__visual img {
+  transform: translateY(0);
 }
 
 /* ─── Challenge cards grid ─── */
@@ -423,8 +441,9 @@
 
 /* ─── Responsive ─── */
 @media (max-width: 900px) {
-  .iv-project-block { grid-template-columns: 1fr; gap: 32px; }
+  .iv-project-block { grid-template-columns: 1fr; }
   .iv-project-block--reverse { direction: ltr; }
+  .iv-project-block__body { padding: 32px; }
   .iv-callout { grid-template-columns: 1fr; }
   .iv-callout__visual { display: none; }
   .iv-takeaways-grid { grid-template-columns: 1fr; }
