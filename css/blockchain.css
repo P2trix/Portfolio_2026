@@ -195,14 +195,22 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: #00EAE4;
-  margin-bottom: 10px;
 }
 
-.iv-project-block__type {
-  font-size: 0.85rem;
-  color: #00EAE4;
-  margin-bottom: 20px;
-  font-weight: 500;
+.iv-project-block__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 12px 0 10px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.iv-project-block__desc {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.6;
+  margin: 0;
 }
 
 .iv-project-block__visual {
