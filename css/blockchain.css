@@ -164,7 +164,7 @@
   outline: 1px solid #393D44;
   border-radius: 28px;
   overflow: hidden;
-  margin-top: 40px;
+  margin: 64px 0;
   height: 400px;
   transition: outline-color 0.3s ease;
 }
