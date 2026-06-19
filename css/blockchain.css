@@ -229,6 +229,24 @@
   margin-bottom: 8px;
 }
 
+/* ─── Challenge cards (context) ─── */
+.iv-challenges .iv-challenge__img {
+  height: 130px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  border: 1px dashed rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+
+.iv-challenges .cs-process__body {
+  margin-top: auto;
+}
+
+.iv-challenges .cs-process__body h3 {
+  font-size: 20px;
+  line-height: 1.3;
+}
+
 /* ─── Artclear callout card ─── */
 .iv-callout {
   background: var(--cs-card-bg);
