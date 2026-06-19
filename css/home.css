@@ -652,27 +652,24 @@
 }
 
 .hm-webdesign__card {
-  background: #ffffff;
-  border: 1px solid #E3E9FF;
-  border-radius: 20px;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  gap: 16px;
 }
 
 .hm-webdesign__card-body {
-  padding: 24px 24px 20px;
+  padding: 0;
 }
 
 .hm-webdesign__card-body h3 {
-  font-size: 1.05rem;
+  font-size: 1.3rem;
   font-weight: 600;
   color: #1A1C23;
   margin: 0 0 8px;
 }
 
 .hm-webdesign__card-body p {
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   color: #6B7280;
   line-height: 1.5;
   margin: 0;
@@ -682,6 +679,7 @@
   width: 100%;
   aspect-ratio: 4 / 3;
   background: #E8ECF8;
+  border-radius: 20px;
   flex-shrink: 0;
 }
 
