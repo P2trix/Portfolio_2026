@@ -5,517 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blockchain & Crypto — Patryk Wenda</title>
   <link rel="stylesheet" href="../css/case-study.css">
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/blockchain.css">
   <link rel="stylesheet" href="../css/animations.css">
-  <style>
-
-    /* ── Palette from IvyCoin illustrations ── */
-    :root {
-      --iv-bg:         #1B181D;
-      --iv-bg2:        #141218;
-      --iv-teal:       #1F8885;
-      --iv-teal-dim:   rgba(31,136,133,0.15);
-      --iv-blue:       #2536EB;
-      --iv-blue-dim:   rgba(37,54,235,0.15);
-      --iv-text:       #FFFFFF;
-      --iv-muted:      rgba(255,255,255,0.45);
-      --iv-border:     rgba(255,255,255,0.08);
-      --iv-card:       rgba(255,255,255,0.04);
-    }
-
-    .iv-page { --cs-bg: #1B181D; --cs-text: #ffffff; --cs-text-muted: rgba(255,255,255,0.45); --cs-border: rgba(255,255,255,0.08); }
-
-    /* ── Nav overrides ── */
-    .cs-nav {
-      background: rgba(27,24,29,0.85);
-      border-color: var(--iv-border);
-      backdrop-filter: blur(16px);
-    }
-    .cs-nav--sticky { background: rgba(27,24,29,0.95); }
-    .cs-nav__logo, .cs-nav__links a { color: var(--iv-text); }
-    .cs-nav__links a:hover { color: var(--iv-teal); }
-    .cs-nav__cv { border-color: var(--iv-border); color: var(--iv-text); }
-    .cs-nav__cv:hover { background: var(--iv-teal); border-color: var(--iv-teal); }
-
-    /* ══════════════════════════════════════
-       HERO
-    ══════════════════════════════════════ */
-    .iv-hero {
-      position: relative;
-      padding: 120px 0 100px;
-      overflow: hidden;
-    }
-
-    .iv-hero__bg {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-    /* subtle teal glow top-left */
-    .iv-hero__bg::before {
-      content: '';
-      position: absolute;
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(31,136,133,0.18) 0%, transparent 70%);
-      top: -150px; left: -100px;
-    }
-    /* blue glow right */
-    .iv-hero__bg::after {
-      content: '';
-      position: absolute;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(37,54,235,0.14) 0%, transparent 70%);
-      top: -80px; right: -80px;
-    }
-
-    .iv-hero__inner {
-      position: relative;
-      z-index: 1;
-      max-width: 800px;
-    }
-
-    .iv-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 5px 14px;
-      border: 1px solid var(--iv-teal);
-      border-radius: 1000px;
-      color: var(--iv-teal);
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
-
-    .iv-hero__title {
-      font-family: 'Onest', sans-serif;
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-      color: var(--iv-text);
-      margin: 0 0 24px;
-    }
-
-    .iv-hero__title em {
-      font-style: normal;
-      color: var(--iv-teal);
-    }
-
-    .iv-hero__lead {
-      font-size: 1.15rem;
-      line-height: 1.7;
-      color: var(--iv-muted);
-      max-width: 640px;
-      margin: 0 0 48px;
-    }
-
-    .iv-meta-row {
-      display: flex;
-      gap: 48px;
-      flex-wrap: wrap;
-    }
-
-    .iv-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .iv-meta__label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--iv-teal);
-    }
-
-    .iv-meta__value {
-      font-size: 0.95rem;
-      color: var(--iv-text);
-      font-weight: 500;
-    }
-
-    /* ══════════════════════════════════════
-       SECTION SHARED
-    ══════════════════════════════════════ */
-    .iv-section {
-      padding: 100px 0;
-      border-top: 1px solid var(--iv-border);
-    }
-
-    .iv-section__label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--iv-teal);
-      margin-bottom: 16px;
-      display: block;
-    }
-
-    .iv-section__title {
-      font-family: 'Onest', sans-serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--iv-text);
-      margin: 0 0 24px;
-    }
-
-    .iv-body {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--iv-muted);
-      max-width: 680px;
-    }
-
-    .iv-body + .iv-body { margin-top: 16px; }
-
-    /* ══════════════════════════════════════
-       CONTEXT — "What it means to design for blockchain"
-    ══════════════════════════════════════ */
-    .iv-context__grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 48px;
-    }
-
-    .iv-challenge-card {
-      background: var(--iv-card);
-      border: 1px solid var(--iv-border);
-      border-radius: 16px;
-      padding: 28px;
-    }
-
-    .iv-challenge-card__num {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--iv-teal);
-      font-family: 'Onest', sans-serif;
-      line-height: 1;
-      margin-bottom: 12px;
-      opacity: 0.5;
-    }
-
-    .iv-challenge-card__title {
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--iv-text);
-      margin-bottom: 8px;
-    }
-
-    .iv-challenge-card__desc {
-      font-size: 0.9rem;
-      line-height: 1.7;
-      color: var(--iv-muted);
-    }
-
-    /* ══════════════════════════════════════
-       PROJECT BLOCKS
-    ══════════════════════════════════════ */
-    .iv-projects { padding: 100px 0; border-top: 1px solid var(--iv-border); }
-
-    .iv-project {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-      padding: 64px 0;
-      border-bottom: 1px solid var(--iv-border);
-    }
-
-    .iv-project:last-child { border-bottom: none; }
-
-    .iv-project--reverse { direction: rtl; }
-    .iv-project--reverse > * { direction: ltr; }
-
-    .iv-project__num {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--iv-teal);
-      margin-bottom: 12px;
-    }
-
-    .iv-project__title {
-      font-family: 'Onest', sans-serif;
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--iv-text);
-      margin: 0 0 8px;
-    }
-
-    .iv-project__type {
-      font-size: 0.85rem;
-      color: var(--iv-teal);
-      margin-bottom: 20px;
-      font-weight: 500;
-    }
-
-    .iv-project__desc {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--iv-muted);
-      margin-bottom: 24px;
-    }
-
-    .iv-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 28px;
-    }
-
-    .iv-pill {
-      padding: 4px 12px;
-      border-radius: 1000px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      border: 1px solid var(--iv-border);
-      color: var(--iv-muted);
-    }
-
-    .iv-project__visual {
-      background: var(--iv-card);
-      border: 1px solid var(--iv-border);
-      border-radius: 20px;
-      overflow: hidden;
-      aspect-ratio: 4/3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .iv-project__visual img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .iv-project__visual-placeholder {
-      color: var(--iv-border);
-      font-size: 0.8rem;
-      text-align: center;
-      padding: 24px;
-    }
-
-    /* ══════════════════════════════════════
-       ARTCLEAR CALLOUT
-    ══════════════════════════════════════ */
-    .iv-artclear {
-      padding: 100px 0;
-      border-top: 1px solid var(--iv-border);
-    }
-
-    .iv-artclear__card {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-      background: var(--iv-card);
-      border: 1px solid var(--iv-border);
-      border-radius: 24px;
-      padding: 64px;
-    }
-
-    .iv-artclear__eyebrow {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--iv-blue);
-      margin-bottom: 16px;
-      display: block;
-    }
-
-    .iv-artclear__title {
-      font-family: 'Onest', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--iv-text);
-      margin: 0 0 16px;
-    }
-
-    .iv-artclear__desc {
-      font-size: 0.95rem;
-      line-height: 1.8;
-      color: var(--iv-muted);
-      margin-bottom: 28px;
-    }
-
-    .iv-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--iv-teal);
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s;
-      padding-bottom: 2px;
-    }
-
-    .iv-link:hover { border-color: var(--iv-teal); }
-
-    .iv-artclear__visual {
-      background: linear-gradient(135deg, rgba(37,54,235,0.15), rgba(37,54,235,0.05));
-      border: 1px solid rgba(37,54,235,0.2);
-      border-radius: 16px;
-      aspect-ratio: 4/3;
-    }
-
-    /* ══════════════════════════════════════
-       TAKEAWAYS
-    ══════════════════════════════════════ */
-    .iv-takeaways {
-      padding: 100px 0;
-      border-top: 1px solid var(--iv-border);
-    }
-
-    .iv-takeaways__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 48px;
-    }
-
-    .iv-takeaway {
-      background: var(--iv-card);
-      border: 1px solid var(--iv-border);
-      border-radius: 16px;
-      padding: 28px;
-    }
-
-    .iv-takeaway__icon {
-      width: 36px; height: 36px;
-      border-radius: 8px;
-      background: var(--iv-teal-dim);
-      border: 1px solid rgba(31,136,133,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-    }
-
-    .iv-takeaway__title {
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--iv-text);
-      margin-bottom: 8px;
-    }
-
-    .iv-takeaway__desc {
-      font-size: 0.88rem;
-      line-height: 1.7;
-      color: var(--iv-muted);
-    }
-
-    /* ══════════════════════════════════════
-       CTA
-    ══════════════════════════════════════ */
-    .iv-cta-section {
-      padding: 80px 0 120px;
-    }
-
-    .iv-cta-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 28px;
-      padding: 80px;
-      text-align: center;
-      background:
-        radial-gradient(ellipse 65% 80% at -5% 50%, rgba(31,136,133,0.5) 0%, transparent 60%),
-        radial-gradient(ellipse 55% 70% at 105% 40%, rgba(37,54,235,0.45) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 50% at 50% 110%, rgba(31,136,133,0.2) 0%, transparent 55%),
-        var(--iv-bg2);
-    }
-
-    .iv-cta-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
-      opacity: 0.05;
-      pointer-events: none;
-    }
-
-    .iv-cta-card__inner { position: relative; z-index: 1; }
-
-    .iv-cta-card__title {
-      font-family: 'Onest', sans-serif;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 700;
-      color: var(--iv-text);
-      margin: 16px 0 12px;
-      letter-spacing: -0.02em;
-    }
-
-    .iv-cta-card__sub {
-      font-size: 1.05rem;
-      color: var(--iv-muted);
-      max-width: 500px;
-      margin: 0 auto 40px;
-      line-height: 1.6;
-    }
-
-    .iv-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 32px;
-      border-radius: 1000px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-
-    .iv-btn--primary {
-      background: var(--iv-teal);
-      color: #fff;
-      box-shadow: 0 0 32px rgba(31,136,133,0.35);
-    }
-    .iv-btn--primary:hover {
-      background: #178480;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 40px rgba(31,136,133,0.5);
-    }
-
-    .iv-btn--ghost {
-      background: rgba(255,255,255,0.06);
-      color: #fff;
-      border: 1px solid var(--iv-border);
-    }
-    .iv-btn--ghost:hover { background: rgba(255,255,255,0.1); }
-
-    .iv-btn-row {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* ══════════════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════════════ */
-    @media (max-width: 768px) {
-      .iv-context__grid { grid-template-columns: 1fr; }
-      .iv-project { grid-template-columns: 1fr; gap: 32px; }
-      .iv-project--reverse { direction: ltr; }
-      .iv-artclear__card { grid-template-columns: 1fr; gap: 32px; padding: 32px; }
-      .iv-takeaways__grid { grid-template-columns: 1fr; }
-      .iv-cta-card { padding: 48px 24px; }
-      .iv-meta-row { gap: 24px; }
-    }
-
-  </style>
 </head>
 <body class="cs-page iv-page">
 
@@ -530,7 +22,9 @@
         Patryk Wenda
       </a>
       <button class="cs-nav__toggle" aria-label="Menu">
-        <span></span><span></span><span></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
       <div class="cs-nav__links">
         <div class="cs-nav__links-inner">
@@ -543,232 +37,352 @@
     </div>
   </nav>
 
-  <!-- ══ HERO ══ -->
-  <section class="iv-hero">
-    <div class="iv-hero__bg"></div>
+  <!-- Hero Bento -->
+  <section class="hm-hero">
     <div class="container">
-      <div class="iv-hero__inner" data-reveal>
-        <div class="iv-tag">Case Study · 2018 – 2023</div>
-        <h1 class="iv-hero__title">
-          5 Years Designing<br>
-          <em>Blockchain & Crypto</em><br>
-          Products
-        </h1>
-        <p class="iv-hero__lead">
-          From hot wallets and ICO platforms to supply chain tracking — five years working on blockchain products during the most chaotic period in crypto history. Some shipped. Some didn't. All taught me something.
-        </p>
-        <div class="iv-meta-row">
-          <div class="iv-meta">
-            <span class="iv-meta__label">Company</span>
-            <span class="iv-meta__value">4Soft</span>
+      <div class="hm-hero__bento iv-hero__bento" data-reveal>
+        <div class="hm-hero__text">
+          <div class="hm-hero__pills">
+            <span class="hm-hero__pill">2018 – 2023</span>
+            <span class="hm-hero__pill">Blockchain</span>
+            <span class="hm-hero__pill">Crypto</span>
+            <span class="hm-hero__pill">UX / UI</span>
           </div>
-          <div class="iv-meta">
-            <span class="iv-meta__label">Role</span>
-            <span class="iv-meta__value">UI/UX Designer</span>
-          </div>
-          <div class="iv-meta">
-            <span class="iv-meta__label">Period</span>
-            <span class="iv-meta__value">2018 – 2023</span>
-          </div>
-          <div class="iv-meta">
-            <span class="iv-meta__label">Tools</span>
-            <span class="iv-meta__value">Sketch · Adobe XD · Zeplin · Figma</span>
+          <h1 class="hm-hero__title">
+            5 Years Designing<br>
+            Blockchain & Crypto<br>
+            Products
+          </h1>
+          <p class="hm-hero__desc">
+            From hot wallets and ICO platforms to supply chain tracking — five years working on blockchain products during the most chaotic period in crypto history. Some shipped. Some didn't. All taught me something.
+          </p>
+          <div class="hm-hero__actions">
+            <a href="#takeaways" class="hm-btn hm-btn--primary">What I learned
+              <span class="btn__icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
+            <a href="#footer" class="hm-btn hm-btn--outline">Let's talk
+              <span class="btn__icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ CONTEXT ══ -->
-  <section class="iv-section" data-reveal>
-    <div class="container">
-      <span class="iv-section__label">__ Context</span>
-      <h2 class="iv-section__title">Designing for an industry<br>that doesn't play by normal rules</h2>
-      <p class="iv-body">
-        The 2018–2019 ICO boom was a strange time to be a designer. Many platforms were burning through investor money at speed, with business models that — in hindsight — were more about raising capital than solving real problems. As a designer you rarely see the full picture. You get a brief, you design, you ship. Sometimes the product disappears quietly.
-      </p>
-      <p class="iv-body">
-        What the industry lacked in stability it made up for in genuine design challenges. Users were skeptical by default. Compliance requirements were brutal. And the technology itself was invisible — you had to make people trust something they couldn't see or touch.
-      </p>
-      <div class="iv-context__grid">
-        <div class="iv-challenge-card">
-          <div class="iv-challenge-card__num">01</div>
-          <div class="iv-challenge-card__title">Trust by design</div>
-          <div class="iv-challenge-card__desc">Crypto users in 2018 had seen enough scams to be skeptical of everything. Every UI decision — from color to copy — had to earn trust before asking for it.</div>
+  <!-- Details -->
+  <div class="container">
+    <div class="cs-details" data-reveal>
+      <div class="cs-details__title">Details</div>
+      <div class="cs-details__card">
+        <div class="cs-details__col">
+          <div class="cs-details__col-label">Company</div>
+          <div class="cs-details__col-value">4Soft</div>
         </div>
-        <div class="iv-challenge-card">
-          <div class="iv-challenge-card__num">02</div>
-          <div class="iv-challenge-card__title">Compliance without friction</div>
-          <div class="iv-challenge-card__desc">KYC and AML flows are inherently tedious — they exist to collect data regulators require, not to delight users. The challenge was making them feel like onboarding, not interrogation.</div>
+        <div class="cs-details__col">
+          <div class="cs-details__col-label">My role</div>
+          <div class="cs-details__col-value">UI/UX Designer</div>
         </div>
-        <div class="iv-challenge-card">
-          <div class="iv-challenge-card__num">03</div>
-          <div class="iv-challenge-card__title">Explaining the invisible</div>
-          <div class="iv-challenge-card__desc">Gas fees, transaction speed, network confirmations — concepts that have no analogue in traditional finance. The UI had to translate technical reality into human decisions.</div>
+        <div class="cs-details__col">
+          <div class="cs-details__col-label">Period</div>
+          <div class="cs-details__col-value">2018 – 2023</div>
         </div>
-        <div class="iv-challenge-card">
-          <div class="iv-challenge-card__num">04</div>
-          <div class="iv-challenge-card__title">Designing for PoCs</div>
-          <div class="iv-challenge-card__desc">Several projects never went to production. The output wasn't a shipped product — it was a pitch, a whitepaper, a proof that the idea was feasible. That's a different design job.</div>
+        <div class="cs-details__col">
+          <div class="cs-details__col-label">Tools</div>
+          <div class="cs-details__col-value">Sketch&#10;Adobe XD&#10;Zeplin&#10;Figma</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ══ PROJECTS ══ -->
-  <section class="iv-projects">
-    <div class="container">
-
-      <span class="iv-section__label">__ Projects</span>
-      <h2 class="iv-section__title">The work</h2>
-
-      <!-- PROJECT 1: BCT Hot Wallet -->
-      <div class="iv-project" data-reveal>
-        <div class="iv-project__content">
-          <div class="iv-project__num">01 — Chrome Extension</div>
-          <h3 class="iv-project__title">BCT Hot Wallet</h3>
-          <div class="iv-project__type">Browser extension · Transfer & exchange · First crypto project</div>
-          <p class="iv-project__desc">
-            My first crypto project — a hot wallet Chrome extension for transferring and exchanging cryptocurrency. Think early MetaMask: balance overview, send to address, pick currency, choose how much gas you want to spend and how fast you want the transaction to go.
-          </p>
-          <p class="iv-project__desc">
-            Simple on paper, but the UX of gas fees is genuinely hard. You're asking a non-technical user to make a financial decision based on network congestion they can't see. The design had to make that tradeoff legible — fast and expensive vs slow and cheap — without overwhelming them.
-          </p>
-          <div class="iv-pills">
-            <span class="iv-pill">Hot Wallet</span>
-            <span class="iv-pill">Chrome Extension</span>
-            <span class="iv-pill">Gas UX</span>
-            <span class="iv-pill">Crypto Exchange</span>
-          </div>
-        </div>
-        <div class="iv-project__visual">
-          <img src="../Figma/blockchain/Illustration 2.svg" alt="BCT Hot Wallet illustration">
-        </div>
+  <!-- 0a: In a nutshell -->
+  <div class="container">
+    <div class="cs-section" id="s-0a" data-reveal>
+      <div class="cs-section__left">
+        <h3>In a nutshell</h3>
+        <div class="cs-section__number">0a</div>
       </div>
-
-      <!-- PROJECT 2: IvyKoin -->
-      <div class="iv-project iv-project--reverse" data-reveal>
-        <div class="iv-project__content">
-          <div class="iv-project__num">02 — ICO Platform</div>
-          <h3 class="iv-project__title">IvyCoin</h3>
-          <div class="iv-project__type">IVY cryptocurrency · KYC / KYT / AML compliance</div>
-          <p class="iv-project__desc">
-            An ICO platform for IVY cryptocurrency — designed to carry more compliance data per transaction than any traditional payment method. Where SWIFT moves 10 data points and Bitcoin moves 1, IVY baked in 74+ KYC and 120+ KYT fields into every transfer.
-          </p>
-          <p class="iv-project__desc">
-            I was brought in to redesign the platform from lo-fi mockups, iterating directly with the client throughout. The core design challenge: compliance flows are inherently painful. Making 74 required fields feel like onboarding rather than interrogation was most of the job.
-          </p>
-          <div class="iv-pills">
-            <span class="iv-pill">ICO</span>
-            <span class="iv-pill">KYC / KYT</span>
-            <span class="iv-pill">AML</span>
-            <span class="iv-pill">Sketch</span>
-            <span class="iv-pill">Zeplin</span>
-          </div>
-        </div>
-        <div class="iv-project__visual">
-          <img src="../Figma/blockchain/Illustration 1.svg" alt="IvyCoin illustration">
-        </div>
-      </div>
-
-      <!-- PROJECT 3: SVC -->
-      <div class="iv-project" data-reveal>
-        <div class="iv-project__content">
-          <div class="iv-project__num">03 — Proof of Concept</div>
-          <h3 class="iv-project__title">SVC — Meat Traceability</h3>
-          <div class="iv-project__type">Swiss client · Supply chain · Investor pitch</div>
-          <p class="iv-project__desc">
-            A PoC for a Swiss client building technology to comply with animal welfare laws and meat selling regulations. The end user wasn't a farmer or inspector — it was a regular person at a supermarket, scanning a product to trace its exact journey: from the farm, through the processing plant, to the shelf they were standing in front of.
-          </p>
-          <p class="iv-project__desc">
-            The core design challenge was information architecture: a single animal could be divided into dozens of separate cuts, each becoming its own traceable unit on the blockchain — with its own record, its own journey. Figuring out how to structure that hierarchy, what data belonged at the animal level vs the cut level, and how to surface it cleanly for an end user who just wants to know if their steak came from a well-treated cow — that was most of the thinking.
-          </p>
-          <p class="iv-project__desc">
-            The product never went into production. My job was to gather requirements, produce mockups clear enough to communicate the concept, and help build the whitepaper and presentation the client needed to find investors. Designing for a pitch is a different discipline — you're selling the idea, not the interface.
-          </p>
-          <div class="iv-pills">
-            <span class="iv-pill">PoC</span>
-            <span class="iv-pill">Supply Chain</span>
-            <span class="iv-pill">Whitepaper</span>
-            <span class="iv-pill">Adobe XD</span>
-            <span class="iv-pill">Zeplin</span>
-          </div>
-        </div>
-        <div class="iv-project__visual">
-          <img src="../Figma/blockchain/Illustration 3.svg" alt="SVC illustration">
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ══ ARTCLEAR CALLOUT ══ -->
-  <section class="iv-artclear" data-reveal>
-    <div class="container">
-      <div class="iv-artclear__card">
-        <div>
-          <span class="iv-artclear__eyebrow">__ A different kind of blockchain</span>
-          <h2 class="iv-artclear__title">When blockchain has nothing to do with crypto</h2>
-          <p class="iv-artclear__desc">
-            With time, I came to think the real value of blockchain was never the currency — it was the licensing and provenance layer. You can mark anything: artwork, meat, ammunition. Anyone in the chain can verify where something came from and who handled it. ArtClear was the only project where that idea was actually the whole point — no tokens, no speculation, just proof of origin backed by HP fingerprinting technology. It's also the only NFT-adjacent project I've worked on, and the one that proved the concept works.
-          </p>
-          <a href="artclear.html" class="iv-link">
-            View ArtClear case study
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5.5 3.5L9 7L5.5 10.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
-        <div class="iv-artclear__visual"></div>
+      <div class="cs-section__right">
+        <p>Five years at 4Soft during the crypto boom meant working across a range of blockchain projects — some with real products behind them, some pitched as proofs of concept to attract investment. The projects were varied: a Chrome extension hot wallet, a compliance-heavy ICO platform, and a supply chain traceability PoC for the meat industry. Three very different products, one common thread — designing trust into systems where users have every reason to be skeptical.</p>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ══ TAKEAWAYS ══ -->
-  <section class="iv-takeaways" data-reveal>
-    <div class="container">
-      <span class="iv-section__label">__ Takeaways</span>
-      <h2 class="iv-section__title">What 5 years in blockchain taught me</h2>
-      <div class="iv-takeaways__grid">
-        <div class="iv-takeaway">
-          <div class="iv-takeaway__icon">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L14 5.5V10.5L8 14L2 10.5V5.5L8 2Z" stroke="#1F8885" stroke-width="1.4"/></svg>
-          </div>
-          <div class="iv-takeaway__title">Compliance is a design problem</div>
-          <div class="iv-takeaway__desc">KYC, AML, gas fees — none of it is user-friendly by default. Five years in crypto taught me that the hardest UX work is turning regulatory requirements into something a real person can get through without dropping off.</div>
+  <!-- Process overview -->
+  <div class="container">
+    <div class="cs-process" data-reveal>
+      <div class="cs-process__card">
+        <span class="cs-process__badge">1</span>
+        <div class="cs-process__body">
+          <h3>Research</h3>
+          <p>Client briefs&#10;Domain research&#10;Competitor analysis</p>
         </div>
-        <div class="iv-takeaway">
-          <div class="iv-takeaway__icon">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#1F8885" stroke-width="1.4"/><path d="M8 5V8L10 10" stroke="#1F8885" stroke-width="1.4" stroke-linecap="round"/></svg>
-          </div>
-          <div class="iv-takeaway__title">Not everything ships — and that's fine</div>
-          <div class="iv-takeaway__desc">PoCs, whitepapers, investor pitches — half the work I did in this period never went live. Designing to prove an idea is as valid as designing to ship one. The output is different, the rigor is the same.</div>
+      </div>
+      <div class="cs-process__card">
+        <span class="cs-process__badge">2</span>
+        <div class="cs-process__body">
+          <h3>Define</h3>
+          <p>User flows&#10;Requirements&#10;Information architecture</p>
         </div>
-        <div class="iv-takeaway">
-          <div class="iv-takeaway__icon">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M3 4H10M3 12H7" stroke="#1F8885" stroke-width="1.4" stroke-linecap="round"/></svg>
-          </div>
-          <div class="iv-takeaway__title">The real use case took time to emerge</div>
-          <div class="iv-takeaway__desc">Most of the 2018 boom was noise. The projects that aged well weren't about trading — they were about provenance. Knowing where something came from. That idea is still the most interesting thing blockchain can do.</div>
+      </div>
+      <div class="cs-process__card">
+        <span class="cs-process__badge">3</span>
+        <div class="cs-process__body">
+          <h3>Design</h3>
+          <p>Wireframing&#10;Hi-fi mockups&#10;Prototyping</p>
+        </div>
+      </div>
+      <div class="cs-process__card">
+        <span class="cs-process__badge">4</span>
+        <div class="cs-process__body">
+          <h3>Iterate</h3>
+          <p>Client feedback&#10;Edge cases&#10;Handoff</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ══ CTA ══ -->
-  <section class="iv-cta-section">
-    <div class="container">
-      <div class="iv-cta-card">
-        <div class="iv-cta-card__inner">
-          <div class="iv-tag">__ Get in touch</div>
-          <h2 class="iv-cta-card__title">Let's build something<br>worth remembering</h2>
-          <p class="iv-cta-card__sub">Available for full-time roles & freelance. I work best close to the product.</p>
-          <div class="iv-btn-row">
-            <a href="mailto:wendapatryk91@gmail.com" class="iv-btn iv-btn--primary">Get in touch</a>
-            <a href="https://www.linkedin.com/in/patrykwenda91/" target="_blank" class="iv-btn iv-btn--ghost">LinkedIn</a>
-          </div>
+  <!-- 0b: The context -->
+  <div class="container">
+    <div class="cs-section" id="s-0b" data-reveal>
+      <div class="cs-section__left">
+        <h3>The context</h3>
+        <div class="cs-section__number alt-line">0b</div>
+      </div>
+      <div class="cs-section__right">
+        <p>The 2018–2019 ICO boom was a strange time to be a designer. Many platforms were burning through investor money at speed, with business models that — in hindsight — were more about raising capital than solving real problems. As a designer you rarely see the full picture. You get a brief, you design, you ship. Sometimes the product disappears quietly.</p>
+        <p>What the industry lacked in stability it made up for in genuine design challenges. Users were skeptical by default. Compliance requirements were brutal. And the technology itself was invisible — you had to make people trust something they couldn't see or touch.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Challenge cards -->
+  <div class="container" data-reveal>
+    <div class="iv-challenge-grid">
+      <div class="cs-process__card">
+        <span class="cs-process__badge">01</span>
+        <div class="cs-process__body">
+          <h3>Trust by design</h3>
+          <p>Crypto users in 2018 had seen enough scams to be skeptical of everything. Every UI decision — from color to copy — had to earn trust before asking for it.</p>
+        </div>
+      </div>
+      <div class="cs-process__card">
+        <span class="cs-process__badge">02</span>
+        <div class="cs-process__body">
+          <h3>Compliance without friction</h3>
+          <p>KYC and AML flows are inherently tedious — they exist to collect data regulators require, not to delight users. The challenge was making them feel like onboarding, not interrogation.</p>
+        </div>
+      </div>
+      <div class="cs-process__card">
+        <span class="cs-process__badge">03</span>
+        <div class="cs-process__body">
+          <h3>Explaining the invisible</h3>
+          <p>Gas fees, transaction speed, network confirmations — concepts that have no analogue in traditional finance. The UI had to translate technical reality into human decisions.</p>
+        </div>
+      </div>
+      <div class="cs-process__card">
+        <span class="cs-process__badge">04</span>
+        <div class="cs-process__body">
+          <h3>Designing for PoCs</h3>
+          <p>Several projects never went to production. The output wasn't a shipped product — it was a pitch, a whitepaper, a proof that the idea was feasible. That's a different design job.</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+
+  <!-- ── PROJECT 1: BCT Hot Wallet ── -->
+  <div class="container">
+    <div class="cs-section" id="s-1a" data-reveal>
+      <div class="cs-section__left">
+        <h3>BCT Hot Wallet</h3>
+        <div class="cs-section__number">1a</div>
+      </div>
+      <div class="cs-section__right">
+        <p>My first crypto project — a hot wallet Chrome extension for transferring and exchanging cryptocurrency. Think early MetaMask: balance overview, send to address, pick currency, choose how much gas you want to spend and how fast you want the transaction to go.</p>
+        <p>Simple on paper, but the UX of gas fees is genuinely hard. You're asking a non-technical user to make a financial decision based on network congestion they can't see. The design had to make that tradeoff legible — fast and expensive vs slow and cheap — without overwhelming them.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" data-reveal>
+    <div class="iv-project-block">
+      <div>
+        <div class="iv-project-block__num">01 — Chrome Extension</div>
+        <div class="iv-project-block__type">Browser extension · Transfer & exchange · First crypto project</div>
+        <div class="hm-hero__pills" style="margin-bottom:0">
+          <span class="hm-hero__pill">Hot Wallet</span>
+          <span class="hm-hero__pill">Chrome Extension</span>
+          <span class="hm-hero__pill">Gas UX</span>
+          <span class="hm-hero__pill">Crypto Exchange</span>
+        </div>
+      </div>
+      <div class="iv-project-block__visual">
+        <img src="../Figma/blockchain/Illustration 2.svg" alt="BCT Hot Wallet illustration">
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PROJECT 2: IvyCoin ── -->
+  <div class="container">
+    <div class="cs-section" id="s-2a" data-reveal>
+      <div class="cs-section__left">
+        <h3>IvyCoin</h3>
+        <div class="cs-section__number">2a</div>
+      </div>
+      <div class="cs-section__right">
+        <p>An ICO platform for IVY cryptocurrency — designed to carry more compliance data per transaction than any traditional payment method. Where SWIFT moves 10 data points and Bitcoin moves 1, IVY baked in 74+ KYC and 120+ KYT fields into every transfer.</p>
+        <p>I was brought in to redesign the platform from lo-fi mockups, iterating directly with the client throughout. The core design challenge: compliance flows are inherently painful. Making 74 required fields feel like onboarding rather than interrogation was most of the job.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" data-reveal>
+    <div class="iv-project-block iv-project-block--reverse">
+      <div>
+        <div class="iv-project-block__num">02 — ICO Platform</div>
+        <div class="iv-project-block__type">IVY cryptocurrency · KYC / KYT / AML compliance</div>
+        <div class="hm-hero__pills" style="margin-bottom:0">
+          <span class="hm-hero__pill">ICO</span>
+          <span class="hm-hero__pill">KYC / KYT</span>
+          <span class="hm-hero__pill">AML</span>
+          <span class="hm-hero__pill">Sketch</span>
+          <span class="hm-hero__pill">Zeplin</span>
+        </div>
+      </div>
+      <div class="iv-project-block__visual">
+        <img src="../Figma/blockchain/Illustration 1.svg" alt="IvyCoin illustration">
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PROJECT 3: SVC ── -->
+  <div class="container">
+    <div class="cs-section" id="s-3a" data-reveal>
+      <div class="cs-section__left">
+        <h3>SVC — Meat Traceability</h3>
+        <div class="cs-section__number">3a</div>
+      </div>
+      <div class="cs-section__right">
+        <p>A PoC for a Swiss client building technology to comply with animal welfare laws and meat selling regulations. The end user wasn't a farmer or inspector — it was a regular person at a supermarket, scanning a product to trace its exact journey: from the farm, through the processing plant, to the shelf they were standing in front of.</p>
+        <p>The core design challenge was information architecture: a single animal could be divided into dozens of separate cuts, each becoming its own traceable unit on the blockchain — with its own record, its own journey. Figuring out how to structure that hierarchy, what data belonged at the animal level vs the cut level, and how to surface it cleanly for a consumer who just wants to know if their steak came from a well-treated cow — that was most of the thinking.</p>
+        <p>The product never went into production. My job was to gather requirements, produce mockups clear enough to communicate the concept, and help build the whitepaper and presentation the client needed to find investors. Designing for a pitch is a different discipline — you're selling the idea, not the interface.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" data-reveal>
+    <div class="iv-project-block">
+      <div>
+        <div class="iv-project-block__num">03 — Proof of Concept</div>
+        <div class="iv-project-block__type">Swiss client · Supply chain · Investor pitch</div>
+        <div class="hm-hero__pills" style="margin-bottom:0">
+          <span class="hm-hero__pill">PoC</span>
+          <span class="hm-hero__pill">Supply Chain</span>
+          <span class="hm-hero__pill">Whitepaper</span>
+          <span class="hm-hero__pill">Adobe XD</span>
+        </div>
+      </div>
+      <div class="iv-project-block__visual">
+        <img src="../Figma/blockchain/Illustration 3.svg" alt="SVC meat traceability illustration">
+      </div>
+    </div>
+  </div>
+
+  <!-- ArtClear callout -->
+  <div class="container">
+    <div class="cs-section" id="s-artclear" data-reveal>
+      <div class="cs-section__left">
+        <h3>A different kind of blockchain</h3>
+        <div class="cs-section__number alt-line">4a</div>
+      </div>
+      <div class="cs-section__right">
+        <p>With time, I came to think the real value of blockchain was never the currency — it was the licensing and provenance layer. You can mark anything: artwork, meat, ammunition. Anyone in the chain can verify where something came from and who handled it.</p>
+        <p>ArtClear was the only project where that idea was actually the whole point — no tokens, no speculation, just proof of origin backed by HP fingerprinting technology. It's also the only NFT-adjacent project I've worked on, and the one that proved the concept works.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" data-reveal>
+    <div class="iv-callout">
+      <div>
+        <span class="iv-callout__eyebrow">__ A deeper look</span>
+        <h2 class="hm-hero__title" style="font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:14px">When blockchain has nothing to do with crypto</h2>
+        <p style="color:var(--cs-text-muted);line-height:1.75;font-size:0.95rem">SaaS for artwork management and licensing that ensures security, prevents fraud, and connects participants for future sale of an art piece — with the possibility to generate a certificate or title of authenticity based on NFT technology. ArtClear is the only project from this period that grew into something large enough to deserve its own story.</p>
+        <a href="artclear.html" class="iv-link">
+          View ArtClear case study
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5.5 3.5L9 7L5.5 10.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="iv-callout__visual"></div>
+    </div>
+  </div>
+
+  <!-- Takeaways -->
+  <div class="container">
+    <div class="cs-section" id="takeaways" data-reveal>
+      <div class="cs-section__left">
+        <h3>What 5 years in blockchain taught me</h3>
+        <div class="cs-section__number">5a</div>
+      </div>
+      <div class="cs-section__right">
+        <p>The projects that aged well weren't about trading — they were about provenance. Knowing where something came from. That idea is still the most interesting thing blockchain can do.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" data-reveal>
+    <div class="iv-takeaways-grid">
+      <div class="cs-process__card">
+        <div class="iv-takeaway-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L14 5.5V10.5L8 14L2 10.5V5.5L8 2Z" stroke="#1F8885" stroke-width="1.4"/></svg>
+        </div>
+        <div class="cs-process__body">
+          <h3>Compliance is a design problem</h3>
+          <p>KYC, AML, gas fees — none of it is user-friendly by default. Five years in crypto taught me that the hardest UX work is turning regulatory requirements into something a real person can get through without dropping off.</p>
+        </div>
+      </div>
+      <div class="cs-process__card">
+        <div class="iv-takeaway-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#1F8885" stroke-width="1.4"/><path d="M8 5V8L10 10" stroke="#1F8885" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <div class="cs-process__body">
+          <h3>Not everything ships — and that's fine</h3>
+          <p>PoCs, whitepapers, investor pitches — half the work I did in this period never went live. Designing to prove an idea is as valid as designing to ship one. The output is different, the rigor is the same.</p>
+        </div>
+      </div>
+      <div class="cs-process__card">
+        <div class="iv-takeaway-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M3 4H10M3 12H7" stroke="#1F8885" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </div>
+        <div class="cs-process__body">
+          <h3>The real use case took time to emerge</h3>
+          <p>Most of the 2018 boom was noise. The projects that aged well weren't about trading — they were about provenance. Knowing where something came from. That idea is still the most interesting thing blockchain can do.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="container iv-cta" id="footer">
+    <div class="iv-cta__card">
+      <div class="iv-cta__inner">
+        <div class="iv-cta__eyebrow">__ Get in touch</div>
+        <h2 class="iv-cta__title">Let's build something<br>worth remembering</h2>
+        <p class="iv-cta__sub">Available for full-time roles & freelance. I work best close to the product.</p>
+        <div class="iv-cta__buttons">
+          <a href="mailto:wendapatryk91@gmail.com" class="iv-btn--teal">Get in touch</a>
+          <a href="https://www.linkedin.com/in/patrykwenda91/" target="_blank" class="iv-btn--ghost">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="../js/app.js"></script>
 </body>

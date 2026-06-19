@@ -1,0 +1,422 @@
+/* ─── Blockchain / Crypto case study ─── */
+/* Overrides base case-study.css with dark IvyCoin palette */
+
+.iv-page {
+  --cs-bg:           #1B181D;
+  --cs-text:         #ffffff;
+  --cs-text-muted:   rgba(255,255,255,0.45);
+  --cs-border:       rgba(255,255,255,0.08);
+  --cs-border-nav:   rgba(255,255,255,0.08);
+  --cs-tag-bg:       rgba(31,136,133,0.15);
+  --cs-tag-text:     #1F8885;
+  --cs-accent:       #1F8885;
+  --cs-card-bg:      rgba(255,255,255,0.04);
+  background: #1B181D;
+  color: #ffffff;
+}
+
+/* ─── Nav ─── */
+.iv-page .cs-nav {
+  background: rgba(27,24,29,0.85);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(16px);
+}
+
+.iv-page .cs-nav--sticky {
+  background: rgba(27,24,29,0.92);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: none;
+}
+
+.iv-page .cs-nav__logo,
+.iv-page .cs-nav__links a {
+  color: #ffffff;
+}
+
+.iv-page .cs-nav__links a:hover {
+  color: #1F8885;
+}
+
+.iv-page .cs-nav__cv {
+  border-color: rgba(255,255,255,0.25);
+  color: #fff;
+}
+
+.iv-page .cs-nav__cv:hover {
+  background: #1F8885;
+  border-color: #1F8885;
+}
+
+/* ─── Hero Bento ─── */
+.iv-hero__bento {
+  background: #141218 !important;
+  border: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+  overflow: hidden;
+  min-height: 420px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.iv-hero__bento::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 80% at -5% 50%, rgba(31,136,133,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 65% at 105% 35%, rgba(37,54,235,0.18) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.iv-hero__bento > * { position: relative; z-index: 1; }
+
+/* hide the right visual panel for this hero — text only layout */
+.iv-hero__bento .hm-hero__visual {
+  display: none;
+}
+
+.iv-hero__bento .hm-hero__text {
+  max-width: 780px;
+}
+
+/* ─── Details card ─── */
+.iv-page .cs-details__card {
+  background: var(--cs-card-bg);
+  border-color: var(--cs-border);
+}
+
+.iv-page .cs-details__title {
+  color: var(--cs-text-muted);
+}
+
+.iv-page .cs-details__col-label {
+  color: #1F8885;
+}
+
+.iv-page .cs-details__col-value {
+  color: var(--cs-text);
+}
+
+/* ─── Sections ─── */
+.iv-page .cs-section {
+  border-top-color: var(--cs-border);
+}
+
+.iv-page .cs-section__left h3 {
+  color: var(--cs-text);
+}
+
+.iv-page .cs-section__number {
+  color: var(--cs-border);
+}
+
+/* ─── Process cards ─── */
+.iv-page .cs-process__card {
+  background: var(--cs-card-bg);
+  border-color: var(--cs-border);
+}
+
+.iv-page .cs-process__badge {
+  background: rgba(31,136,133,0.15);
+  color: #1F8885;
+  border-color: rgba(31,136,133,0.3);
+}
+
+.iv-page .cs-process__body h3 {
+  color: var(--cs-text);
+}
+
+.iv-page .cs-process__body p {
+  color: var(--cs-text-muted);
+}
+
+/* ─── Pills / tags ─── */
+.iv-page .hm-hero__pill {
+  background: rgba(31,136,133,0.12);
+  color: #1F8885;
+  border: 1px solid rgba(31,136,133,0.25);
+}
+
+/* ─── Buttons ─── */
+.iv-page .hm-btn--primary {
+  background: #1F8885;
+  color: #fff;
+  border-color: #1F8885;
+}
+
+.iv-page .hm-btn--primary:hover {
+  background: #178480;
+  border-color: #178480;
+}
+
+.iv-page .hm-btn--outline {
+  border-color: rgba(255,255,255,0.25);
+  color: #fff;
+}
+
+.iv-page .hm-btn--outline:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+/* ─── Project blocks ─── */
+.iv-project-block {
+  padding: 64px 0;
+  border-top: 1px solid var(--cs-border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.iv-project-block--reverse {
+  direction: rtl;
+}
+
+.iv-project-block--reverse > * {
+  direction: ltr;
+}
+
+.iv-project-block__num {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #1F8885;
+  margin-bottom: 10px;
+}
+
+.iv-project-block__type {
+  font-size: 0.85rem;
+  color: #1F8885;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.iv-project-block__visual {
+  background: var(--cs-card-bg);
+  border: 1px solid var(--cs-border);
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iv-project-block__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─── Challenge cards grid ─── */
+.iv-challenge-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.iv-challenge-grid .cs-process__card {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.iv-challenge-grid .cs-process__badge {
+  font-size: 1.6rem;
+  font-weight: 800;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  color: rgba(31,136,133,0.4);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+/* ─── Artclear callout card ─── */
+.iv-callout {
+  background: var(--cs-card-bg);
+  border: 1px solid rgba(37,54,235,0.25);
+  border-radius: 24px;
+  padding: 56px;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 48px;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.iv-callout__eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(37,54,235,0.7);
+  margin-bottom: 14px;
+  display: block;
+}
+
+.iv-callout__visual {
+  background: linear-gradient(135deg, rgba(37,54,235,0.12), rgba(37,54,235,0.04));
+  border: 1px solid rgba(37,54,235,0.18);
+  border-radius: 16px;
+  aspect-ratio: 4/3;
+}
+
+.iv-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1F8885;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+  padding-bottom: 2px;
+  margin-top: 24px;
+}
+
+.iv-link:hover { border-color: #1F8885; }
+
+/* ─── Takeaways ─── */
+.iv-takeaways-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.iv-takeaways-grid .cs-process__card {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.iv-takeaway-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(31,136,133,0.12);
+  border: 1px solid rgba(31,136,133,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+
+/* ─── CTA section ─── */
+.iv-cta {
+  margin-top: 16px;
+}
+
+.iv-cta__card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 80px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse 65% 80% at -5% 50%, rgba(31,136,133,0.45) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 70% at 105% 40%, rgba(37,54,235,0.4) 0%, transparent 60%),
+    #141218;
+}
+
+.iv-cta__card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.iv-cta__inner { position: relative; z-index: 1; }
+
+.iv-cta__eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #1F8885;
+  margin-bottom: 14px;
+}
+
+.iv-cta__title {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+}
+
+.iv-cta__sub {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.45);
+  max-width: 480px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+.iv-cta__buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.iv-btn--teal {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: 1000px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s;
+  background: #1F8885;
+  color: #fff;
+  box-shadow: 0 0 24px rgba(31,136,133,0.3);
+}
+
+.iv-btn--teal:hover {
+  background: #178480;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 32px rgba(31,136,133,0.45);
+}
+
+.iv-btn--ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: 1000px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.iv-btn--ghost:hover { background: rgba(255,255,255,0.1); }
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .iv-project-block { grid-template-columns: 1fr; gap: 32px; }
+  .iv-project-block--reverse { direction: ltr; }
+  .iv-callout { grid-template-columns: 1fr; }
+  .iv-callout__visual { display: none; }
+  .iv-takeaways-grid { grid-template-columns: 1fr; }
+  .iv-challenge-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .iv-cta__card { padding: 48px 24px; }
+}
