@@ -165,6 +165,7 @@
   border-radius: 28px;
   overflow: hidden;
   margin-top: 40px;
+  height: 400px;
   transition: outline-color 0.3s ease;
 }
 
