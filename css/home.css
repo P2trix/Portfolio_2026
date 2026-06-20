@@ -52,6 +52,7 @@
   z-index: 0;
   overflow: hidden;
   border-radius: inherit;
+  isolation: isolate;
 }
 
 .hm-hero__bg::after {
