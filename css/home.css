@@ -6,11 +6,6 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 4px 12px 8px;
-  border-left: 1px solid rgba(181, 186, 203, 0.60);
-  border-bottom: 1px solid rgba(181, 186, 203, 0.60);
-  border-bottom-left-radius: 9px;
-  backdrop-filter: blur(2px);
   color: var(--cs-accent);
   font-size: 16px;
   font-weight: 700;
@@ -25,7 +20,7 @@
   line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--cs-text);
-  margin: 12px 0 0;
+  margin: 4px 0 0;
 }
 
 /* ─── Hero Bento ─── */
