@@ -326,13 +326,17 @@
 .iv-link:hover { border-color: #00EAE4; }
 
 /* ─── Takeaways ─── */
-.iv-section-pad {
-  padding: 64px 0;
-}
 .iv-takeaways-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+}
+.cs-section#takeaways {
+  flex-wrap: wrap;
+}
+.cs-section#takeaways .iv-takeaways-grid {
+  width: 100%;
+  flex: 0 0 100%;
 }
 
 .iv-takeaways-grid .cs-process__card {
