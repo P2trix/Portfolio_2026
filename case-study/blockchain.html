@@ -61,7 +61,7 @@
             From hot wallets and ICO platforms to supply chain tracking — five years working on blockchain products during the most chaotic period in crypto history. Some shipped. Some didn't. All taught me something.
           </p>
           <div class="hm-hero__actions">
-            <a href="#s-5a" class="hm-btn hm-btn--primary">What I learned <span class="btn__icon">
+            <a href="#takeaways" class="hm-btn hm-btn--primary">What I learned <span class="btn__icon">
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
@@ -274,7 +274,7 @@
 
   <!-- ArtClear callout -->
   <div class="container">
-    <div class="cs-section" id="s-4a" data-reveal>
+    <div class="cs-section" id="s-artclear" data-reveal>
       <div class="cs-section__left">
         <h3>A different kind of blockchain</h3>
         <div class="cs-section__number alt-line">4a</div>
@@ -303,7 +303,7 @@
 
   <!-- Takeaways -->
   <div class="container">
-    <div class="cs-section" id="s-5a" data-reveal>
+    <div class="cs-section" id="takeaways" data-reveal>
       <div class="cs-section__left">
         <h3>What 5 years in blockchain taught me</h3>
         <div class="cs-section__number">5a</div>
@@ -457,7 +457,7 @@
     var tocList = document.getElementById('tocList');
     var tocToggle = document.getElementById('tocToggle');
     var tocPanel = document.getElementById('tocPanel');
-    var sections = document.querySelectorAll('.cs-section[id^="s-"]');
+    var sections = document.querySelectorAll('.cs-section[id^="s-"], .cs-section[id="takeaways"]');
     var tocItems = [];
     var activeIndex = -1;
     if (!tocList || !sections.length) return;
