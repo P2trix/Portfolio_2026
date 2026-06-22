@@ -3,14 +3,12 @@
 
 /* Section tag */
 .hm-section__tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
+  display: block;
   color: var(--cs-accent);
   font-size: 16px;
   font-weight: 700;
   font-family: 'Onest', sans-serif;
-  line-height: 24px;
+  line-height: 1;
 }
 
 .hm-section__title {
@@ -20,7 +18,7 @@
   line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--cs-text);
-  margin: 4px 0 0;
+  margin: 8px 0 0;
 }
 
 /* ─── Hero Bento ─── */
