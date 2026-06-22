@@ -363,7 +363,6 @@
 .hm-work {
   padding: 100px 0;
   background: #F8FAFF;
-  border-top: 1px solid var(--cs-border);
 }
 
 .hm-work__header {
@@ -695,7 +694,6 @@
 /* ─── Gallery ─── */
 .hm-gallery {
   padding: 100px 0 0;
-  border-top: 1px solid var(--cs-border);
   margin-bottom: 24px;
 }
 
