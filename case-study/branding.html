@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Branding — Patryk Wenda</title>
   <link rel="stylesheet" href="../css/case-study.css">
+  <link rel="stylesheet" href="../css/home.css">
   <link rel="stylesheet" href="../css/animations.css">
   <style>
     .br-hero {
@@ -172,7 +173,7 @@
 
   <section class="br-gallery">
     <div class="container">
-      <div class="cs-section" data-reveal style="padding-top:0">
+      <div class="cs-section" id="s-01" data-reveal style="padding-top:0">
         <div class="cs-section__left">
           <h3>Visual Identity</h3>
           <div class="cs-section__number">01</div>
@@ -197,7 +198,7 @@
 
   <section class="br-gallery">
     <div class="container">
-      <div class="cs-section" data-reveal style="padding-top:0">
+      <div class="cs-section" id="s-02" data-reveal style="padding-top:0">
         <div class="cs-section__left">
           <h3>Brand Guidelines</h3>
           <div class="cs-section__number">02</div>
@@ -253,6 +254,23 @@
   </footer>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <!-- Table of Contents -->
+  <nav class="toc-widget" id="toc" aria-label="Section navigation">
+    <button class="toc-widget__toggle" id="tocToggle" aria-label="Toggle section list">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <rect x="3" y="3" width="2" height="2" rx="0.5" fill="currentColor"/>
+        <rect x="3" y="7" width="2" height="2" rx="0.5" fill="currentColor"/>
+        <rect x="3" y="11" width="2" height="2" rx="0.5" fill="currentColor"/>
+        <path d="M8 4H13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M8 8H13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M8 12H13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="toc-widget__panel" id="tocPanel">
+      <ul class="toc-widget__list" id="tocList"></ul>
+    </div>
+  </nav>
 
   <div class="lightbox" id="lightbox">
     <button class="lightbox__close" id="lightbox-close">✕</button>
@@ -368,6 +386,70 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
+
+    // Floating Table of Contents
+    (function() {
+      var tocList = document.getElementById('tocList');
+      var tocToggle = document.getElementById('tocToggle');
+      var tocPanel = document.getElementById('tocPanel');
+      var sections = document.querySelectorAll('.cs-section[id^="s-"]');
+      var tocItems = [];
+      var activeIndex = -1;
+
+      if (!tocList || !sections.length) return;
+
+      sections.forEach(function(sec, i) {
+        var numEl = sec.querySelector('.cs-section__number');
+        var titleEl = sec.querySelector('h3');
+        if (!numEl || !titleEl) return;
+        var num = numEl.textContent.trim();
+        var label = titleEl.textContent.trim();
+        var li = document.createElement('li');
+        li.className = 'toc-widget__item';
+        li.setAttribute('data-index', i);
+        li.innerHTML = '<span class="toc-widget__item-num">' + num + '</span><span class="toc-widget__item-label">' + label + '</span>';
+        li.addEventListener('click', function() {
+          sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          tocPanel.classList.remove('is-open');
+          tocToggle.classList.remove('is-open');
+        });
+        tocList.appendChild(li);
+        tocItems.push({ el: li, sec: sec });
+      });
+
+      var tocObserver = new IntersectionObserver(function(entries) {
+        var best = -1;
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            var idx = parseInt(entry.target.getAttribute('data-toc-idx'));
+            if (idx > best) best = idx;
+          }
+        });
+        if (best >= 0 && best !== activeIndex) {
+          activeIndex = best;
+          tocItems.forEach(function(item, i) {
+            item.el.classList.toggle('is-active', i === best);
+          });
+        }
+      }, { threshold: 0.3, rootMargin: '0px 0px -20% 0px' });
+
+      sections.forEach(function(sec, i) {
+        sec.setAttribute('data-toc-idx', i);
+        tocObserver.observe(sec);
+      });
+
+      tocToggle.addEventListener('click', function() {
+        tocPanel.classList.toggle('is-open');
+        tocToggle.classList.toggle('is-open');
+      });
+
+      document.addEventListener('click', function(e) {
+        if (!tocPanel.contains(e.target) && e.target !== tocToggle && !tocToggle.contains(e.target)) {
+          tocPanel.classList.remove('is-open');
+          tocToggle.classList.remove('is-open');
+        }
+      });
+    })();
 
   </script>
 
