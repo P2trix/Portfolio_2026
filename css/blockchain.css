@@ -326,17 +326,13 @@
 .iv-link:hover { border-color: #00EAE4; }
 
 /* ─── Takeaways ─── */
+.iv-section-pad {
+  padding: 0 0 64px;
+}
 .iv-takeaways-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-}
-.cs-section#takeaways {
-  flex-wrap: wrap;
-}
-.cs-section#takeaways .iv-takeaways-grid {
-  width: 100%;
-  flex: 0 0 100%;
 }
 
 .iv-takeaways-grid .cs-process__card {
@@ -358,6 +354,9 @@
 }
 
 /* ─── Contact section ─── */
+.iv-page .hm-contact {
+  padding-top: 64px;
+}
 .iv-page .hm-contact__graphic {
   background: #2F343D;
 }
