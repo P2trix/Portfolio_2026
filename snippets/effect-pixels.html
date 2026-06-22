@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel / Mosaic Effect — ref: erenaygun.com</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #020420;
+      color: #fff;
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    #shader-mount {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+
+    #shader-mount canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* mouse spotlight — CSS radial-gradient overlay (erenaygun.com contact effect) */
+    #spotlight {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(208,208,208,0.03), transparent 70%);
+    }
+
+    .hero {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 0 8vw;
+      gap: 18px;
+    }
+
+    .hero__eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .hero__title {
+      font-size: clamp(3rem, 9vw, 7rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      color: #fff;
+    }
+
+    .hero__sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.38);
+      max-width: 360px;
+      line-height: 1.55;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="shader-mount"></div>
+  <div id="spotlight"></div>
+
+  <section class="hero">
+    <p class="hero__eyebrow">erenaygun.com — hero bg</p>
+    <h1 class="hero__title">Mosaic<br>Shader</h1>
+    <p class="hero__sub">WebGL ShaderMaterial via Three.js — mosaic quantization + animated concentric rings.</p>
+  </section>
+
+  <!-- Three.js r89 (same version as erenaygun.com) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/89/three.min.js"></script>
+  <script>
+  (function () {
+
+    /* ── VERTEX SHADER ──────────────────────────────────────────── */
+    var vertexShader = `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `;
+
+    /* ── FRAGMENT SHADER (exact source from erenaygun.com) ──────── */
+    var fragmentShader = `
+      precision highp float;
+      uniform vec2 resolution;
+      uniform float time;
+
+      float random (in float x) {
+          return fract(sin(x)*1e4);
+      }
+      float random (vec2 st) {
+          return fract(sin(dot(st.xy,
+                               vec2(12.9898,78.233)))*
+              43758.5453123);
+      }
+
+      varying vec2 vUv;
+
+      void main(void) {
+        vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
+
+        vec2 fMosaicScal = vec2(4.0, 2.0);
+        vec2 vScreenSize = vec2(256.0, 256.0);
+        uv.x = floor(uv.x * vScreenSize.x / fMosaicScal.x) / (vScreenSize.x / fMosaicScal.x);
+        uv.y = floor(uv.y * vScreenSize.y / fMosaicScal.y) / (vScreenSize.y / fMosaicScal.y);
+
+        float t = time * 0.06 + random(uv.x) * 0.4;
+        float lineWidth = 0.0008;
+
+        vec3 color = vec3(0.0);
+        for (int j = 0; j < 3; j++) {
+          for (int i = 0; i < 5; i++) {
+            color[j] += lineWidth * float(i * i) / abs(fract(t - 0.01 * float(j) + float(i) * 0.01) * 1.0 - length(uv));
+          }
+        }
+
+        gl_FragColor = vec4(color[2], color[1], color[0], 1.0);
+      }
+    `;
+
+    /* ── SETUP ──────────────────────────────────────────────────── */
+    var mount = document.getElementById('shader-mount');
+
+    var uniforms = {
+      resolution: { value: new THREE.Vector2() },
+      time:       { value: 0.0 }
+    };
+
+    var scene    = new THREE.Scene();
+    var camera   = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    var geometry = new THREE.PlaneGeometry(2, 2);
+    var material = new THREE.ShaderMaterial({
+      uniforms:       uniforms,
+      vertexShader:   vertexShader,
+      fragmentShader: fragmentShader,
+    });
+    var mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    var renderer = new THREE.WebGLRenderer({ antialias: false });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    mount.appendChild(renderer.domElement);
+
+    function resize() {
+      var w = window.innerWidth;
+      var h = window.innerHeight;
+      renderer.setSize(w, h);
+      uniforms.resolution.value.set(renderer.domElement.width, renderer.domElement.height);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    /* ── MOUSE SPOTLIGHT ────────────────────────────────────────── */
+    var spotlight = document.getElementById('spotlight');
+    window.addEventListener('mousemove', function (e) {
+      spotlight.style.setProperty('--mx', e.clientX + 'px');
+      spotlight.style.setProperty('--my', e.clientY + 'px');
+    });
+
+    /* ── RENDER LOOP ────────────────────────────────────────────── */
+    function animate() {
+      requestAnimationFrame(animate);
+      uniforms.time.value += 0.05;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+  })();
+  </script>
+
+</body>
+</html>
