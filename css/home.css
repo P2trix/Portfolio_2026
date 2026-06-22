@@ -6,9 +6,13 @@
   display: block;
   color: var(--cs-accent);
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 400;
   font-family: 'Onest', sans-serif;
   line-height: 1;
+}
+
+.hm-section__tag + .hm-section__title {
+  margin-top: 8px;
 }
 
 .hm-section__title {
@@ -18,7 +22,7 @@
   line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--cs-text);
-  margin: 8px 0 0;
+  margin: 0;
 }
 
 /* ─── Hero Bento ─── */
@@ -282,7 +286,6 @@
 .hm-about__left {
   display: flex;
   flex-direction: column;
-  gap: 24px;
 }
 
 .hm-about__right {
@@ -565,6 +568,7 @@
 .hm-about__tags {
   flex: 1;
   display: flex;
+  margin-top: 16px;
 }
 
 .hm-about__tags-box {
