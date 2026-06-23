@@ -627,6 +627,7 @@ body.cs-page {
     text-align: center;
     color: var(--cs-text);
     text-decoration: none;
+    padding: 10px 0;
     transition: color 0.2s ease;
   }
   .cs-nav--open .cs-nav__links a:hover {
@@ -634,7 +635,7 @@ body.cs-page {
   }
   .cs-nav .container { flex-wrap: nowrap; gap: 8px; }
   .cs-hero__title { font-size: 32px; line-height: 40px; }
-  .cs-hero__image { padding: 24px; border-radius: 16px; }
+  .cs-hero__image { padding: 24px; border-radius: 16px; min-height: 320px; }
   .cs-hero__content { gap: 24px; }
   .cs-hero__subtitle { font-size: 16px; line-height: 24px; }
   .cs-section { padding: 32px 0; gap: 24px; }
@@ -642,7 +643,7 @@ body.cs-page {
   .cs-section__number { font-size: 64px; line-height: 1; }
   .cs-details { padding: 32px 0; gap: 24px; }
   .cs-process { padding: 32px 0; gap: 16px; }
-  .cs-process__card { flex: 1 1 calc(50% - 8px); min-width: 220px; height: 280px; }
+  .cs-process__card { flex: 1 1 calc(50% - 8px); min-width: 220px; min-height: 200px; height: auto; }
   .cs-footer { padding: 16px 0; }
   .cs-page .container { padding: 0 24px; }
 }
@@ -653,6 +654,7 @@ body.cs-page {
   .cs-hero__image { padding: 16px; min-height: auto; border-radius: 12px; }
   .cs-hero__content { gap: 20px; }
   .cs-hero__subtitle { font-size: 14px; line-height: 22px; }
+  .cs-hero__tag { font-size: 12px; padding: 6px 12px; }
   .cs-section { padding: 20px 0; gap: 16px; }
   .cs-section__left h3 { font-size: 22px; line-height: 28px; }
   .cs-section__number { font-size: 40px; line-height: 1; }
@@ -667,11 +669,44 @@ body.cs-page {
   .cs-process__body h3 { font-size: 24px; line-height: 30px; }
   .cs-process__body p { font-size: 14px; line-height: 20px; }
   .cs-image-row { overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; margin: 16px 0; gap: 12px; touch-action: pan-x pan-y; }
-  .cs-image-row__item { scroll-snap-align: start; flex-shrink: 0; }
+  .cs-image-row__item { scroll-snap-align: start; flex-shrink: 0; min-width: 75%; }
   .cs-image-row-2, .cs-image-row-3 { margin: 16px 0; gap: 12px; grid-template-columns: 1fr; }
   .cs-footer { padding: 12px 0; }
   .cs-footer .container { flex-direction: column; align-items: flex-start; gap: 2px; }
   .cs-footer__copy, .cs-footer__quote { font-size: 11px; line-height: 18px; }
+}
+
+@media (max-width: 360px) {
+  .cs-page .container { padding: 0 12px; }
+  .cs-nav .container { padding: 0 16px; }
+  .cs-nav--open .cs-nav__links .cs-nav__links-inner { padding: 0 16px; }
+  .cs-nav--open .cs-nav__links a { font-size: 22px; }
+  .cs-nav__toggle { width: 40px; height: 40px; }
+  .cs-nav--open .cs-nav__toggle { right: 12px; top: 16px; }
+  .cs-hero__title { font-size: 22px; line-height: 28px; }
+  .cs-hero__image { padding: 12px; border-radius: 10px; }
+  .cs-hero__content { gap: 16px; }
+  .cs-hero__subtitle { font-size: 13px; line-height: 20px; }
+  .cs-hero__tag { font-size: 11px; padding: 4px 10px; }
+  .cs-section { padding: 16px 0; gap: 12px; }
+  .cs-section__left h3 { font-size: 20px; line-height: 26px; }
+  .cs-section__number { font-size: 32px; }
+  .cs-section__right p { font-size: 14px; line-height: 20px; }
+  .cs-details { padding: 16px 0; gap: 12px; }
+  .cs-details__title { font-size: 20px; line-height: 26px; }
+  .cs-details__card { padding: 16px 12px; gap: 12px; }
+  .cs-details__col { gap: 8px; }
+  .cs-details__col-label { font-size: 14px; }
+  .cs-details__col-value { font-size: 14px; }
+  .cs-process { padding: 16px 0; gap: 8px; }
+  .cs-process__card { padding: 12px; min-height: 140px; }
+  .cs-process__body h3 { font-size: 20px; line-height: 26px; }
+  .cs-process__body p { font-size: 13px; line-height: 18px; }
+  .cs-image-row { margin: 12px 0; gap: 8px; }
+  .cs-image-row__item { min-width: 80%; }
+  .cs-image-row-2, .cs-image-row-3 { margin: 12px 0; gap: 8px; }
+  .cs-footer { padding: 10px 0; }
+  .cs-footer__copy, .cs-footer__quote { font-size: 10px; line-height: 16px; }
 }
 
 /* ─── Floating Table of Contents ─── */
