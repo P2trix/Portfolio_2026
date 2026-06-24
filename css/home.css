@@ -846,17 +846,18 @@
 }
 
 .hm-contact__bento {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  display: flex;
+  gap: 40px;
   align-items: center;
   background: var(--cs-card-bg);
   border: 1px solid var(--cs-border);
   border-radius: 28px;
-  padding: 80px;
+  padding: 24px 24px 24px 56px;
+  overflow: hidden;
 }
 
 .hm-contact__left {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -899,17 +900,15 @@
 }
 
 .hm-contact__right {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex: 1;
+  height: 469px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: url('../assets/Backgreound2.png') center/cover no-repeat;
 }
 
 .hm-contact__graphic {
-  width: 100%;
-  aspect-ratio: 1;
-  border-radius: 20px;
-  background: #E8ECF8;
-  max-width: 320px;
+  display: none;
 }
 
 .hm-contact__linkedin {
@@ -1027,11 +1026,8 @@
   .hm-work__row-img { aspect-ratio: 16 / 9; }
 
   .hm-contact { padding: 0 0 64px; }
-  .hm-contact__bento {
-    grid-template-columns: 1fr;
-    gap: 32px;
-    padding: 40px;
-  }
+  .hm-contact__bento { flex-direction: column; gap: 24px; padding: 40px; }
+  .hm-contact__right { width: 100%; height: 300px; }
   .hm-contact__title { font-size: 28px; }
   .hm-contact__email { font-size: 18px; }
 }
@@ -1085,11 +1081,11 @@
   .hm-gallery__card-body p { font-size: 13px; }
 
   .hm-contact { padding: 0 0 40px; }
-  .hm-contact__bento { border-radius: 12px; padding: 24px; gap: 24px; }
+  .hm-contact__bento { padding: 24px 16px; gap: 16px; }
+  .hm-contact__right { height: 200px; }
   .hm-contact__title { font-size: 24px; }
   .hm-contact__desc { font-size: 15px; }
   .hm-contact__email { font-size: 16px; }
-  .hm-contact__graphic { max-width: 200px; }
 }
 
 
