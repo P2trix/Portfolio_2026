@@ -766,6 +766,7 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  border: 1px solid var(--cs-border);
 }
 
 
