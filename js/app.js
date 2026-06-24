@@ -209,6 +209,31 @@ document.addEventListener('DOMContentLoaded', () => {
       mouseY = null;
     });
 
+    // Rotate only the blue gradient layer toward cursor
+    const glowPath = box.querySelector('[data-glow-path]');
+    const glow = box.querySelector('.hm-about__tags-glow');
+    const gradStops = box.querySelectorAll('#paint4_radial_120_59 stop');
+    const resetColor = '#1C4EFE';
+    function setGradColor(clr) {
+      gradStops.forEach(s => s.setAttribute('stop-color', clr));
+    }
+    if (glowPath && glow) {
+      box.addEventListener('mousemove', (e) => {
+        const rect = box.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+        const angle = Math.atan2(my - cy, mx - cx) * (180 / Math.PI);
+        glowPath.setAttribute('transform', `rotate(${angle - 130.6} 621 621)`);
+      });
+      box.addEventListener('mouseleave', () => {
+        glowPath.setAttribute('transform', 'rotate(0 621 621)');
+        glow.classList.remove('visible');
+        setGradColor(resetColor);
+      });
+    }
+
     // Drag
     let dragIdx = -1;
     let dragStartX = 0, dragStartY = 0;
@@ -236,6 +261,9 @@ document.addEventListener('DOMContentLoaded', () => {
           s.vx = 0;
           s.vy = 0;
           s.el.classList.add('dragging');
+          const tagClr = s.el.style.getPropertyValue('--tag-clr').trim();
+          if (tagClr) setGradColor(tagClr);
+          glow.classList.add('visible');
           break;
         }
       }
@@ -255,6 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (dragIdx === -1) return;
       state[dragIdx].drag = false;
       state[dragIdx].el.classList.remove('dragging');
+      glow.classList.remove('visible');
       dragIdx = -1;
     }
 

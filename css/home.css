@@ -267,6 +267,13 @@
   transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 
+.hm-hero__visual-img {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .hm-hero__visual.iframe-ready iframe {
   opacity: 1;
   visibility: visible;
@@ -323,6 +330,7 @@
   gap: 16px;
   padding-top: 32px;
   margin-top: 16px;
+  width: 100%;
 }
 
 .hm-stat {
@@ -337,14 +345,28 @@
   min-width: 120px;
   aspect-ratio: 1;
   position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+.hm-stat__bg {
+  position: absolute;
+  right: -20px;
+  bottom: 10px;
+  width: 144px;
+  height: auto;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
 }
 
 .hm-stat__icon {
   position: absolute;
-  top: 14px;
-  left: 14px;
-  width: 18px;
-  height: 18px;
+  top: 24px;
+  left: 24px;
+  width: 44px;
+  height: 44px;
+  z-index: 1;
 }
 
 .hm-stat__number {
@@ -578,10 +600,33 @@
   justify-content: center;
   width: 100%;
   flex: 1;
-  background: #f5f5f5;
+  background: #F8FAFF url('../assets/Backgreound1.svg') center/90% no-repeat;
+  border: 1px solid var(--cs-border);
   border-radius: 20px;
   overflow: hidden;
   user-select: none;
+}
+
+.hm-about__tags-glow {
+  position: absolute;
+  left: 5%;
+  top: 5%;
+  width: 90%;
+  height: 90%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.hm-about__tags-glow.visible {
+  opacity: 1;
+}
+
+.hm-about__tags-glow svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .hm-about__tag {
@@ -909,12 +954,13 @@
   .hm-btn,
   .hm-btn--primary,
   .hm-btn--outline { justify-content: center; padding: 16px 28px; font-size: 15px; }
-  .hm-hero__visual { position: relative; width: 100%; height: 300px; border-radius: 0 0 28px 28px; }
+  .hm-hero__visual { position: relative; width: 100%; height: 300px; border-radius: 0 0 28px 28px; background: #060e18; }
   .hm-hero__visual iframe,
   .hm-hero__visual.iframe-ready iframe {
     opacity: 0 !important;
     visibility: hidden !important;
   }
+  .hm-hero__visual-img { display: block; }
 
   .hm-about { padding: 80px 0; }
   .hm-about__grid {
@@ -934,7 +980,26 @@
 }
 
 @media (max-width: 768px) {
-  .hm-gallery { padding: 64px 0 0; }
+  .hm-webdesign__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .hm-webdesign__header {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+  .hm-webdesign__header-right p {
+    max-width: none;
+  }
+  .hm-webdesign__card {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .hm-webdesign__card-img {
+    width: 100%;
+  }
   .hm-gallery__grid { grid-template-columns: 1fr; }
   .hm-gallery__card--wide { grid-row: auto; }
   .hm-gallery__card-arrow { opacity: 1; transform: translateY(0); }
@@ -944,8 +1009,9 @@
   .hm-stat__number { font-size: 28px; }
 
   .hm-work__header { flex-direction: column; gap: 12px; margin-bottom: 24px; }
-  .hm-work__pill-text span:first-child { font-size: 12px; }
-  .hm-work__pill-email { font-size: 12px; }
+  .hm-work__pill-text { align-items: flex-start; }
+  .hm-work__pill-text span:first-child { font-size: 14px; }
+  .hm-work__pill-email { font-size: 13px; }
   .hm-work__pill-avatar { width: 32px; height: 32px; }
   .hm-work__pill { gap: 8px; padding: 5px 5px 5px 22px; }
   .hm-work__list { gap: 24px; }
@@ -988,6 +1054,7 @@
     opacity: 0 !important;
     visibility: hidden !important;
   }
+  .hm-hero__visual-img { display: block; }
 
   .hm-about { padding: 40px 0; }
   .hm-about__tags-box { min-height: 260px; border-radius: 14px; }
@@ -998,11 +1065,12 @@
   .hm-stat__number { font-size: 24px; }
   .hm-stat__label { font-size: 11px; }
 
-  .hm-work { padding: 40px 0; }
+  .hm-work { padding: 40px 0; width: 100vw; }
   .hm-work__pill { gap: 6px; padding: 4px 4px 4px 18px; }
-  .hm-work__pill-text span:first-child { font-size: 11px; }
-  .hm-work__pill-email { font-size: 11px; }
-  .hm-work__pill-avatar { width: 28px; height: 28px; }
+  .hm-work__pill-text { align-items: flex-start; }
+  .hm-work__pill-text span:first-child { font-size: 14px; }
+  .hm-work__pill-email { font-size: 13px; }
+  .hm-work__pill-avatar { width: 32px; height: 32px; }
   .hm-work__row { border-radius: 20px; }
   .hm-work__row-body { padding: 20px; gap: 12px; }
   .hm-work__row-tags span { font-size: 11px; padding: 4px 10px; }
