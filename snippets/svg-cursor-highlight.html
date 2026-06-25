@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Cursor Highlight</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0B0E11;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, sans-serif;
+    }
+
+    .svg-wrap {
+      position: relative;
+      width: 90vmin;
+      max-width: 720px;
+      aspect-ratio: 1;
+      border-radius: 28px;
+      background: #0F1218;
+      border: 1px solid #2F343D;
+      overflow: hidden;
+    }
+
+    .svg-wrap svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .info {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #9DA4B1;
+      font-size: 12px;
+      font-family: 'Spline Sans', system-ui, sans-serif;
+      letter-spacing: 0.3px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="svg-wrap" id="wrap">
+    <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" id="svg">
+      <defs>
+        <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#1C4EFE" stop-opacity="0.6"/>
+          <stop offset="60%" stop-color="#1C4EFE" stop-opacity="0.15"/>
+          <stop offset="100%" stop-color="#1C4EFE" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="blur4"><feGaussianBlur stdDeviation="4"/></filter>
+        <filter id="blur8"><feGaussianBlur stdDeviation="8"/></filter>
+      </defs>
+
+      <!-- Background grid dots -->
+      <g id="dots">
+        <circle cx="50" cy="50" r="1.5" fill="#2F343D"/>
+        <circle cx="150" cy="50" r="1.5" fill="#2F343D"/>
+        <circle cx="250" cy="50" r="1.5" fill="#2F343D"/>
+        <circle cx="350" cy="50" r="1.5" fill="#2F343D"/>
+        <circle cx="50" cy="150" r="1.5" fill="#2F343D"/>
+        <circle cx="150" cy="150" r="1.5" fill="#2F343D"/>
+        <circle cx="250" cy="150" r="1.5" fill="#2F343D"/>
+        <circle cx="350" cy="150" r="1.5" fill="#2F343D"/>
+        <circle cx="50" cy="250" r="1.5" fill="#2F343D"/>
+        <circle cx="150" cy="250" r="1.5" fill="#2F343D"/>
+        <circle cx="250" cy="250" r="1.5" fill="#2F343D"/>
+        <circle cx="350" cy="250" r="1.5" fill="#2F343D"/>
+        <circle cx="50" cy="350" r="1.5" fill="#2F343D"/>
+        <circle cx="150" cy="350" r="1.5" fill="#2F343D"/>
+        <circle cx="250" cy="350" r="1.5" fill="#2F343D"/>
+        <circle cx="350" cy="350" r="1.5" fill="#2F343D"/>
+      </g>
+
+      <!-- Constellation-like paths (strokes) -->
+      <g id="paths" stroke="#2F343D" stroke-width="1.5" stroke-linecap="round">
+        <path d="M50,50 Q100,20 150,50 T250,50"/>
+        <path d="M250,50 Q300,20 350,50"/>
+        <path d="M50,150 Q100,120 150,150 T250,150 T350,150"/>
+        <path d="M50,250 Q100,220 150,250 T250,250 T350,250"/>
+        <path d="M50,350 Q100,320 150,350 T250,350 T350,350"/>
+
+        <path d="M50,50 Q20,100 50,150 T50,250 T50,350"/>
+        <path d="M150,50 Q120,100 150,150 T150,250 T150,350"/>
+        <path d="M250,50 Q220,100 250,150 T250,250 T250,350"/>
+        <path d="M350,50 Q320,100 350,150 T350,250 T350,350"/>
+
+        <!-- Diagonals / decorative -->
+        <path d="M50,50 Q200,20 350,350" opacity="0.4"/>
+        <path d="M350,50 Q200,20 50,350" opacity="0.4"/>
+      </g>
+
+      <!-- Duplicate paths for highlight (initially invisible) -->
+      <g id="highlight" stroke="#1C4EFE" stroke-width="0" stroke-linecap="round" filter="url(#blur4)" opacity="0">
+        <path d="M50,50 Q100,20 150,50 T250,50"/>
+        <path d="M250,50 Q300,20 350,50"/>
+        <path d="M50,150 Q100,120 150,150 T250,150 T350,150"/>
+        <path d="M50,250 Q100,220 150,250 T250,250 T350,250"/>
+        <path d="M50,350 Q100,320 150,350 T250,350 T350,350"/>
+        <path d="M50,50 Q20,100 50,150 T50,250 T50,350"/>
+        <path d="M150,50 Q120,100 150,150 T150,250 T150,350"/>
+        <path d="M250,50 Q220,100 250,150 T250,250 T250,350"/>
+        <path d="M350,50 Q320,100 350,150 T350,250 T350,350"/>
+        <path d="M50,50 Q200,20 350,350"/>
+        <path d="M350,50 Q200,20 50,350"/>
+      </g>
+
+      <!-- Cursor spotlight ring -->
+      <circle id="spotlight" cx="200" cy="200" r="60" stroke="#1C4EFE" stroke-width="2" opacity="0.3" fill="none"/>
+      <circle id="spotlight-glow" cx="200" cy="200" r="90" fill="url(#glow)" opacity="0"/>
+
+      <!-- Point nodes -->
+      <g id="nodes" fill="#5A6270">
+        <circle cx="50" cy="50" r="3"/>
+        <circle cx="150" cy="50" r="3"/>
+        <circle cx="250" cy="50" r="3"/>
+        <circle cx="350" cy="50" r="3"/>
+        <circle cx="50" cy="150" r="3"/>
+        <circle cx="150" cy="150" r="3"/>
+        <circle cx="250" cy="150" r="3"/>
+        <circle cx="350" cy="150" r="3"/>
+        <circle cx="50" cy="250" r="3"/>
+        <circle cx="150" cy="250" r="3"/>
+        <circle cx="250" cy="250" r="3"/>
+        <circle cx="350" cy="250" r="3"/>
+        <circle cx="50" cy="350" r="3"/>
+        <circle cx="150" cy="350" r="3"/>
+        <circle cx="250" cy="350" r="3"/>
+        <circle cx="350" cy="350" r="3"/>
+      </g>
+    </svg>
+    <div class="info">move cursor — blue highlight follows</div>
+  </div>
+
+  <script>
+  (function () {
+    var wrap = document.getElementById('wrap');
+    var svg = document.getElementById('svg');
+    var paths = document.querySelectorAll('#paths path');
+    var hl = document.getElementById('highlight');
+    var hlPaths = hl.querySelectorAll('path');
+    var spotlight = document.getElementById('spotlight');
+    var glow = document.getElementById('spotlight-glow');
+
+    var pt = svg.createSVGPoint();
+    var cursor = { x: 200, y: 200 };
+    var smooth = { x: 200, y: 200 };
+
+    // Cache path data for distance checks
+    var pathData = [];
+    paths.forEach(function (p, i) {
+      var len = p.getTotalLength();
+      var samples = [];
+      for (var t = 0; t <= 1; t += 0.02) {
+        var point = p.getPointAtLength(t * len);
+        samples.push(point);
+      }
+      pathData.push({ el: p, hlEl: hlPaths[i], len: len, samples: samples });
+    });
+
+    function getNearest(path, cx, cy) {
+      var minDist = Infinity;
+      for (var i = 0; i < path.samples.length; i++) {
+        var dx = path.samples[i].x - cx;
+        var dy = path.samples[i].y - cy;
+        var d = dx * dx + dy * dy;
+        if (d < minDist) minDist = d;
+      }
+      return Math.sqrt(minDist);
+    }
+
+    function onMove(e) {
+      var rect = svg.getBoundingClientRect();
+      pt.x = e.clientX - rect.left;
+      pt.y = e.clientY - rect.top;
+      var svgPt = pt.matrixTransform(svg.getScreenCTM().inverse());
+      cursor.x = svgPt.x;
+      cursor.y = svgPt.y;
+    }
+
+    wrap.addEventListener('mousemove', onMove);
+    wrap.addEventListener('mouseleave', function () {
+      cursor.x = 200;
+      cursor.y = 200;
+    });
+
+    // Touch support
+    wrap.addEventListener('touchmove', function (e) {
+      e.preventDefault();
+      var t = e.touches[0];
+      var rect = svg.getBoundingClientRect();
+      pt.x = t.clientX - rect.left;
+      pt.y = t.clientY - rect.top;
+      var svgPt = pt.matrixTransform(svg.getScreenCTM().inverse());
+      cursor.x = svgPt.x;
+      cursor.y = svgPt.y;
+    }, { passive: false });
+    wrap.addEventListener('touchend', function () {
+      cursor.x = 200;
+      cursor.y = 200;
+    });
+
+    function tick() {
+      smooth.x += (cursor.x - smooth.x) * 0.15;
+      smooth.y += (cursor.y - smooth.y) * 0.15;
+
+      var cx = smooth.x;
+      var cy = smooth.y;
+
+      // Move spotlight
+      spotlight.setAttribute('cx', cx);
+      spotlight.setAttribute('cy', cy);
+      glow.setAttribute('cx', cx);
+      glow.setAttribute('cy', cy);
+
+      // Distance from cursor to center (normalized)
+      var centerDist = Math.sqrt((cx - 200) * (cx - 200) + (cy - 200) * (cy - 200)) / 200;
+      var glowOpacity = Math.max(0, 1 - centerDist * 1.2);
+      glow.setAttribute('opacity', glowOpacity * 0.6);
+
+      // Highlight paths near cursor
+      var anyLit = false;
+      for (var i = 0; i < pathData.length; i++) {
+        var d = getNearest(pathData[i], cx, cy);
+        if (d < 40) {
+          var intensity = 1 - (d / 40);
+          var w = 2 + intensity * 4;
+          pathData[i].hlEl.setAttribute('stroke-width', w);
+          pathData[i].hlEl.setAttribute('opacity', 0.3 + intensity * 0.7);
+          anyLit = true;
+        } else {
+          pathData[i].hlEl.setAttribute('stroke-width', 0);
+          pathData[i].hlEl.setAttribute('opacity', 0);
+        }
+      }
+
+      hl.setAttribute('opacity', anyLit ? 1 : 0);
+      spotlight.setAttribute('opacity', anyLit ? 0.4 : 0.15);
+
+      requestAnimationFrame(tick);
+    }
+
+    tick();
+  })();
+  </script>
+</body>
+</html>
