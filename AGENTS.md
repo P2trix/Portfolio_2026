@@ -17,6 +17,13 @@
 - Rozwiązanie: użyć innej przeglądarki lub zaktualizować sterowniki GPU
 - Nie wina kodu — problem sprzętowy
 
+## Critical Lessons (2026-06-24)
+- **NEVER use `git checkout -- <file>` to revert** — it destroys ALL uncommitted work (3-4h lost)
+- **Ask before acting** when instructions are ambiguous — don't guess
+- **One change at a time** — let user verify before proceeding
+- **Don't modify files the user didn't ask for** — focus on exactly what was requested
+- **Only edit what was explicitly requested** — don't refactor/restructure unless asked
+
 ## Key Fixes Applied
 
 ### GitHub Pages deployment

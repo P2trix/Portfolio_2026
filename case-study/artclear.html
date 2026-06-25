@@ -265,7 +265,8 @@
   <div class="container">
     <div class="cs-process" data-reveal style="border:none;padding:32px 0">
       <div class="cs-process__card ac-anim-card">
-        <div class="ac-bg" aria-hidden="true">
+        <div class="ac-bg" aria-hidden="true" style="border-radius:12px;overflow:hidden">
+          <img src="../Figma/Artclear/1.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0.5">
           <canvas id="acScanCanvas"></canvas>
         </div>
         <script>(function(){
@@ -325,18 +326,9 @@
       </div>
       <div class="cs-section__right">
         <p>The client was aware of the fact that people associated with art galleries tend to be closed off to their own circles. The technology underlying the project is not particularly popular among artists, so the use of blockchain was not highlighted as one of its advantages. Blockchain provided security and assurance that no one at any stage would be able to counterfeit a given piece of art. Additionally, the artist, owner, and buyer could verify that the artwork was not a forgery during the process of creating sales documents.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Image: two side by side -->
-  <div class="container">
-    <div class="cs-image-row" data-reveal>
-      <div class="cs-image-row__item cs-image-row__item--wide">
-        <img src="../Figma/img_2wZeG498RTkCLQDfvcHgo9FPLaY.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
-      </div>
-      <div class="cs-image-row__item cs-image-row__item--narrow">
-        <img src="../Figma/img_6rCiKv0VcPC6cixGf2cDYyNMjmw.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
+        <div data-reveal style="width:100%;border-radius:12px;overflow:hidden;border:1px solid #1C4EFE;margin:24px 0">
+          <img src="../Figma/Artclear/7.webp" alt="" style="width:100%;height:auto;display:block">
+        </div>
       </div>
     </div>
   </div>
@@ -371,17 +363,18 @@
   <div class="container">
     <div class="cs-process" data-reveal style="border:none;padding:32px 0">
       <div class="cs-process__card ac-anim-card">
-        <div class="ac-bg" aria-hidden="true">
+        <div class="ac-bg" aria-hidden="true" style="border-radius:12px;overflow:hidden">
+          <img src="../Figma/Artclear/2.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.5">
           <canvas id="acPersonaCanvas"></canvas>
         </div>
         <script>(function(){
           var c=document.getElementById('acPersonaCanvas'),ctx=c.getContext('2d');
           var W,H;
           var LBL=['A','B','C','D','E'];
-          var ang0=[0,1.26,2.51,3.77,5.03],spd=[0.28,0.35,0.22,0.30,0.25],rFrac=[0.32,0.24,0.38,0.27,0.20];
+          var ang0=[0,1.26,2.51,3.77,5.03],spd=[0.28,0.35,0.22,0.30,0.25],rFrac=[0.48,0.36,0.57,0.40,0.30];
           function resize(){var r=c.parentElement.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height;}
           resize();new ResizeObserver(resize).observe(c.parentElement);
-          function pos(i,t){var r=rFrac[i]*Math.min(W,H)*0.66;var a=ang0[i]+t*spd[i];return{x:W/2+Math.cos(a)*r,y:H/2+Math.sin(a)*r*0.7};}
+          function pos(i,t){var r=rFrac[i]*Math.min(W,H)*0.85;var a=ang0[i]+t*spd[i];return{x:W*0.7+Math.cos(a)*r,y:H/2+Math.sin(a)*r*0.7};}
           function frame(ts){var t=ts/1000;
             ctx.clearRect(0,0,W,H);
             var P=LBL.map(function(_,i){return pos(i,t);});
@@ -391,10 +384,10 @@
             }
             LBL.forEach(function(l,i){
               var p=P[i];
-              ctx.beginPath();ctx.arc(p.x,p.y,17,0,Math.PI*2);
+              ctx.beginPath();ctx.arc(p.x,p.y,24,0,Math.PI*2);
               ctx.fillStyle='rgba(240,244,255,0.92)';ctx.fill();
-              ctx.strokeStyle='rgba(28,78,254,0.65)';ctx.lineWidth=1.5;ctx.stroke();
-              ctx.fillStyle='rgba(28,78,254,0.85)';ctx.font='bold 10px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';
+              ctx.strokeStyle='rgba(28,78,254,0.65)';ctx.lineWidth=2;ctx.stroke();
+              ctx.fillStyle='rgba(28,78,254,0.85)';ctx.font='bold 14px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';
               ctx.fillText(l,p.x,p.y);
             });
             requestAnimationFrame(frame);}
@@ -452,7 +445,10 @@
         <div class="cs-section__number">2c</div>
       </div>
       <div class="cs-section__right">
-        <p>To develop the product, it was necessary to secure funding and support, as individual clients were not the target audience. The CTO and their team scheduled meetings with art galleries that might be interested in the product presentation. During these discussions, they conducted surveys about the development of existing functionalities, gathered feedback on potential additions, and identified improvements that could be made at the current stage of development.</p>
+        <p>One of the elements I had to create was a simple interface for an application designed to communicate with a scanner. The company responsible for developing the scanner was Loop Technology, while I was responsible for designing the interface based on their specifications.</p>
+        <div data-reveal style="width:100%;border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px #E3E9FF;margin:24px 0">
+          <img src="../Figma/img_71L0jC5btXmD7Scc8yRcdbFBKdw.webp" alt="" style="width:100%;height:auto;display:block">
+        </div>
       </div>
     </div>
   </div>
@@ -474,17 +470,18 @@
   <div class="container">
     <div class="cs-process" data-reveal style="border:none;padding:32px 0">
       <div class="cs-process__card ac-anim-card">
-        <div class="ac-bg" aria-hidden="true">
+        <div class="ac-bg" aria-hidden="true" style="border-radius:12px;overflow:hidden">
+          <img src="../Figma/Artclear/3.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.5">
           <canvas id="acWireCanvas"></canvas>
         </div>
         <script>(function(){
           var c=document.getElementById('acWireCanvas'),ctx=c.getContext('2d');
           var W,H;
           var BOXES=[
-            {x:.08,y:.08,w:.84,h:.84},
-            {x:.11,y:.11,w:.40,h:.38},{x:.53,y:.11,w:.40,h:.38},
-            {x:.11,y:.53,w:.19,h:.38},{x:.32,y:.53,w:.18,h:.38},
-            {x:.52,y:.53,w:.19,h:.38},{x:.73,y:.53,w:.18,h:.38}
+            {x:.06,y:.06,w:.88,h:.88},
+            {x:.10,y:.10,w:.38,h:.36},{x:.52,y:.10,w:.38,h:.36},
+            {x:.10,y:.52,w:.17,h:.38},{x:.31,y:.52,w:.17,h:.38},
+            {x:.52,y:.52,w:.17,h:.38},{x:.73,y:.52,w:.17,h:.38}
           ];
           var CYCLE=5,FADE_START=4;
           function resize(){var r=c.parentElement.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height;}
@@ -500,7 +497,7 @@
               ctx.fillStyle='rgba(28,78,254,0.04)';ctx.fillRect(bx,by,bw,bh);
               ctx.strokeStyle='rgba(28,78,254,0.7)';ctx.lineWidth=1.5;ctx.strokeRect(bx,by,bw,bh);
               [[0,0],[1,0],[1,1],[0,1]].forEach(function(co){
-                ctx.beginPath();ctx.arc(bx+co[0]*bw,by+co[1]*bh,3,0,Math.PI*2);
+                ctx.beginPath();ctx.arc(bx+co[0]*bw,by+co[1]*bh,4,0,Math.PI*2);
                 ctx.fillStyle='rgba(28,78,254,0.8)';ctx.fill();
               });
               ctx.restore();
@@ -525,36 +522,35 @@
         <div class="cs-section__number">3a</div>
       </div>
       <div class="cs-section__right">
-        <p>For this project, I developed a design system based on Atomic Design principles and design tokens. Initially, I used Material Design as a foundation to ensure consistency and a smooth implementation.</p>
-        <p>Atomic Design helped break the design into smaller, reusable components, which made it easier to update and maintain the system over time. This approach also sped up the documentation process. When Figma introduced design variables and tokens, I updated the styles to take advantage of these new features.</p>
+        <p>From lo-fi wireframes to hi-fi designs, the stages of design creation are iterative and user-focused. We start with basic layouts to outline functionality, then progress to mid-fi prototypes for testing and feedback. Hi-fi designs bring the product to life with final visuals and interactions. After handoff to development, we monitor post-launch performance to refine and enhance the user experience.</p>
       </div>
     </div>
   </div>
 
-  <!-- Image: 3 images row 1 -->
+  <!-- Image row 1: lo-fi to mid-fi -->
   <div class="container">
     <div class="cs-image-row-3" data-reveal>
-      <div><img src="../Figma/img_IlgwBRghhW6Q6ppdTWe3tF4.webp" alt="" style="width:100%;height:auto;display:block;border-radius:12px"></div>
-      <div><img src="../Figma/img_4qUGocRXD2Wu7VIQQUyhvtRPvfg.webp" alt="" style="width:100%;height:auto;display:block;border-radius:12px"></div>
-      <div><img src="../Figma/img_MKZqMK1HgRlaPiFGBJgtags9aWo.webp" alt="" style="width:100%;height:auto;display:block;border-radius:12px"></div>
+      <div style="box-shadow:0 0 0 1px #E3E9FF"><img src="../Figma/img_YTnZtgeOMJpY7DQymLPfDNhStZw.webp" alt="" style="width:100%;height:auto;display:block"></div>
+      <div style="box-shadow:0 0 0 1px #E3E9FF"><img src="../Figma/img_6rCiKv0VcPC6cixGf2cDYyNMjmw.webp" alt="" style="width:100%;height:auto;display:block"></div>
+      <div style="box-shadow:0 0 0 1px #E3E9FF"><img src="../Figma/img_zUyHLtTtUfhEjYlM36Xw5sipA.webp" alt="" style="width:100%;height:auto;display:block"></div>
     </div>
   </div>
 
   <div class="container">
-    <p data-reveal style="max-width:720px;margin-left:auto;font-size:16px;line-height:24px;color:var(--cs-text-muted);letter-spacing:0.15px">Design starts with rough sketches and simple wireframes, like the hand-drawn notes and basic layouts shown here. These early versions focus on structure and functionality rather than appearance. As the design progresses, it becomes more refined&mdash;moving from black-and-white wireframes to interactive prototypes with images, colors, and detailed elements.</p>
+    <p data-reveal style="font-size:16px;line-height:24px;color:var(--cs-text-muted);letter-spacing:0.15px">Design starts with rough sketches and simple wireframes, like the hand-drawn notes and basic layouts shown here. These early versions focus on structure and functionality rather than appearance. As the design progresses, it becomes more refined&mdash;moving from black-and-white wireframes to interactive prototypes with images, colors, and detailed elements.</p>
   </div>
 
-  <!-- Image: 3 images row 2 -->
+  <!-- Image row 2: mid-fi to hi-fi -->
   <div class="container">
     <div class="cs-image-row-3" data-reveal>
-      <div><img src="../Figma/img_YvmEAUsgJiKiSq3r0fZAHj9a5GM.webp" alt="" style="width:100%;height:auto;display:block;border-radius:12px"></div>
-      <div><img src="../Figma/img_JJOAwjN2t96xnOAYomc6M2KvQY.webp" alt="" style="width:100%;height:auto;display:block;border-radius:12px"></div>
-      <div><img src="../Figma/img_HlauBRe6odhPJ6CnsV6g66ao8Ag.webp" alt="" style="width:100%;height:auto;display:block;border-radius:12px"></div>
+      <div style="box-shadow:0 0 0 1px #E3E9FF"><img src="../Figma/Artclear/12dsadsadsa.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="box-shadow:0 0 0 1px #E3E9FF"><img src="../Figma/Artclear/Frame-945.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="box-shadow:0 0 0 1px #E3E9FF"><img src="../Figma/Artclear/imagdsadsadsae-1.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
     </div>
   </div>
 
   <div class="container">
-    <p data-reveal style="max-width:720px;margin-left:auto;font-size:16px;line-height:24px;color:var(--cs-text-muted);letter-spacing:0.15px">Early versions of a design&mdash;whether lo-fi wireframes or initial prototypes&mdash;often look incomplete, messy, or even "bad". These rough drafts are not meant to be perfect; they're meant to explore ideas, test assumptions, and uncover problems early.</p>
+    <p data-reveal style="font-size:16px;line-height:24px;color:var(--cs-text-muted);letter-spacing:0.15px">Early versions of a design&mdash;whether lo-fi wireframes or initial prototypes&mdash;often look incomplete, messy, or even "bad". These rough drafts are not meant to be perfect; they&rsquo;re meant to explore ideas, test assumptions, and uncover problems early.</p>
   </div>
 
   <!-- Section 3b: Atomic design -->
@@ -571,10 +567,9 @@
     </div>
   </div>
 
-  <!-- Image: full-width design system overview -->
   <div class="container">
-    <div data-reveal style="width:100%;border-radius:28px;overflow:hidden;margin:32px 0">
-      <img src="../Figma/img_1XK7WgfluCg6nEq7ySIifOW9LDM.webp" alt="" style="width:100%;height:auto;display:block">
+    <div data-reveal style="width:100%;border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px #E3E9FF;margin:32px 0">
+      <img src="../Figma/Artclear/dsaaapng.webp" alt="" style="width:100%;height:auto;display:block">
     </div>
   </div>
 
@@ -595,7 +590,8 @@
   <div class="container">
     <div class="cs-process" data-reveal style="border:none;padding:32px 0">
       <div class="cs-process__card ac-anim-card">
-        <div class="ac-bg" aria-hidden="true">
+        <div class="ac-bg" aria-hidden="true" style="border-radius:12px;overflow:hidden">
+          <img src="../Figma/Artclear/4.webp" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.5">
           <canvas id="acLoopCanvas"></canvas>
         </div>
         <script>(function(){
@@ -649,6 +645,20 @@
     </div>
   </div>
 
+  <div class="container">
+    <div class="cs-image-row-2" data-reveal>
+      <div><img src="../Figma/img_YvmEAUsgJiKiSq3r0fZAHj9a5GM.webp" alt="" style="width:100%;height:auto;display:block"></div>
+      <div><img src="../Figma/img_IlgwBRghhW6Q6ppdTWe3tF4.webp" alt="" style="width:100%;height:auto;display:block"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="cs-image-row-2" data-reveal>
+      <div><img src="../Figma/img_HlauBRe6odhPJ6CnsV6g66ao8Ag.webp" alt="" style="width:100%;height:auto;display:block"></div>
+      <div><img src="../Figma/img_KrBDIwFhpFqznYyTIW07rgk6Q.webp" alt="" style="width:100%;height:auto;display:block"></div>
+    </div>
+  </div>
+
   <!-- Section 4b: Design review -->
   <div class="container">
     <div class="cs-section" id="s-4b" data-reveal>
@@ -658,26 +668,14 @@
       </div>
       <div class="cs-section__right">
         <p>In design reviews, I focused on making sure each feature stayed true to the overall design vision. I provided feedback on visual details, interactions, and usability, working closely with developers to address any issues early and keep everything consistent.</p>
+        <div data-reveal style="width:100%;border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px #E3E9FF;margin:24px 0">
+          <img src="../Figma/Artclear/Group632975.webp" alt="" style="width:100%;height:auto;display:block">
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Image: 2 images row 1 -->
-  <div class="container">
-    <div class="cs-image-row-2" data-reveal>
-      <div><img src="../Figma/img_F9VV0T10jQxeCzIHxrfIFjDDxt4.webp" alt="" style="width:100%;height:auto;display:block;border-radius:12px"></div>
-      <div><img src="../Figma/img_zUyHLtTtUfhEjYlM36Xw5sipA.webp" alt="" style="width:100%;height:auto;display:block;border-radius:12px"></div>
-    </div>
-  </div>
-
-  <!-- Image: 2 images row 2 -->
-  <div class="container">
-    <div class="cs-image-row-2" data-reveal>
-      <div><img src="../Figma/img_1pcV1mURYFcxJjb6KCovzwNuvUk.webp" alt="" style="width:100%;height:auto;display:block;border-radius:12px"></div>
-      <div><img src="../Figma/img_NOVzh9l2upi7dTNdhXImtTKYA8.webp" alt="" style="width:100%;height:auto;display:block;border-radius:12px"></div>
-    </div>
-  </div>
-
+  
   <!-- Section 4c: Looking for edge cases -->
   <div class="container">
     <div class="cs-section" id="s-4c" data-reveal>
@@ -706,17 +704,15 @@
     </div>
   </div>
 
-  <!-- Image: full-width mobile screens -->
   <div class="container">
-    <div data-reveal style="width:100%;border-radius:28px;overflow:hidden;margin:32px 0">
+    <div data-reveal style="width:100%;border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px #E3E9FF;margin:32px 0">
       <img src="../Figma/img_sFqnkRQIgqkL116x7i9eWNTcv4.webp" alt="" style="width:100%;height:auto;display:block">
     </div>
   </div>
 
-  <!-- Image: full-width closing visual -->
   <div class="container">
-    <div data-reveal style="width:100%;border-radius:28px;overflow:hidden;margin:32px 0">
-      <img src="../Figma/img_TKMR5ndSfxKFYYeCiZMpDCaiKaU.webp" alt="" style="width:100%;height:auto;display:block">
+    <div data-reveal style="width:100%;border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px #E3E9FF;margin:32px 0">
+      <img src="../Figma/Artclear/5.webp" alt="" style="width:100%;height:auto;display:block">
     </div>
   </div>
 
