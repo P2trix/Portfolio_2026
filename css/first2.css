@@ -349,3 +349,64 @@
 .f2-page .toc-widget__item.is-active {
   background: rgba(238, 255, 47, 0.12);
 }
+
+/* ─── Team grid ─── */
+.f2-team {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 32px 0;
+}
+.f2-team__card {
+  flex: 1 1 0;
+  min-width: 160px;
+  padding: 20px 16px;
+  background: rgba(23, 27, 33, 0.80);
+  border-radius: 30px 30px 16px 16px;
+  outline: 1px solid #2F343D;
+  outline-offset: -1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+.f2-team__photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+.f2-team__name {
+  color: #EEFF2F;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+.f2-team__role {
+  color: #9DA4B1;
+  font-size: 15px;
+  line-height: 1.3;
+}
+@media (max-width: 900px) {
+  .f2-team__card { flex: 1 1 calc(33% - 24px); }
+}
+@media (max-width: 600px) {
+  .f2-team__card { flex: 1 1 calc(50% - 24px); min-width: 140px; }
+  .f2-team__photo { width: 100px; height: 100px; }
+  .f2-team__name { font-size: 15px; }
+  .f2-team__role { font-size: 13px; }
+}
+@media (max-width: 400px) {
+  .f2-team__card { flex: 1 1 100%; }
+}
+
+/* ─── Phone mockup responsive ─── */
+@media (max-width: 768px) {
+  .f2-phone-mockup { height: 360px !important; }
+}
+@media (max-width: 480px) {
+  .f2-phone-mockup { height: 280px !important; }
+}
