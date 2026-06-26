@@ -16,7 +16,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       align-items: center;
-      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #2a1a3e 100%);
+      background: url('../assets/heroconcepts.webp') center/cover no-repeat;
       border-radius: 28px;
       padding: 80px;
       min-height: 400px;
@@ -131,6 +131,27 @@
     .lightbox__close:hover {
       background: rgba(255,255,255,0.3);
     }
+    .lightbox__nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+      z-index: 10;
+    }
+    .lightbox__nav:hover { background: rgba(255,255,255,0.3); }
+    .lightbox__nav--prev { left: 24px; }
+    .lightbox__nav--next { right: 24px; }
 
     @media (max-width: 768px) {
       .cn-hero__bento {
@@ -179,7 +200,7 @@
   <section class="cn-hero">
     <div class="container">
       <div class="cn-hero__bento" data-reveal>
-        <div>
+        <div style="grid-column:1/-1">
           <h1 class="cn-hero__title">Concepts, art,<br>and side explorations</h1>
           <p class="cn-hero__desc">A collection of personal projects — game assets, illustrations, photography, and everything in between that doesn't fit in a case study.</p>
         </div>
@@ -198,16 +219,20 @@
           <p>Digital illustrations and concept art created for personal projects and creative exploration.</p>
         </div>
       </div>
-      <div class="cn-grid" data-reveal>
-        <div class="cn-grid__item cn-grid__item--tall">
-          <img src="../Figma/placeholder_casestudy1.webp" alt="">
-        </div>
-        <div class="cn-grid__item">
-          <img src="../Figma/placeholder_casestudy1.webp" alt="">
-        </div>
-        <div class="cn-grid__item">
-          <img src="../Figma/placeholder_casestudy1.webp" alt="">
-        </div>
+      <div class="cn-grid cn-grid--3" data-reveal>
+        <div class="cn-grid__item"><img src="../assets/monster7.webp" alt=""></div>
+        <div class="cn-grid__item"><img src="../assets/monster6.webp" alt=""></div>
+        <div class="cn-grid__item"><img src="../assets/monste7.webp" alt=""></div>
+      </div>
+      <div class="cn-grid cn-grid--3" data-reveal style="margin-top:16px">
+        <div class="cn-grid__item"><img src="../assets/od.webp" alt=""></div>
+        <div class="cn-grid__item"><img src="../assets/cp.webp" alt=""></div>
+        <div class="cn-grid__item"><img src="../assets/iss_final.webp" alt=""></div>
+      </div>
+      <div class="cn-grid cn-grid--3" data-reveal style="margin-top:16px">
+        <div class="cn-grid__item"><img src="../assets/untitled_2.webp" alt=""></div>
+        <div class="cn-grid__item"><img src="../assets/3.webp" alt=""></div>
+        <div class="cn-grid__item"><img src="../assets/blockchain___icons_1.webp" alt=""></div>
       </div>
     </div>
   </section>
@@ -223,25 +248,12 @@
           <p>Game-ready assets, sprites, environment concepts, and props designed for various game projects.</p>
         </div>
       </div>
-      <div class="cn-grid cn-grid--3" data-reveal>
-        <div class="cn-grid__item">
-          <img src="../Figma/placeholder_casestudy1.webp" alt="">
-        </div>
-        <div class="cn-grid__item">
-          <img src="../Figma/placeholder_casestudy1.webp" alt="">
-        </div>
-        <div class="cn-grid__item">
-          <img src="../Figma/placeholder_casestudy1.webp" alt="">
-        </div>
-        <div class="cn-grid__item">
-          <img src="../Figma/placeholder_casestudy1.webp" alt="">
-        </div>
-        <div class="cn-grid__item">
-          <img src="../Figma/placeholder_casestudy1.webp" alt="">
-        </div>
-        <div class="cn-grid__item">
-          <img src="../Figma/placeholder_casestudy1.webp" alt="">
-        </div>
+      <div class="cn-grid cn-grid--3" data-reveal style="grid-auto-rows:1fr">
+        <div class="cn-grid__item cn-grid__item--wide" style="background:#1a1a1a"><img src="../assets/krasnale1.webp" alt="" style="object-fit:cover"></div>
+        <div class="cn-grid__item"><img src="../assets/krasn1.webp" alt=""></div>
+        <div class="cn-grid__item" style="background:#1a1a1a"><img src="../assets/plane1.webp" alt="" style="object-fit:cover"></div>
+        <div class="cn-grid__item" style="background:#1a1a1a"><img src="../assets/tree.webp" alt="" style="object-fit:cover"></div>
+        <div class="cn-grid__item"><img src="../assets/skrzynia1.webp" alt=""></div>
       </div>
     </div>
   </section>
@@ -257,16 +269,30 @@
           <p>Selected photographs exploring composition, light, and perspective.</p>
         </div>
       </div>
-      <div class="cn-grid cn-grid--2" data-reveal>
-        <div class="cn-grid__item cn-grid__item--wide">
-          <img src="../Figma/placeholder_casestudy1.webp" alt="">
-        </div>
-        <div class="cn-grid__item">
-          <img src="../Figma/placeholder_casestudy1.webp" alt="">
-        </div>
-        <div class="cn-grid__item">
-          <img src="../Figma/placeholder_casestudy1.webp" alt="">
-        </div>
+      <div class="cn-grid cn-grid--3" data-reveal>
+        <div class="cn-grid__item"><img src="../assets/img_0142.webp" alt=""></div>
+        <div class="cn-grid__item"><img src="../assets/img_9410.webp" alt=""></div>
+        <div class="cn-grid__item"><img src="../assets/img_e1922.webp" alt=""></div>
+      </div>
+      <div class="cn-grid cn-grid--3" data-reveal style="margin-top:16px">
+        <div class="cn-grid__item"><img src="../assets/cxua2296.webp" alt=""></div>
+        <div class="cn-grid__item"><img src="../assets/fypc5661.webp" alt=""></div>
+        <div class="cn-grid__item"><img src="../assets/lafk3824.webp" alt=""></div>
+      </div>
+      <div class="cn-grid cn-grid--3" data-reveal style="margin-top:16px">
+        <div class="cn-grid__item"><img src="../assets/laxt3528.webp" alt=""></div>
+        <div class="cn-grid__item"><img src="../assets/nvwp9318.webp" alt=""></div>
+        <div class="cn-grid__item"><img src="../assets/otde2912.webp" alt=""></div>
+      </div>
+      <div class="cn-grid cn-grid--3" data-reveal style="margin-top:16px">
+        <div class="cn-grid__item"><img src="../assets/qmyu9897.webp" alt=""></div>
+        <div class="cn-grid__item"><img src="../assets/qrxg4970.webp" alt=""></div>
+        <div class="cn-grid__item"><img src="../assets/tsjx5809.webp" alt=""></div>
+      </div>
+      <div class="cn-grid cn-grid--3" data-reveal style="margin-top:16px">
+        <div class="cn-grid__item"><img src="../assets/uiju5759.webp" alt=""></div>
+        <div class="cn-grid__item"><img src="../assets/p1100143.webp" alt=""></div>
+        <div class="cn-grid__item" style="display:flex;align-items:center;justify-content:center;background:var(--cs-card-bg,#F6F8FF);color:var(--cs-text-muted,#666);font-family:'Onest',sans-serif;font-size:18px;cursor:default;min-height:200px">More coming</div>
       </div>
     </div>
   </section>
@@ -321,6 +347,8 @@
 
   <div class="lightbox" id="lightbox">
     <button class="lightbox__close" id="lightbox-close">✕</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lightbox-prev">‹</button>
+    <button class="lightbox__nav lightbox__nav--next" id="lightbox-next">›</button>
     <img src="" alt="" id="lightbox-img">
   </div>
 
@@ -389,15 +417,25 @@
 
     var lightbox = document.getElementById('lightbox');
     var lightboxImg = document.getElementById('lightbox-img');
+    var allImages = [];
+    var currentIdx = 0;
     document.querySelectorAll('.cn-grid__item').forEach(function(item) {
-      item.addEventListener('click', function() {
-        var img = this.querySelector('img');
-        if (img) {
-          lightboxImg.src = img.src;
-          lightbox.classList.add('open');
-        }
+      var img = item.querySelector('img');
+      if (img) { allImages.push(img); }
+    });
+    allImages.forEach(function(img, i) {
+      img.addEventListener('click', function(e) {
+        currentIdx = i;
+        lightboxImg.src = img.src;
+        lightbox.classList.add('open');
       });
     });
+    function showImage(dir) {
+      currentIdx = (currentIdx + dir + allImages.length) % allImages.length;
+      lightboxImg.src = allImages[currentIdx].src;
+    }
+    document.getElementById('lightbox-prev').addEventListener('click', function() { showImage(-1); });
+    document.getElementById('lightbox-next').addEventListener('click', function() { showImage(1); });
     document.getElementById('lightbox-close').addEventListener('click', function() {
       lightbox.classList.remove('open');
     });
@@ -407,8 +445,10 @@
       }
     });
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        lightbox.classList.remove('open');
+      if (lightbox.classList.contains('open')) {
+        if (e.key === 'Escape') lightbox.classList.remove('open');
+        if (e.key === 'ArrowLeft') showImage(-1);
+        if (e.key === 'ArrowRight') showImage(1);
       }
     });
 
