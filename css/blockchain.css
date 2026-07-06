@@ -2,7 +2,7 @@
 /* Overrides base case-study.css with dark IvyCoin palette */
 
 .iv-page {
-  --cs-bg:           #1B181D;
+  --cs-bg:           #141115;
   --cs-text:         #ffffff;
   --cs-text-muted:   rgba(255,255,255,0.45);
   --cs-border:       rgba(255,255,255,0.08);
@@ -11,18 +11,18 @@
   --cs-tag-text:     #00EAE4;
   --cs-accent:       #00EAE4;
   --cs-card-bg:      rgba(255,255,255,0.04);
-  background: #1B181D;
+  background: #141115;
   color: #ffffff;
 }
 
 /* ─── Nav ─── */
 .iv-page .cs-nav {
-  background: rgba(27,24,29,0.85);
+  background: rgba(20,17,21,0.85);
   backdrop-filter: blur(16px);
 }
 
 .iv-page .cs-nav--sticky {
-  background: rgba(27,24,29,0.92);
+  background: rgba(20,17,21,0.92);
   border: 1px solid rgba(255,255,255,0.1);
   box-shadow: none;
 }
