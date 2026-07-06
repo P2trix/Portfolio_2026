@@ -378,12 +378,25 @@
 .iv-page .hm-work__row {
   border-color: var(--cs-border);
 }
+.iv-page .hm-work__row-body {
+  gap: 12px;
+  justify-content: normal;
+  padding: 32px 40px;
+}
 .iv-page .hm-work__row-body p {
   color: var(--cs-text-muted);
+  max-width: 100%;
+}
+.iv-page .hm-work__row-bottom h3 {
+  font-size: 32px;
+}
+.iv-page .hm-work__row-num {
+  display: none;
 }
 .iv-page .hm-work__row-cta {
   border-color: var(--cs-border);
   color: var(--cs-text);
+  margin-top: 4px;
 }
 .iv-page .hm-work__row-cta::before {
   background: var(--cs-accent);
