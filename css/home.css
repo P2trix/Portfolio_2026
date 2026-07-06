@@ -848,7 +848,14 @@
   transform: translateY(0);
 }
 
-.hm-gallery__card-arrow--wip { pointer-events: auto; cursor: default; transition: width 0.3s, border-radius 0.3s; }
+.hm-gallery__card-arrow--wip {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  cursor: default;
+  overflow: hidden;
+  transition: width 0.3s, border-radius 0.3s, padding 0.3s, gap 0.3s;
+}
 .hm-gallery__card-arrow--wip .arrow-icon { transition: transform 0.3s; }
 .hm-gallery__card-arrow--wip:hover { width: auto; border-radius: 1000px; padding: 0 14px; gap: 6px; }
 .hm-gallery__card-arrow--wip:hover .arrow-icon { transform: rotate(180deg); }
