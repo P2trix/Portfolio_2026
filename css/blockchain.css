@@ -293,7 +293,7 @@
   background: var(--cs-card-bg);
   outline: 1px solid #393D44;
   border-radius: 24px;
-  padding: 56px;
+  padding: 0;
   display: grid;
   grid-template-columns: 1fr 200px;
   gap: 48px;
@@ -313,9 +313,12 @@
 }
 
 .iv-callout__visual {
-  margin: -56px -56px -56px 0;
   overflow: hidden;
   border-radius: 0 24px 24px 0;
+}
+
+.iv-callout > :first-child {
+  padding: 56px 0 56px 56px;
 }
 
 .iv-link {
