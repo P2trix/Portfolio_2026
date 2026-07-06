@@ -379,8 +379,8 @@
   border-color: var(--cs-border);
 }
 .iv-page .hm-work__row-body {
-  gap: 12px;
-  justify-content: normal;
+  gap: 0;
+  justify-content: space-between;
   padding: 32px 40px;
 }
 .iv-page .hm-work__row-body p {
