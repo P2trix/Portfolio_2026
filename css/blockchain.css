@@ -299,6 +299,7 @@
   gap: 48px;
   align-items: center;
   margin: 80px 0;
+  overflow: hidden;
 }
 
 .iv-callout__eyebrow {
@@ -312,6 +313,9 @@
 }
 
 .iv-callout__visual {
+  margin: -56px -56px -56px 0;
+  overflow: hidden;
+  border-radius: 0 24px 24px 0;
 }
 
 .iv-link {
