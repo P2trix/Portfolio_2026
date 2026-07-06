@@ -95,6 +95,15 @@
   -webkit-text-stroke: 0.5px var(--cs-accent);
 }
 
+/* ─── Hero blobs ─── */
+.iv-page .hm-hero__blob--1 {
+  background: radial-gradient(circle at 40% 40%, #2AF698 0%, #0BB5E3 40%, transparent 70%);
+}
+
+.iv-page .hm-hero__blob--2 {
+  background: radial-gradient(circle at 55% 45%, #6F3FDE 0%, #F393FF 40%, transparent 70%);
+}
+
 /* ─── Process cards ─── */
 .iv-page .cs-process__card {
   background: var(--cs-card-bg);
