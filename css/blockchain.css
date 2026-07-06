@@ -295,7 +295,7 @@
   border-radius: 24px;
   padding: 56px;
   display: grid;
-  grid-template-columns: 1fr 280px;
+  grid-template-columns: 1fr 200px;
   margin: 80px 0;
   overflow: hidden;
 }
