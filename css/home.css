@@ -851,19 +851,18 @@
 .hm-gallery__card-arrow--wip {
   cursor: default;
   overflow: hidden;
-  transition: opacity 0.3s ease, transform 0.3s ease, width 0.3s, border-radius 0.3s, padding 0.3s, gap 0.3s;
 }
-.hm-gallery__card:hover .hm-gallery__card-arrow--wip {
+.hm-gallery__card:hover .hm-gallery__card-arrow.hm-gallery__card-arrow--wip {
   opacity: 1 !important;
   transform: translateY(0) !important;
-  pointer-events: auto;
+  pointer-events: auto !important;
 }
 .hm-gallery__card-arrow--wip .arrow-icon { transition: transform 0.3s; flex-shrink: 0; }
 .hm-gallery__card-arrow--wip:hover { width: 130px; border-radius: 1000px; padding: 0 14px 0 10px; gap: 6px; }
-.hm-gallery__card-arrow--wip:hover .arrow-icon { transform: rotate(180deg); }
 .hm-gallery__card-arrow--wip:hover .wip-text { opacity: 1 !important; }
+.hm-gallery__card-arrow--wip:hover .arrow-icon { transform: rotate(180deg); }
 .hm-gallery__card--branding { cursor: default; }
-.hm-gallery__card--branding .wip-text { font-size: 11px; white-space: nowrap; opacity: 0; transition: opacity 0.3s; }
+.hm-gallery__card--branding .wip-text { font-size: 11px; white-space: nowrap; opacity: 0; }
 
 /* ─── Contact Bento ─── */
 .hm-contact {
