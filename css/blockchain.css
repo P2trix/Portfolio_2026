@@ -248,6 +248,8 @@
   background: none;
   min-height: 0;
   padding: 0;
+  align-self: center;
+  justify-self: center;
 }
 
 .iv-project-block__visual--plain img {
