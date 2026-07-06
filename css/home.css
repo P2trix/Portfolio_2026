@@ -854,10 +854,12 @@
   pointer-events: auto;
   cursor: default;
   overflow: hidden;
+  width: 36px;
+  justify-content: center;
   transition: width 0.3s, border-radius 0.3s, padding 0.3s, gap 0.3s;
 }
-.hm-gallery__card-arrow--wip .arrow-icon { transition: transform 0.3s; }
-.hm-gallery__card-arrow--wip:hover { width: auto; border-radius: 1000px; padding: 0 14px; gap: 6px; }
+.hm-gallery__card-arrow--wip .arrow-icon { transition: transform 0.3s; flex-shrink: 0; }
+.hm-gallery__card-arrow--wip:hover { width: 130px; border-radius: 1000px; padding: 0 14px; gap: 6px; justify-content: flex-start; }
 .hm-gallery__card-arrow--wip:hover .arrow-icon { transform: rotate(180deg); }
 .hm-gallery__card-arrow--wip:hover .wip-text { opacity: 1 !important; }
 .hm-gallery__card--branding { cursor: default; }
