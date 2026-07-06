@@ -966,7 +966,7 @@
 
 .hm-contact__actions {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   gap: 12px;
 }
@@ -1000,8 +1000,6 @@
   font-family: 'Spline Sans', sans-serif;
   font-size: 13px;
   color: var(--cs-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 /* ─── Mobile ─── */
