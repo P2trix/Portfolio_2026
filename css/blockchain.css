@@ -226,7 +226,6 @@
 .iv-project-block__visual {
   overflow: hidden;
   position: relative;
-  background: rgba(255,255,255,0.02);
   min-height: 300px;
 }
 
