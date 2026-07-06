@@ -740,7 +740,8 @@
   overflow: hidden;
 }
 
-.hm-webdesign__card-img img {
+.hm-webdesign__card-img img,
+.hm-webdesign__card-img video {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -846,6 +847,14 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+.hm-gallery__card-arrow--wip { pointer-events: auto; cursor: default; transition: width 0.3s, border-radius 0.3s; }
+.hm-gallery__card-arrow--wip .arrow-icon { transition: transform 0.3s; }
+.hm-gallery__card-arrow--wip:hover { width: auto; border-radius: 1000px; padding: 0 14px; gap: 6px; }
+.hm-gallery__card-arrow--wip:hover .arrow-icon { transform: rotate(180deg); }
+.hm-gallery__card-arrow--wip:hover .wip-text { opacity: 1 !important; }
+.hm-gallery__card--branding { cursor: default; }
+.hm-gallery__card--branding .wip-text { font-size: 11px; white-space: nowrap; opacity: 0; transition: opacity 0.3s; }
 
 /* ─── Contact Bento ─── */
 .hm-contact {
