@@ -853,6 +853,7 @@
   overflow: hidden;
   justify-content: flex-end;
   padding-right: 10px;
+  box-sizing: border-box;
 }
 .hm-gallery__card:hover .hm-gallery__card-arrow.hm-gallery__card-arrow--wip {
   opacity: 1 !important;
