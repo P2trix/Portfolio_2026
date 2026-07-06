@@ -861,7 +861,7 @@
   pointer-events: auto !important;
 }
 .hm-gallery__card-arrow--wip .arrow-icon { transition: transform 0.3s; flex-shrink: 0; }
-.hm-gallery__card-arrow--wip:hover { width: 130px; border-radius: 1000px; padding: 0 14px 0 10px; gap: 6px; }
+.hm-gallery__card-arrow--wip:hover { width: 150px; border-radius: 1000px; padding: 0 14px 0 16px; gap: 6px; }
 .hm-gallery__card-arrow--wip:hover .wip-text { opacity: 1 !important; }
 .hm-gallery__card-arrow--wip:hover .arrow-icon { transform: rotate(180deg); }
 .hm-gallery__card--branding { cursor: default; }
