@@ -11,6 +11,7 @@
   --cs-tag-text:     #00EAE4;
   --cs-accent:       #00EAE4;
   --cs-card-bg:      rgba(255,255,255,0.04);
+  --cs-white:        var(--cs-card-bg);
   background: #141115;
   color: #ffffff;
 }
