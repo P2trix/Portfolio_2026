@@ -243,6 +243,18 @@
   transform: translateY(0);
 }
 
+.iv-project-block__visual--plain {
+  background: none;
+  min-height: 0;
+}
+
+.iv-project-block__visual--plain img {
+  height: auto;
+  object-fit: none;
+  transform: none;
+  transition: none;
+}
+
 /* ─── Challenge cards grid ─── */
 .iv-challenge-grid {
   display: grid;
