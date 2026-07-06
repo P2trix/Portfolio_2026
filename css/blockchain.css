@@ -296,6 +296,8 @@
   padding: 56px;
   display: grid;
   grid-template-columns: 1fr 200px;
+  gap: 48px;
+  align-items: center;
   margin: 80px 0;
   overflow: hidden;
 }
