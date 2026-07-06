@@ -964,6 +964,46 @@
   flex-shrink: 0;
 }
 
+.hm-contact__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.hm-contact__email-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Onest', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--cs-text);
+  text-decoration: none;
+  padding: 12px 24px;
+  border: 1px solid var(--cs-border);
+  border-radius: 100px;
+  transition: all 0.2s ease;
+}
+
+.hm-contact__email-btn:hover {
+  background: var(--cs-text);
+  color: var(--cs-bg);
+  border-color: var(--cs-text);
+}
+
+.hm-contact__email-btn svg {
+  flex-shrink: 0;
+}
+
+.hm-contact__or {
+  font-family: 'Spline Sans', sans-serif;
+  font-size: 13px;
+  color: var(--cs-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 /* ─── Mobile ─── */
 @media (max-width: 1024px) {
   .hm-hero__bento {
