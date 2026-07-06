@@ -388,7 +388,7 @@
   max-width: 100%;
 }
 .iv-page .hm-work__row-bottom h3 {
-  font-size: 32px;
+  line-height: 1.15;
 }
 .iv-page .hm-work__row-num {
   display: none;
