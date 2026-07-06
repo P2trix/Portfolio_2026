@@ -851,7 +851,7 @@
 .hm-gallery__card-arrow--wip {
   cursor: default;
   overflow: hidden;
-  transition: width 0.3s, border-radius 0.3s, padding 0.3s, gap 0.3s;
+  transition: opacity 0.3s ease, transform 0.3s ease, width 0.3s, border-radius 0.3s, padding 0.3s, gap 0.3s;
 }
 .hm-gallery__card:hover .hm-gallery__card-arrow--wip {
   pointer-events: auto;
