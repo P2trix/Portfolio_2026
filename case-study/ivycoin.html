@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../css/case-study.css">
   <link rel="stylesheet" href="../css/home.css">
   <link rel="stylesheet" href="../css/animations.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r89/three.min.js"></script>
   <style>
     /* ─── IvyCoin page vars ─── */
     .iv-page {
@@ -198,29 +199,128 @@
     <img src="../Figma/Ivycoin/IVY.png" alt="IvyCoin ICO Platform" style="width:100%;display:block">
   </div>
 
-  <!-- Gradient Orbs CTA Section -->
-  <div class="container">
-    <div class="iv-orbs-section" data-reveal>
-
-      <div class="iv-orbs-content">
-        <p class="iv-orbs-eyebrow">__ Get in touch</p>
-        <h2 class="iv-orbs-heading">
-          FROM CONCEPT<br>TO <span>CREATION</span>
-        </h2>
-        <p class="iv-orbs-sub">Let's work together on your next project. I'm available for full-time roles & freelance work.</p>
-        <div class="iv-cta-row">
-          <a href="mailto:wendapatryk91@gmail.com" class="iv-btn-primary">
-            Get in touch
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/in/patrykwenda91/" target="_blank" class="iv-btn-ghost">LinkedIn</a>
+  <!-- Contact -->
+  <section class="hm-contact" id="contact" data-reveal>
+    <div class="container">
+      <div class="hm-contact__bento">
+        <div class="hm-contact__left">
+          <span class="hm-section__tag">Get in touch __</span>
+          <h2 class="hm-contact__title">Let's create something<br><span class="hm-hero__highlight">amazing together</span></h2>
+          <p class="hm-contact__desc">Have a project in mind? I'm always open to discussing new opportunities, collaborations, or just to say hello.</p>
+          <div class="hm-contact__actions">
+            <a href="mailto:wendapatryk91@gmail.com" class="hm-contact__email-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              Send me an email
+            </a>
+            <span class="hm-contact__or">or</span>
+            <a href="https://www.linkedin.com/in/patrykwenda91/" target="_blank" class="hm-contact__linkedin">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              Find me on LinkedIn
+            </a>
+          </div>
+        </div>
+        <div class="hm-contact__right" id="contact-shader-wrap">
+          <div id="contact-shader-mount"></div>
+          <img src="../Figma/send1.png" alt="" id="contact-send-icon">
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="iv-spacer"></div>
+  <!-- Contact mosaic shader -->
+  <script>
+  (function () {
+    var wrap = document.getElementById('contact-shader-wrap');
+    var mount = document.getElementById('contact-shader-mount');
+    if (!mount || !wrap) return;
 
+    var vertexShader = [
+      'varying vec2 vUv;',
+      'void main() {',
+      '  vUv = uv;',
+      '  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);',
+      '}'
+    ].join('\n');
+
+    var fragmentShader = [
+      'precision highp float;',
+      'uniform vec2 resolution;',
+      'uniform float time;',
+      '',
+      'float random (vec2 st) {',
+      '  return fract(sin(dot(st.xy, vec2(12.9898,78.233)))*43758.5453123);',
+      '}',
+      '',
+      'varying vec2 vUv;',
+      'void main(void) {',
+      '  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);',
+      '  vec2 fMosaicScal = vec2(4.0, 2.0);',
+      '  vec2 vScreenSize = vec2(48.0, 48.0);',
+      '  uv.x = floor(uv.x * vScreenSize.x / fMosaicScal.x) / (vScreenSize.x / fMosaicScal.x);',
+      '  uv.y = floor(uv.y * vScreenSize.y / fMosaicScal.y) / (vScreenSize.y / fMosaicScal.y);',
+      '',
+      '  float t = time * 0.06 + random(uv) * 0.4;',
+      '  float lineWidth = 0.0008;',
+      '',
+      '  vec3 cardBg = vec3(0.965, 0.973, 1.0);',
+      '  vec3 color = cardBg;',
+      '  vec3 ringColor = vec3(0.0);',
+      '  for (int j = 0; j < 3; j++) {',
+      '    for (int i = 0; i < 5; i++) {',
+      '      ringColor[j] += lineWidth * float(i * i) / abs(fract(t - 0.01 * float(j) + float(i) * 0.01) * 1.0 - length(uv));',
+      '    }',
+      '  }',
+      '  ringColor = clamp(ringColor * 0.15, 0.0, 1.0);',
+      '',
+      '  vec3 accent = vec3(0.110, 0.306, 0.996);',
+      '  vec3 teal = vec3(0.0, 0.918, 0.894);',
+      '  vec3 tint = mix(accent, teal, ringColor.g);',
+      '  color = mix(cardBg, tint, ringColor.r * 0.5 + ringColor.b * 0.5);',
+      '',
+      '  gl_FragColor = vec4(color, 1.0);',
+      '}'
+    ].join('\n');
+
+    var uniforms = {
+      resolution: { value: new THREE.Vector2() },
+      time:       { value: 0.0 }
+    };
+
+    var scene    = new THREE.Scene();
+    var camera   = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    var geometry = new THREE.PlaneGeometry(2, 2);
+    var material = new THREE.ShaderMaterial({
+      uniforms:       uniforms,
+      vertexShader:   vertexShader,
+      fragmentShader: fragmentShader,
+    });
+    var mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+
+    var renderer = new THREE.WebGLRenderer({ antialias: false });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    mount.appendChild(renderer.domElement);
+
+    function resize() {
+      var w = wrap.clientWidth;
+      var h = wrap.clientHeight;
+      if (w === 0 || h === 0) return;
+      renderer.setSize(w, h);
+      uniforms.resolution.value.set(renderer.domElement.width, renderer.domElement.height);
+    }
+    resize();
+
+    var ro = new ResizeObserver(resize);
+    ro.observe(wrap);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      uniforms.time.value += 0.05;
+      renderer.render(scene, camera);
+    }
+    animate();
+  })();
+  </script>
 
 </body>
 </html>
