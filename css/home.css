@@ -935,7 +935,26 @@
   height: 469px;
   border-radius: 12px;
   overflow: hidden;
-  background: url('../assets/Backgreound2.png') center/cover no-repeat;
+  position: relative;
+}
+
+#contact-shader-mount {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+#contact-shader-mount canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#contact-spotlight {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(208,208,208,0.03), transparent 70%);
 }
 
 .hm-contact__graphic {
