@@ -865,7 +865,10 @@
 .hm-gallery__card-arrow--wip:hover { width: 140px; border-radius: 1000px; padding: 0 14px 0 12px; gap: 6px; }
 .hm-gallery__card-arrow--wip:hover .wip-text { opacity: 1 !important; }
 .hm-gallery__card-arrow--wip:hover .arrow-icon { transform: rotate(180deg); }
-.hm-gallery__card--branding { cursor: default; }
+.hm-gallery__card--branding {
+  cursor: default;
+  background: #121215 url('../Figma/brandign.png') center / cover no-repeat;
+}
 .hm-gallery__card--branding .wip-text { font-size: 11px; white-space: nowrap; opacity: 0; transition: opacity 0.3s ease; }
 
 /* ─── Contact Bento ─── */
