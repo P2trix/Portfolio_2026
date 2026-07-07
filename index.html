@@ -328,7 +328,6 @@
         </div>
         <div class="hm-contact__right" id="contact-shader-wrap">
           <div id="contact-shader-mount"></div>
-          <div id="contact-spotlight"></div>
         </div>
       </div>
     </div>
@@ -374,7 +373,7 @@
       for (var ci = 0; ci < numCols; ci++) {
         var x = ci * cellW + cellW / 2;
         if (ci < line.length) {
-          tc.fillStyle = 'rgb(55, 60, 90)';
+          tc.fillStyle = 'rgb(60, 65, 95)';
           tc.fillText('_', x, y);
           if (line[ci] !== '_') {
             tc.fillStyle = '#fff';
@@ -407,20 +406,11 @@
       '  return fract(sin(dot(st.xy, vec2(12.9898,78.233)))*43758.5453123);',
       '}',
       '',
-      'vec3 palette(float t) {',
-      '  vec3 accent = vec3(0.110, 0.306, 0.996);',
-      '  vec3 teal = vec3(0.0, 0.918, 0.894);',
-      '  vec3 blue = vec3(0.031, 0.678, 1.0);',
-      '  t = clamp(t, 0.0, 1.0);',
-      '  if (t < 0.5) return mix(accent, teal, t / 0.5);',
-      '  return mix(teal, blue, (t - 0.5) / 0.5);',
-      '}',
-      '',
       'varying vec2 vUv;',
       'void main(void) {',
       '  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);',
       '  vec2 fMosaicScal = vec2(3.0, 3.0);',
-      '  vec2 vScreenSize = vec2(120.0, 120.0);',
+      '  vec2 vScreenSize = vec2(200.0, 200.0);',
       '  vec2 grid = vec2(',
       '    floor(uv.x * vScreenSize.x / fMosaicScal.x) / (vScreenSize.x / fMosaicScal.x),',
       '    floor(uv.y * vScreenSize.y / fMosaicScal.y) / (vScreenSize.y / fMosaicScal.y)',
@@ -433,31 +423,46 @@
       '',
       '  float t = time * 0.06 + random(grid) * 0.4;',
       '  float lineWidth = 0.0008;',
-      '  float intensity = 0.0;',
+      '  float rings = 0.0;',
       '  for (int j = 0; j < 3; j++) {',
       '    for (int i = 0; i < 5; i++) {',
-      '      intensity += lineWidth * float(i * i) / abs(fract(t - 0.01 * float(j) + float(i) * 0.01) * 1.0 - length(grid));',
+      '      rings += lineWidth * float(i * i) / abs(fract(t - 0.01 * float(j) + float(i) * 0.01) * 1.0 - length(grid));',
       '    }',
       '  }',
-      '  intensity = clamp(intensity * 0.15, 0.0, 1.0);',
+      '  rings = clamp(rings * 0.15, 0.0, 1.0);',
+      '',
+      '  vec3 cardBg = vec3(0.965, 0.973, 1.0);',
+      '  vec3 accent = vec3(0.110, 0.306, 0.996);',
+      '  vec3 teal = vec3(0.0, 0.918, 0.894);',
       '',
       '  float numCols = float(' + numCols + ');',
       '  float colIdx = floor(textUV.x * numCols);',
       '  float revealCol = floor(time * 1.5);',
       '  float isRevealed = step(colIdx, revealCol);',
       '',
-      '  float isLetter = step(0.5, texel.r);',
-      '  float isUnderscore = step(0.03, texel.r) * (1.0 - isLetter);',
-      '  float textMask = isUnderscore + isLetter * isRevealed;',
+      '  float brightness = texel.r;',
+      '  float isLetter = step(0.5, brightness);',
+      '  float isPlaceholder = step(0.02, brightness) * (1.0 - isLetter);',
+      '  float textMask = isPlaceholder + isLetter * isRevealed;',
       '',
-      '  float scanline = step(0.5, fract(gl_FragCoord.y * 0.5));',
-      '  vec3 accent = vec3(0.110, 0.306, 0.996);',
-      '  vec3 color = accent;',
+      '  vec3 ringColor = mix(cardBg, accent, rings * 0.4);',
+      '  ringColor = mix(ringColor, teal, rings * rings * 0.3);',
+      '',
+      '  vec3 color = cardBg;',
+      '',
       '  if (textMask > 0.5) {',
-      '    color = palette(intensity);',
-      '    if (isUnderscore > 0.5) color = mix(color, accent, 0.5);',
+      '    vec3 textColor = mix(accent, cardBg, 0.15);',
+      '    vec3 textTeal = mix(teal, cardBg, 0.4);',
+      '    float textShade = rings;',
+      '    vec3 txt = mix(textColor, textTeal, textShade);',
+      '    color = mix(cardBg, txt, 0.7);',
+      '    if (isPlaceholder > 0.5) {',
+      '      color = mix(cardBg, accent, 0.15);',
+      '    }',
+      '  } else {',
+      '    float fade = 1.0 - smoothstep(0.0, 0.6, length(center));',
+      '    color = mix(cardBg, ringColor, fade);',
       '  }',
-      '  color *= 0.85 + 0.15 * scanline;',
       '',
       '  gl_FragColor = vec4(color, 1.0);',
       '}'
@@ -476,14 +481,11 @@
       uniforms:       uniforms,
       vertexShader:   vertexShader,
       fragmentShader: fragmentShader,
-      depthWrite: false,
-      depthTest: false,
     });
     var mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
-    renderer.setClearColor(0x000000, 0);
+    var renderer = new THREE.WebGLRenderer({ antialias: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     mount.appendChild(renderer.domElement);
 

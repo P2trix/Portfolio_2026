@@ -936,6 +936,7 @@
   border-radius: 12px;
   overflow: hidden;
   position: relative;
+  background: var(--cs-card-bg);
 }
 
 #contact-shader-mount {
@@ -947,18 +948,6 @@
   display: block;
   width: 100% !important;
   height: 100% !important;
-}
-
-#contact-spotlight {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 50%), rgba(208,208,208,0.03), transparent 70%);
-}
-
-.hm-contact__graphic {
-  display: none;
 }
 
 .hm-contact__linkedin {
