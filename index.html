@@ -352,13 +352,10 @@
     var spotlight = document.getElementById('contact-spotlight');
     if (!mount || !wrap) return;
 
-    /* build text texture */
     var lines = ['GET___', 'IN_____', 'TOUCH'];
-    var numCols = 8;
-    var numLines = 3;
-    var cellW = 64, cellH = 72, padX = 16, padY = 16;
-    var cw = cellW * numCols + padX * 2;
-    var ch = cellH * numLines + padY * 2;
+    var numCols = 8, numLines = 3;
+    var cellW = 48, cellH = 48;
+    var cw = cellW * numCols, ch = cellH * numLines;
 
     var textCanvas = document.createElement('canvas');
     textCanvas.width = cw;
@@ -370,25 +367,15 @@
 
     tc.textAlign = 'left';
     tc.textBaseline = 'middle';
-    tc.font = 'bold 60px monospace';
-
-    var underscoreColor = 'rgb(55, 60, 85)';
-    var letterColor = '#ffffff';
+    tc.font = 'bold 44px "Courier New", monospace';
 
     for (var li = 0; li < numLines; li++) {
       var line = lines[li];
-      var y = padY + li * cellH + cellH / 2;
-      for (var ci = 0; ci < line.length; ci++) {
-        var ch2 = line[ci];
-        var x = padX + ci * cellW;
-        if (ch2 === '_') {
-          tc.fillStyle = underscoreColor;
-          tc.fillText('_', x, y);
-        } else {
-          tc.fillStyle = letterColor;
-          tc.fillText(ch2, x, y);
-        }
-      }
+      var y = li * cellH + cellH / 2;
+      tc.fillStyle = 'rgb(55, 58, 80)';
+      tc.fillText(line.replace(/[^_]/g, '_'), 0, y);
+      tc.fillStyle = '#fff';
+      tc.fillText(line, 0, y);
     }
 
     var textTexture = new THREE.Texture(textCanvas);
@@ -427,7 +414,7 @@
       'void main(void) {',
       '  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);',
       '  vec2 fMosaicScal = vec2(4.0, 2.0);',
-      '  vec2 vScreenSize = vec2(128.0, 128.0);',
+      '  vec2 vScreenSize = vec2(96.0, 96.0);',
       '  vec2 grid = vec2(',
       '    floor(uv.x * vScreenSize.x / fMosaicScal.x) / (vScreenSize.x / fMosaicScal.x),',
       '    floor(uv.y * vScreenSize.y / fMosaicScal.y) / (vScreenSize.y / fMosaicScal.y)',
@@ -450,28 +437,21 @@
       '',
       '  float numCols = float(' + numCols + ');',
       '  float colIdx = floor(textUV.x * numCols);',
-      '  float revealCol = floor(time * 2.5);',
+      '  float revealCol = floor(time * 1.8);',
       '  float isRevealed = step(colIdx, revealCol);',
       '',
       '  float isLetter = step(0.5, texel.r);',
       '  float isUnderscore = step(0.04, texel.r) * (1.0 - isLetter);',
-      '',
       '  float textMask = isUnderscore + isLetter * isRevealed;',
       '',
-      '  float scanline = step(0.5, fract(gl_FragCoord.y * 0.4));',
-      '  float scanlineAlpha = 0.85 + 0.15 * scanline;',
-      '',
+      '  float scanline = step(0.5, fract(gl_FragCoord.y * 0.5));',
       '  vec3 accent = vec3(0.110, 0.306, 0.996);',
       '  vec3 color = accent;',
       '  if (textMask > 0.5) {',
-      '    float colorShift = sin(time * 2.0 + center.x * 20.0) * 0.1;',
-      '    color = palette(clamp(intensity + colorShift, 0.0, 1.0));',
-      '    if (isUnderscore > 0.5) {',
-      '      color = mix(color, accent, 0.3);',
-      '    }',
+      '    color = palette(intensity);',
+      '    if (isUnderscore > 0.5) color = mix(color, accent, 0.5);',
       '  }',
-      '',
-      '  color *= scanlineAlpha;',
+      '  color *= 0.85 + 0.15 * scanline;',
       '',
       '  gl_FragColor = vec4(color, 1.0);',
       '}'
