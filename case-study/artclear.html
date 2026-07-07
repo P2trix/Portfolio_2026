@@ -8,10 +8,22 @@
   <link rel="stylesheet" href="../css/home.css">
   <link rel="stylesheet" href="../css/animations.css">
   <style>
-    /* ArtClear hero — light bg, visible blobs, dark pills/buttons */
+    /* ─── ArtClear brand overrides ─── */
+    .ac-page {
+      --cs-accent: #42B368;
+      --cs-card-bg: #F5F6FA;
+      --cs-border: #EBEDF7;
+      --cs-border-nav: #EBEDF7;
+      --cs-text: #1C2E38;
+      --cs-text-muted: #647B9E;
+      --cs-tag-bg: #D7F8E1;
+      --cs-tag-text: #1C2B1E;
+    }
+
+    /* Hero */
     .ac-page .hm-hero__bento { background: #F2F2F2 !important; }
     .ac-page .hm-hero__title,
-    .ac-page .hm-hero__desc { color: #000 !important; }
+    .ac-page .hm-hero__desc { color: var(--cs-text) !important; }
     .ac-page .hm-hero__blob--1 {
       background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 40%, transparent 70%);
       width: 90%;
@@ -23,35 +35,37 @@
       aspect-ratio: 1;
     }
     .ac-page .hm-hero__pill {
-      color: #222;
-      border-color: rgba(0,0,0,0.2);
+      color: var(--cs-text);
+      border-color: #DBE2F4;
     }
     .ac-page .hm-btn--outline {
-      color: #222;
-      border-color: rgba(0,0,0,0.2);
+      color: var(--cs-text);
+      border-color: #DBE2F4;
     }
     .ac-page .hm-btn--outline:hover {
-      background: #222;
+      background: var(--cs-text);
       color: #fff;
-      border-color: #222;
+      border-color: var(--cs-text);
     }
     .ac-page .hm-hero__bg::after { display: none; }
-    /* ArtClear summary — solid blue */
+
+    /* Summary — solid green */
     .ac-summary {
-      background: #1C4EFE;
+      background: var(--cs-accent);
       border-radius: 24px;
       padding-left: 24px;
       padding-right: 24px;
       margin: 32px 0;
     }
     .ac-summary .cs-section__left h3,
-    .ac-summary .cs-section__right p {
+    .ac-summary .cs-section__right p,
+    .ac-summary .cs-section__number {
       color: #ffffff;
     }
     .ac-summary .cs-section__number {
-      color: #ffffff;
       -webkit-text-stroke: 0;
     }
+
     /* Hero copy */
     .ac-hero-copy {
       text-align: center;
@@ -61,21 +75,22 @@
     .ac-hero-copy__stat {
       font-size: 2rem;
       line-height: 1.3;
-      color: #000000;
+      color: var(--cs-text);
       margin: 0 0 24px;
     }
     .ac-hero-copy__num {
-      color: #1C4EFE;
+      color: var(--cs-accent);
       font-weight: 700;
     }
     .ac-hero-copy__quote {
       font-size: 1.25rem;
       line-height: 1.5;
-      color: #666;
+      color: var(--cs-text-muted);
       font-style: italic;
       max-width: 720px;
       margin: 0 auto;
     }
+
     /* Takeaways */
     .ac-takeaways {
       display: grid;
@@ -84,28 +99,28 @@
       margin: 0 0 48px;
     }
     .ac-takeaways__card {
-      background: #F6F8FF;
-      outline: 1px solid #E3E9FF;
+      background: var(--cs-card-bg);
+      outline: 1px solid var(--cs-border);
       border-radius: 20px;
       padding: 28px 24px;
       transition: outline-color 0.2s, box-shadow 0.2s;
     }
     .ac-takeaways__card:hover {
-      outline-color: #1C4EFE;
-      box-shadow: 0 12px 32px rgba(28, 78, 254, 0.12);
+      outline-color: var(--cs-accent);
+      box-shadow: 0 12px 32px rgba(66, 179, 104, 0.12);
     }
     .ac-takeaways__icon {
       display: inline-block;
       font-size: 1rem;
       font-weight: 700;
-      color: #1C4EFE;
+      color: var(--cs-accent);
       margin-bottom: 12px;
       letter-spacing: 0.04em;
     }
     .ac-takeaways__card p {
       font-size: 0.95rem;
       line-height: 1.5;
-      color: #666;
+      color: var(--cs-text-muted);
       margin: 0;
     }
     @media (max-width: 768px) {
@@ -318,14 +333,14 @@
               var dist=Math.abs(d.y-by);
               d.g=dist<BW?Math.pow(1-dist/BW,2):Math.max(0,d.g-0.03);
               ctx.beginPath();ctx.arc(d.x,d.y,2,0,Math.PI*2);
-              ctx.fillStyle=d.g>0.05?'rgba(28,78,254,'+(0.2+d.g*0.8)+')':'#DDE5FF';
+              ctx.fillStyle=d.g>0.05?'rgba(66,179,104,'+(0.2+d.g*0.8)+')':'#D7F8E1';
               ctx.fill();
             });
             var g=ctx.createLinearGradient(0,by-BW,0,by+BW);
-            g.addColorStop(0,'rgba(28,78,254,0)');g.addColorStop(0.5,'rgba(28,78,254,0.10)');g.addColorStop(1,'rgba(28,78,254,0)');
+            g.addColorStop(0,'rgba(66,179,104,0)');g.addColorStop(0.5,'rgba(66,179,104,0.10)');g.addColorStop(1,'rgba(66,179,104,0)');
             ctx.fillStyle=g;ctx.fillRect(0,by-BW,W,BW*2);
-            ctx.strokeStyle='rgba(28,78,254,0.75)';ctx.lineWidth=1.5;
-            ctx.shadowColor='#1C4EFE';ctx.shadowBlur=12;
+            ctx.strokeStyle='rgba(66,179,104,0.75)';ctx.lineWidth=1.5;
+            ctx.shadowColor='#42B368';ctx.shadowBlur=12;
             ctx.beginPath();ctx.moveTo(0,by);ctx.lineTo(W,by);ctx.stroke();
             ctx.shadowBlur=0;
             requestAnimationFrame(frame);}
@@ -362,7 +377,7 @@
       </div>
       <div class="cs-section__right">
         <p>The client was aware of the fact that people associated with art galleries tend to be closed off to their own circles. The technology underlying the project is not particularly popular among artists, so the use of blockchain was not highlighted as one of its advantages. Blockchain provided security and assurance that no one at any stage would be able to counterfeit a given piece of art. Additionally, the artist, owner, and buyer could verify that the artwork was not a forgery during the process of creating sales documents.</p>
-        <div data-reveal style="width:100%;border-radius:12px;overflow:hidden;border:1px solid #1C4EFE;margin:24px 0">
+        <div data-reveal style="width:100%;border-radius:12px;overflow:hidden;border:1px solid #42B368;margin:24px 0">
           <img src="../Figma/Artclear/7.webp" alt="" style="width:100%;height:auto;display:block">
         </div>
       </div>
@@ -416,14 +431,14 @@
             var P=LBL.map(function(_,i){return pos(i,t);});
             for(var i=0;i<5;i++)for(var j=i+1;j<5;j++){
               var dx=P[j].x-P[i].x,dy=P[j].y-P[i].y,d=Math.sqrt(dx*dx+dy*dy),md=H*.65;
-              if(d<md){var op=(1-d/md)*0.5;ctx.strokeStyle='rgba(28,78,254,'+op+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P[i].x,P[i].y);ctx.lineTo(P[j].x,P[j].y);ctx.stroke();}
+              if(d<md){var op=(1-d/md)*0.5;ctx.strokeStyle='rgba(66,179,104,'+op+')';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P[i].x,P[i].y);ctx.lineTo(P[j].x,P[j].y);ctx.stroke();}
             }
             LBL.forEach(function(l,i){
               var p=P[i];
               ctx.beginPath();ctx.arc(p.x,p.y,24,0,Math.PI*2);
               ctx.fillStyle='rgba(240,244,255,0.92)';ctx.fill();
-              ctx.strokeStyle='rgba(28,78,254,0.65)';ctx.lineWidth=2;ctx.stroke();
-              ctx.fillStyle='rgba(28,78,254,0.85)';ctx.font='bold 14px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';
+              ctx.strokeStyle='rgba(66,179,104,0.65)';ctx.lineWidth=2;ctx.stroke();
+              ctx.fillStyle='rgba(66,179,104,0.85)';ctx.font='bold 14px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';
               ctx.fillText(l,p.x,p.y);
             });
             requestAnimationFrame(frame);}
@@ -482,7 +497,7 @@
       </div>
       <div class="cs-section__right">
         <p>One of the elements I had to create was a simple interface for an application designed to communicate with a scanner. The company responsible for developing the scanner was ████ Technology, while I was responsible for designing the interface based on their specifications.</p>
-        <div data-reveal style="width:100%;border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px #E3E9FF;margin:24px 0">
+        <div data-reveal style="width:100%;border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px #EBEDF7;margin:24px 0">
           <img src="../Figma/img_71L0jC5btXmD7Scc8yRcdbFBKdw.webp" alt="" style="width:100%;height:auto;display:block">
         </div>
       </div>
@@ -530,11 +545,11 @@
               if(op<0.01)return;
               ctx.save();ctx.globalAlpha=op;
               var bx=b.x*W,by=b.y*H,bw=b.w*W,bh=b.h*H;
-              ctx.fillStyle='rgba(28,78,254,0.04)';ctx.fillRect(bx,by,bw,bh);
-              ctx.strokeStyle='rgba(28,78,254,0.7)';ctx.lineWidth=1.5;ctx.strokeRect(bx,by,bw,bh);
+              ctx.fillStyle='rgba(66,179,104,0.04)';ctx.fillRect(bx,by,bw,bh);
+              ctx.strokeStyle='rgba(66,179,104,0.7)';ctx.lineWidth=1.5;ctx.strokeRect(bx,by,bw,bh);
               [[0,0],[1,0],[1,1],[0,1]].forEach(function(co){
                 ctx.beginPath();ctx.arc(bx+co[0]*bw,by+co[1]*bh,4,0,Math.PI*2);
-                ctx.fillStyle='rgba(28,78,254,0.8)';ctx.fill();
+                ctx.fillStyle='rgba(66,179,104,0.8)';ctx.fill();
               });
               ctx.restore();
             });
@@ -566,9 +581,9 @@
   <!-- Image row 1: lo-fi to mid-fi -->
   <div class="container">
     <div class="cs-image-row-3" data-reveal>
-      <div style="box-shadow:0 0 0 1px #E3E9FF"><img src="../Figma/img_YTnZtgeOMJpY7DQymLPfDNhStZw.webp" alt="" style="width:100%;height:auto;display:block"></div>
-      <div style="box-shadow:0 0 0 1px #E3E9FF"><img src="../Figma/img_6rCiKv0VcPC6cixGf2cDYyNMjmw.webp" alt="" style="width:100%;height:auto;display:block"></div>
-      <div style="box-shadow:0 0 0 1px #E3E9FF"><img src="../Figma/img_zUyHLtTtUfhEjYlM36Xw5sipA.webp" alt="" style="width:100%;height:auto;display:block"></div>
+      <div style="box-shadow:0 0 0 1px #EBEDF7"><img src="../Figma/img_YTnZtgeOMJpY7DQymLPfDNhStZw.webp" alt="" style="width:100%;height:auto;display:block"></div>
+      <div style="box-shadow:0 0 0 1px #EBEDF7"><img src="../Figma/img_6rCiKv0VcPC6cixGf2cDYyNMjmw.webp" alt="" style="width:100%;height:auto;display:block"></div>
+      <div style="box-shadow:0 0 0 1px #EBEDF7"><img src="../Figma/img_zUyHLtTtUfhEjYlM36Xw5sipA.webp" alt="" style="width:100%;height:auto;display:block"></div>
     </div>
   </div>
 
@@ -579,9 +594,9 @@
   <!-- Image row 2: mid-fi to hi-fi -->
   <div class="container">
     <div class="cs-image-row-3" data-reveal>
-      <div style="box-shadow:0 0 0 1px #E3E9FF"><img src="../Figma/Artclear/12dsadsadsa.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-      <div style="box-shadow:0 0 0 1px #E3E9FF"><img src="../Figma/Artclear/Frame-945.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
-      <div style="box-shadow:0 0 0 1px #E3E9FF"><img src="../Figma/Artclear/imagdsadsadsae-1.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="box-shadow:0 0 0 1px #EBEDF7"><img src="../Figma/Artclear/12dsadsadsa.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="box-shadow:0 0 0 1px #EBEDF7"><img src="../Figma/Artclear/Frame-945.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+      <div style="box-shadow:0 0 0 1px #EBEDF7"><img src="../Figma/Artclear/imagdsadsadsae-1.webp" alt="" style="width:100%;height:100%;object-fit:cover;display:block"></div>
     </div>
   </div>
 
@@ -604,7 +619,7 @@
   </div>
 
   <div class="container">
-    <div data-reveal style="width:100%;border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px #E3E9FF;margin:32px 0">
+    <div data-reveal style="width:100%;border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px #EBEDF7;margin:32px 0">
       <img src="../Figma/Artclear/dsaaapng.webp" alt="" style="width:100%;height:auto;display:block">
     </div>
   </div>
@@ -640,18 +655,18 @@
             ctx.clearRect(0,0,W,H);
             var cx=W*.5,cy=H*.5,rx=W*.38,ry=H*.28;
             ctx.beginPath();ctx.ellipse(cx,cy,rx,ry,0,0,Math.PI*2);
-            ctx.strokeStyle='#DDE5FF';ctx.lineWidth=2;ctx.stroke();
+            ctx.strokeStyle='#D7F8E1';ctx.lineWidth=2;ctx.stroke();
             var a=(t*.8)%(Math.PI*2)-Math.PI/2;
             var px=cx+Math.cos(a)*rx,py=cy+Math.sin(a)*ry;
             var ta=Math.atan2(ry*Math.cos(a),-rx*Math.sin(a))+Math.PI/2;
             ctx.save();ctx.translate(px,py);ctx.rotate(ta);
             var s=H*.048/32;ctx.scale(s,s);ctx.translate(-32,-32);
-            ctx.fillStyle='#1C4EFE';ctx.shadowColor='#1C4EFE';ctx.shadowBlur=18;
+            ctx.fillStyle='#42B368';ctx.shadowColor='#42B368';ctx.shadowBlur=18;
             ctx.fill(ICON);ctx.restore();
             var loopPh=((t*.8)%(Math.PI*2))/(Math.PI*2);
             if(loopPh>0.82){
               var op=Math.sin((loopPh-.82)/.18*Math.PI);
-              ctx.save();ctx.globalAlpha=op;ctx.strokeStyle='#1C4EFE';ctx.lineWidth=2;
+              ctx.save();ctx.globalAlpha=op;ctx.strokeStyle='#42B368';ctx.lineWidth=2;
               var mx=cx,my=cy-ry-22;
               ctx.beginPath();ctx.moveTo(mx-10,my-5);ctx.lineTo(mx-3,my+3);ctx.lineTo(mx+10,my-8);ctx.stroke();
               ctx.restore();
@@ -704,7 +719,7 @@
       </div>
       <div class="cs-section__right">
         <p>In design reviews, I focused on making sure each feature stayed true to the overall design vision. I provided feedback on visual details, interactions, and usability, working closely with developers to address any issues early and keep everything consistent.</p>
-        <div data-reveal style="width:100%;border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px #E3E9FF;margin:24px 0">
+        <div data-reveal style="width:100%;border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px #EBEDF7;margin:24px 0">
           <img src="../Figma/Artclear/Group632975.webp" alt="" style="width:100%;height:auto;display:block">
         </div>
       </div>
@@ -741,13 +756,13 @@
   </div>
 
   <div class="container">
-    <div data-reveal style="width:100%;border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px #E3E9FF;margin:32px 0">
+    <div data-reveal style="width:100%;border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px #EBEDF7;margin:32px 0">
       <img src="../Figma/img_sFqnkRQIgqkL116x7i9eWNTcv4.webp" alt="" style="width:100%;height:auto;display:block">
     </div>
   </div>
 
   <div class="container">
-    <div data-reveal style="width:100%;border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px #E3E9FF;margin:32px 0">
+    <div data-reveal style="width:100%;border-radius:28px;overflow:hidden;box-shadow:0 0 0 1px #EBEDF7;margin:32px 0">
       <img src="../Figma/Artclear/5.webp" alt="" style="width:100%;height:auto;display:block">
     </div>
   </div>
