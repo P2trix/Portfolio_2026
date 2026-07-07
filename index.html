@@ -353,22 +353,43 @@
     if (!mount || !wrap) return;
 
     /* build text texture */
+    var lines = ['GET___', 'IN_____', 'TOUCH'];
+    var numCols = 8;
+    var numLines = 3;
+    var cellW = 64, cellH = 72, padX = 16, padY = 16;
+    var cw = cellW * numCols + padX * 2;
+    var ch = cellH * numLines + padY * 2;
+
     var textCanvas = document.createElement('canvas');
-    var tw = 512, th = 256;
-    textCanvas.width = tw;
-    textCanvas.height = th;
+    textCanvas.width = cw;
+    textCanvas.height = ch;
     var tc = textCanvas.getContext('2d');
+
     tc.fillStyle = '#000';
-    tc.fillRect(0, 0, tw, th);
-    tc.textAlign = 'center';
+    tc.fillRect(0, 0, cw, ch);
+
+    tc.textAlign = 'left';
     tc.textBaseline = 'middle';
-    tc.fillStyle = '#fff';
-    tc.font = 'bold 72px monospace';
-    tc.fillText('GET', tw/2, 52);
-    tc.font = 'bold 72px monospace';
-    tc.fillText('IN', tw/2, 130);
-    tc.font = 'bold 72px monospace';
-    tc.fillText('TOUCH', tw/2, 208);
+    tc.font = 'bold 60px monospace';
+
+    var underscoreColor = 'rgb(55, 60, 85)';
+    var letterColor = '#ffffff';
+
+    for (var li = 0; li < numLines; li++) {
+      var line = lines[li];
+      var y = padY + li * cellH + cellH / 2;
+      for (var ci = 0; ci < line.length; ci++) {
+        var ch2 = line[ci];
+        var x = padX + ci * cellW;
+        if (ch2 === '_') {
+          tc.fillStyle = underscoreColor;
+          tc.fillText('_', x, y);
+        } else {
+          tc.fillStyle = letterColor;
+          tc.fillText(ch2, x, y);
+        }
+      }
+    }
 
     var textTexture = new THREE.Texture(textCanvas);
     textTexture.needsUpdate = true;
@@ -416,7 +437,6 @@
       '',
       '  vec2 textUV = center * 0.5 + 0.5;',
       '  vec4 texel = texture2D(textTexture, textUV);',
-      '  float textMask = step(0.3, texel.r);',
       '',
       '  float t = time * 0.06 + random(grid) * 0.4;',
       '  float lineWidth = 0.0008;',
@@ -428,29 +448,27 @@
       '  }',
       '  intensity = clamp(intensity * 0.15, 0.0, 1.0);',
       '',
-      '  vec3 accent = vec3(0.110, 0.306, 0.996);',
+      '  float numCols = float(' + numCols + ');',
+      '  float colIdx = floor(textUV.x * numCols);',
+      '  float revealCol = floor(time * 2.5);',
+      '  float isRevealed = step(colIdx, revealCol);',
       '',
-      '  float charCount = 14.0;',
-      '  float charIdx = floor(textUV.x * charCount);',
-      '  float charTime = time * 3.0 - charIdx * 0.12 - floor(textUV.y * 3.0) * 1.2;',
-      '  float reveal = smoothstep(0.0, 0.4, charTime);',
+      '  float isLetter = step(0.5, texel.r);',
+      '  float isUnderscore = step(0.04, texel.r) * (1.0 - isLetter);',
+      '',
+      '  float textMask = isUnderscore + isLetter * isRevealed;',
       '',
       '  float scanline = step(0.5, fract(gl_FragCoord.y * 0.4));',
-      '  float scanlineAlpha = 0.88 + 0.12 * scanline;',
+      '  float scanlineAlpha = 0.85 + 0.15 * scanline;',
       '',
-      '  float waveY = sin(textUV.y * 20.0 + time * 4.0) * 0.01;',
-      '  vec2 waveUV = vec2(textUV.x + waveY, textUV.y);',
-      '  vec4 waveTexel = texture2D(textTexture, waveUV);',
-      '  float waveMask = step(0.3, waveTexel.r);',
-      '',
-      '  float finalMask = textMask * reveal;',
-      '',
+      '  vec3 accent = vec3(0.110, 0.306, 0.996);',
       '  vec3 color = accent;',
-      '  if (finalMask > 0.5) {',
-      '    color = palette(intensity + sin(time * 2.0 + textUV.x * 30.0) * 0.1);',
-      '  }',
-      '  if (waveMask > 0.5) {',
-      '    color = mix(color, vec3(0.0, 0.918, 0.894), 0.15);',
+      '  if (textMask > 0.5) {',
+      '    float colorShift = sin(time * 2.0 + center.x * 20.0) * 0.1;',
+      '    color = palette(clamp(intensity + colorShift, 0.0, 1.0));',
+      '    if (isUnderscore > 0.5) {',
+      '      color = mix(color, accent, 0.3);',
+      '    }',
       '  }',
       '',
       '  color *= scanlineAlpha;',
