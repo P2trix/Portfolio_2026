@@ -949,6 +949,24 @@
   width: 100% !important;
   height: 100% !important;
 }
+#contact-send-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  max-width: 60%;
+  max-height: 60%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  opacity: 0;
+  animation: sendFadeIn 1s ease 0.5s forwards;
+}
+@keyframes sendFadeIn {
+  to { opacity: 1; }
+}
 
 .hm-contact__linkedin {
   display: inline-flex;

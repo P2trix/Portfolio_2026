@@ -328,6 +328,7 @@
         </div>
         <div class="hm-contact__right" id="contact-shader-wrap">
           <div id="contact-shader-mount"></div>
+          <img src="Figma/send1.png" alt="" id="contact-send-icon">
         </div>
       </div>
     </div>
@@ -350,21 +351,6 @@
     var mount = document.getElementById('contact-shader-mount');
     if (!mount || !wrap) return;
 
-    var img = new Image();
-    img.src = 'Figma/send1.png';
-
-    var imgTex = new THREE.Texture(img);
-    imgTex.minFilter = THREE.LinearFilter;
-    imgTex.magFilter = THREE.LinearFilter;
-
-    var imgLoaded = false;
-    var imgAspect = 1;
-    img.onload = function () {
-      imgTex.needsUpdate = true;
-      imgAspect = img.width / img.height;
-      imgLoaded = true;
-    };
-
     var vertexShader = [
       'varying vec2 vUv;',
       'void main() {',
@@ -377,9 +363,6 @@
       'precision highp float;',
       'uniform vec2 resolution;',
       'uniform float time;',
-      'uniform sampler2D imgTexture;',
-      'uniform float imgAspect;',
-      'uniform float imgAlpha;',
       '',
       'float random (vec2 st) {',
       '  return fract(sin(dot(st.xy, vec2(12.9898,78.233)))*43758.5453123);',
@@ -411,31 +394,13 @@
       '  vec3 tint = mix(accent, teal, ringColor.g);',
       '  color = mix(cardBg, tint, ringColor.r * 0.5 + ringColor.b * 0.5);',
       '',
-      '  if (imgAlpha > 0.0) {',
-      '    vec2 imgUV = uv;',
-      '    float containerAspect = resolution.x / resolution.y;',
-      '    if (containerAspect > imgAspect) {',
-      '      imgUV.x *= containerAspect / imgAspect;',
-      '    } else {',
-      '      imgUV.y *= imgAspect / containerAspect;',
-      '    }',
-      '    vec2 sampleUV = imgUV * 0.5 + 0.5;',
-      '    if (sampleUV.x >= 0.0 && sampleUV.x <= 1.0 && sampleUV.y >= 0.0 && sampleUV.y <= 1.0) {',
-      '      vec4 imgColor = texture2D(imgTexture, sampleUV);',
-      '      color = mix(color, imgColor.rgb, imgColor.a * imgAlpha);',
-      '    }',
-      '  }',
-      '',
       '  gl_FragColor = vec4(color, 1.0);',
       '}'
     ].join('\n');
 
     var uniforms = {
       resolution: { value: new THREE.Vector2() },
-      time:       { value: 0.0 },
-      imgTexture: { value: imgTex },
-      imgAspect:  { value: 1.0 },
-      imgAlpha:   { value: 0.0 }
+      time:       { value: 0.0 }
     };
 
     var scene    = new THREE.Scene();
@@ -465,17 +430,9 @@
     var ro = new ResizeObserver(resize);
     ro.observe(wrap);
 
-    var startTime = Date.now();
-
     function animate() {
       requestAnimationFrame(animate);
       uniforms.time.value += 0.05;
-
-      if (imgLoaded && uniforms.imgAlpha.value < 1.0) {
-        uniforms.imgAlpha.value = Math.min(1.0, uniforms.imgAlpha.value + 0.02);
-        uniforms.imgAspect.value = imgAspect;
-      }
-
       renderer.render(scene, camera);
     }
     animate();
