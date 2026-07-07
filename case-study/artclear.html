@@ -8,6 +8,16 @@
   <link rel="stylesheet" href="../css/home.css">
   <link rel="stylesheet" href="../css/animations.css">
   <style>
+    /* ArtClear hero — light bg, white blobs, black text */
+    .ac-page .hm-hero__bento { background: #F2F2F2; }
+    .ac-page .hm-hero__title,
+    .ac-page .hm-hero__desc { color: #000; }
+    .ac-page .hm-hero__blob--1 {
+      background: radial-gradient(circle at 40% 40%, #ffffff 0%, rgba(255,255,255,0.4) 40%, transparent 70%);
+    }
+    .ac-page .hm-hero__blob--2 {
+      background: radial-gradient(circle at 55% 45%, #ffffff 0%, rgba(255,255,255,0.3) 40%, transparent 70%);
+    }
     /* ArtClear summary — solid blue */
     .ac-summary {
       background: #1C4EFE;
@@ -101,7 +111,7 @@
     .ac-anim-card .cs-process__body { position: relative; z-index: 1; }
   </style>
 </head>
-<body class="cs-page">
+<body class="cs-page ac-page">
 
   <!-- Nav -->
   <nav class="cs-nav">
@@ -133,6 +143,10 @@
   <section class="hm-hero">
     <div class="container">
       <div class="hm-hero__bento" data-reveal>
+        <div class="hm-hero__bg" aria-hidden="true">
+          <div class="hm-hero__blob hm-hero__blob--1"></div>
+          <div class="hm-hero__blob hm-hero__blob--2"></div>
+        </div>
         <div class="hm-hero__text">
           <div class="hm-hero__pills">
             <span class="hm-hero__pill">2022 - 2023</span>
