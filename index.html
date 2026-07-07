@@ -348,45 +348,7 @@
   (function () {
     var wrap = document.getElementById('contact-shader-wrap');
     var mount = document.getElementById('contact-shader-mount');
-    var spotlight = document.getElementById('contact-spotlight');
     if (!mount || !wrap) return;
-
-    var lines = ['GET___', 'IN_____', 'TOUCH'];
-    var numCols = 8, numLines = 3;
-    var cellW = 48, cellH = 48;
-    var cw = cellW * numCols, ch = cellH * numLines;
-
-    var textCanvas = document.createElement('canvas');
-    textCanvas.width = cw;
-    textCanvas.height = ch;
-    var tc = textCanvas.getContext('2d');
-
-    tc.fillStyle = '#000';
-    tc.fillRect(0, 0, cw, ch);
-    tc.textAlign = 'center';
-    tc.textBaseline = 'middle';
-    tc.font = 'bold 38px "Courier New", monospace';
-
-    for (var li = 0; li < numLines; li++) {
-      var line = lines[li];
-      var y = li * cellH + cellH / 2;
-      for (var ci = 0; ci < numCols; ci++) {
-        var x = ci * cellW + cellW / 2;
-        if (ci < line.length) {
-          tc.fillStyle = 'rgb(60, 65, 95)';
-          tc.fillText('_', x, y);
-          if (line[ci] !== '_') {
-            tc.fillStyle = '#fff';
-            tc.fillText(line[ci], x, y);
-          }
-        }
-      }
-    }
-
-    var textTexture = new THREE.Texture(textCanvas);
-    textTexture.needsUpdate = true;
-    textTexture.minFilter = THREE.NearestFilter;
-    textTexture.magFilter = THREE.NearestFilter;
 
     var vertexShader = [
       'varying vec2 vUv;',
@@ -400,7 +362,6 @@
       'precision highp float;',
       'uniform vec2 resolution;',
       'uniform float time;',
-      'uniform sampler2D textTexture;',
       '',
       'float random (vec2 st) {',
       '  return fract(sin(dot(st.xy, vec2(12.9898,78.233)))*43758.5453123);',
@@ -409,60 +370,28 @@
       'varying vec2 vUv;',
       'void main(void) {',
       '  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);',
-      '  vec2 fMosaicScal = vec2(3.0, 3.0);',
-      '  vec2 vScreenSize = vec2(200.0, 200.0);',
-      '  vec2 grid = vec2(',
-      '    floor(uv.x * vScreenSize.x / fMosaicScal.x) / (vScreenSize.x / fMosaicScal.x),',
-      '    floor(uv.y * vScreenSize.y / fMosaicScal.y) / (vScreenSize.y / fMosaicScal.y)',
-      '  );',
-      '  vec2 cellSize = vec2(2.0 / (vScreenSize.x / fMosaicScal.x), 2.0 / (vScreenSize.y / fMosaicScal.y));',
-      '  vec2 center = grid + cellSize * 0.5;',
+      '  vec2 fMosaicScal = vec2(4.0, 2.0);',
+      '  vec2 vScreenSize = vec2(48.0, 48.0);',
+      '  uv.x = floor(uv.x * vScreenSize.x / fMosaicScal.x) / (vScreenSize.x / fMosaicScal.x);',
+      '  uv.y = floor(uv.y * vScreenSize.y / fMosaicScal.y) / (vScreenSize.y / fMosaicScal.y);',
       '',
-      '  vec2 textUV = center * 0.5 + 0.5;',
-      '  vec4 texel = texture2D(textTexture, textUV);',
-      '',
-      '  float t = time * 0.06 + random(grid) * 0.4;',
+      '  float t = time * 0.06 + random(uv) * 0.4;',
       '  float lineWidth = 0.0008;',
-      '  float rings = 0.0;',
-      '  for (int j = 0; j < 3; j++) {',
-      '    for (int i = 0; i < 5; i++) {',
-      '      rings += lineWidth * float(i * i) / abs(fract(t - 0.01 * float(j) + float(i) * 0.01) * 1.0 - length(grid));',
-      '    }',
-      '  }',
-      '  rings = clamp(rings * 0.15, 0.0, 1.0);',
       '',
       '  vec3 cardBg = vec3(0.965, 0.973, 1.0);',
+      '  vec3 color = cardBg;',
+      '  vec3 ringColor = vec3(0.0);',
+      '  for (int j = 0; j < 3; j++) {',
+      '    for (int i = 0; i < 5; i++) {',
+      '      ringColor[j] += lineWidth * float(i * i) / abs(fract(t - 0.01 * float(j) + float(i) * 0.01) * 1.0 - length(uv));',
+      '    }',
+      '  }',
+      '  ringColor = clamp(ringColor * 0.15, 0.0, 1.0);',
+      '',
       '  vec3 accent = vec3(0.110, 0.306, 0.996);',
       '  vec3 teal = vec3(0.0, 0.918, 0.894);',
-      '',
-      '  float numCols = float(' + numCols + ');',
-      '  float colIdx = floor(textUV.x * numCols);',
-      '  float revealCol = floor(time * 1.5);',
-      '  float isRevealed = step(colIdx, revealCol);',
-      '',
-      '  float brightness = texel.r;',
-      '  float isLetter = step(0.5, brightness);',
-      '  float isPlaceholder = step(0.02, brightness) * (1.0 - isLetter);',
-      '  float textMask = isPlaceholder + isLetter * isRevealed;',
-      '',
-      '  vec3 ringColor = mix(cardBg, accent, rings * 0.4);',
-      '  ringColor = mix(ringColor, teal, rings * rings * 0.3);',
-      '',
-      '  vec3 color = cardBg;',
-      '',
-      '  if (textMask > 0.5) {',
-      '    vec3 textColor = mix(accent, cardBg, 0.15);',
-      '    vec3 textTeal = mix(teal, cardBg, 0.4);',
-      '    float textShade = rings;',
-      '    vec3 txt = mix(textColor, textTeal, textShade);',
-      '    color = mix(cardBg, txt, 0.7);',
-      '    if (isPlaceholder > 0.5) {',
-      '      color = mix(cardBg, accent, 0.15);',
-      '    }',
-      '  } else {',
-      '    float fade = 1.0 - smoothstep(0.0, 0.6, length(center));',
-      '    color = mix(cardBg, ringColor, fade);',
-      '  }',
+      '  vec3 tint = mix(accent, teal, ringColor.g);',
+      '  color = mix(cardBg, tint, ringColor.r * 0.5 + ringColor.b * 0.5);',
       '',
       '  gl_FragColor = vec4(color, 1.0);',
       '}'
@@ -470,8 +399,7 @@
 
     var uniforms = {
       resolution: { value: new THREE.Vector2() },
-      time:       { value: 0.0 },
-      textTexture: { value: textTexture }
+      time:       { value: 0.0 }
     };
 
     var scene    = new THREE.Scene();
@@ -500,12 +428,6 @@
 
     var ro = new ResizeObserver(resize);
     ro.observe(wrap);
-
-    wrap.addEventListener('mousemove', function (e) {
-      var rect = wrap.getBoundingClientRect();
-      spotlight.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
-      spotlight.style.setProperty('--my', (e.clientY - rect.top) + 'px');
-    });
 
     function animate() {
       requestAnimationFrame(animate);
