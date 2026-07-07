@@ -12,8 +12,8 @@
     .ac-page {
       --cs-accent: #42B368;
       --cs-card-bg: #F5F6FA;
-      --cs-border: #EBEDF7;
-      --cs-border-nav: #EBEDF7;
+      --cs-border: #C5D0E8;
+      --cs-border-nav: #C5D0E8;
       --cs-text: #1C2E38;
       --cs-text-muted: #647B9E;
       --cs-tag-bg: #D7F8E1;
@@ -21,7 +21,8 @@
     }
 
     /* Hero */
-    .ac-page .hm-hero__bento { background: url('../Figma/Artclear/artclear2bg.png') center/cover no-repeat #ffffff !important; }
+    .ac-page .hm-hero__bento { background: url('../Figma/Artclear/artclear2bg.png') center/cover no-repeat #ffffff !important; outline: 1px solid var(--cs-border); outline-offset: -1px; }
+    .ac-page .hm-hero__visual img { object-position: 65% 55%; }
     .ac-page .hm-hero__title,
     .ac-page .hm-hero__desc { color: var(--cs-text) !important; }
     .ac-page .hm-hero__blob--1 {
@@ -36,7 +37,7 @@
     }
     .ac-page .hm-hero__pill {
       color: var(--cs-text);
-      border-color: #DBE2F4;
+      border-color: var(--cs-border);
     }
     .ac-page .hm-btn--primary {
       background:
@@ -59,7 +60,7 @@
     }
     .ac-page .hm-btn--outline {
       color: var(--cs-text);
-      border-color: #DBE2F4;
+      border-color: var(--cs-border);
     }
     .ac-page .hm-btn--outline:hover {
       background: var(--cs-text);
