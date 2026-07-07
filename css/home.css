@@ -148,7 +148,7 @@
 }
 
 .hm-hero__highlight {
-  background: linear-gradient(135deg, var(--cs-accent), #764ba2);
+  background: linear-gradient(135deg, var(--cs-accent), #08ADFF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
