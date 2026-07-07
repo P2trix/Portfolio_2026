@@ -352,6 +352,29 @@
     var spotlight = document.getElementById('contact-spotlight');
     if (!mount || !wrap) return;
 
+    /* build text texture */
+    var textCanvas = document.createElement('canvas');
+    var tw = 512, th = 256;
+    textCanvas.width = tw;
+    textCanvas.height = th;
+    var tc = textCanvas.getContext('2d');
+    tc.fillStyle = '#000';
+    tc.fillRect(0, 0, tw, th);
+    tc.textAlign = 'center';
+    tc.textBaseline = 'middle';
+    tc.fillStyle = '#fff';
+    tc.font = 'bold 72px monospace';
+    tc.fillText('GET', tw/2, 52);
+    tc.font = 'bold 72px monospace';
+    tc.fillText('IN', tw/2, 130);
+    tc.font = 'bold 72px monospace';
+    tc.fillText('TOUCH', tw/2, 208);
+
+    var textTexture = new THREE.Texture(textCanvas);
+    textTexture.needsUpdate = true;
+    textTexture.minFilter = THREE.NearestFilter;
+    textTexture.magFilter = THREE.NearestFilter;
+
     var vertexShader = [
       'varying vec2 vUv;',
       'void main() {',
@@ -364,6 +387,7 @@
       'precision highp float;',
       'uniform vec2 resolution;',
       'uniform float time;',
+      'uniform sampler2D textTexture;',
       '',
       'float random (vec2 st) {',
       '  return fract(sin(dot(st.xy, vec2(12.9898,78.233)))*43758.5453123);',
@@ -382,7 +406,7 @@
       'void main(void) {',
       '  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);',
       '  vec2 fMosaicScal = vec2(4.0, 2.0);',
-      '  vec2 vScreenSize = vec2(64.0, 64.0);',
+      '  vec2 vScreenSize = vec2(128.0, 128.0);',
       '  vec2 grid = vec2(',
       '    floor(uv.x * vScreenSize.x / fMosaicScal.x) / (vScreenSize.x / fMosaicScal.x),',
       '    floor(uv.y * vScreenSize.y / fMosaicScal.y) / (vScreenSize.y / fMosaicScal.y)',
@@ -390,12 +414,9 @@
       '  vec2 cellSize = vec2(2.0 / (vScreenSize.x / fMosaicScal.x), 2.0 / (vScreenSize.y / fMosaicScal.y));',
       '  vec2 center = grid + cellSize * 0.5;',
       '',
-      '  float envW = 0.55, envH = 0.35;',
-      '',
-      '  float inRect = step(abs(center.x), envW) * step(abs(center.y), envH);',
-      '',
-      '  float flapLine = envH - abs(center.x) * (envH * 2.0) / envW;',
-      '  float inFlap = step(center.y, flapLine);',
+      '  vec2 textUV = center * 0.5 + 0.5;',
+      '  vec4 texel = texture2D(textTexture, textUV);',
+      '  float textMask = step(0.3, texel.r);',
       '',
       '  float t = time * 0.06 + random(grid) * 0.4;',
       '  float lineWidth = 0.0008;',
@@ -408,23 +429,31 @@
       '  intensity = clamp(intensity * 0.15, 0.0, 1.0);',
       '',
       '  vec3 accent = vec3(0.110, 0.306, 0.996);',
-      '  vec3 color = accent;',
       '',
-      '  if (inRect > 0.5) {',
-      '    if (inFlap > 0.5) {',
-      '      color = mix(palette(intensity), vec3(0.0, 0.918, 0.894), 0.3);',
-      '    } else {',
-      '      color = palette(intensity);',
-      '    }',
-      '    float edgeMargin = min(cellSize.x, cellSize.y) * 0.5;',
-      '    float dx = envW - abs(center.x);',
-      '    float dy = envH - abs(center.y);',
-      '    float dFlap = abs(center.y - flapLine);',
-      '    float nearEdge = 1.0 - step(edgeMargin, min(dx, dy));',
-      '    float nearFlap = 1.0 - step(edgeMargin, dFlap);',
-      '    float isEdge = max(nearEdge, nearFlap);',
-      '    color = mix(color, vec3(0.0, 0.918, 0.894), isEdge * 0.6);',
+      '  float charCount = 14.0;',
+      '  float charIdx = floor(textUV.x * charCount);',
+      '  float charTime = time * 3.0 - charIdx * 0.12 - floor(textUV.y * 3.0) * 1.2;',
+      '  float reveal = smoothstep(0.0, 0.4, charTime);',
+      '',
+      '  float scanline = step(0.5, fract(gl_FragCoord.y * 0.4));',
+      '  float scanlineAlpha = 0.88 + 0.12 * scanline;',
+      '',
+      '  float waveY = sin(textUV.y * 20.0 + time * 4.0) * 0.01;',
+      '  vec2 waveUV = vec2(textUV.x + waveY, textUV.y);',
+      '  vec4 waveTexel = texture2D(textTexture, waveUV);',
+      '  float waveMask = step(0.3, waveTexel.r);',
+      '',
+      '  float finalMask = textMask * reveal;',
+      '',
+      '  vec3 color = accent;',
+      '  if (finalMask > 0.5) {',
+      '    color = palette(intensity + sin(time * 2.0 + textUV.x * 30.0) * 0.1);',
       '  }',
+      '  if (waveMask > 0.5) {',
+      '    color = mix(color, vec3(0.0, 0.918, 0.894), 0.15);',
+      '  }',
+      '',
+      '  color *= scanlineAlpha;',
       '',
       '  gl_FragColor = vec4(color, 1.0);',
       '}'
@@ -432,7 +461,8 @@
 
     var uniforms = {
       resolution: { value: new THREE.Vector2() },
-      time:       { value: 0.0 }
+      time:       { value: 0.0 },
+      textTexture: { value: textTexture }
     };
 
     var scene    = new THREE.Scene();
