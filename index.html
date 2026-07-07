@@ -364,18 +364,24 @@
 
     tc.fillStyle = '#000';
     tc.fillRect(0, 0, cw, ch);
-
-    tc.textAlign = 'left';
+    tc.textAlign = 'center';
     tc.textBaseline = 'middle';
-    tc.font = 'bold 44px "Courier New", monospace';
+    tc.font = 'bold 38px "Courier New", monospace';
 
     for (var li = 0; li < numLines; li++) {
       var line = lines[li];
       var y = li * cellH + cellH / 2;
-      tc.fillStyle = 'rgb(55, 58, 80)';
-      tc.fillText(line.replace(/[^_]/g, '_'), 0, y);
-      tc.fillStyle = '#fff';
-      tc.fillText(line, 0, y);
+      for (var ci = 0; ci < numCols; ci++) {
+        var x = ci * cellW + cellW / 2;
+        if (ci < line.length) {
+          tc.fillStyle = 'rgb(55, 60, 90)';
+          tc.fillText('_', x, y);
+          if (line[ci] !== '_') {
+            tc.fillStyle = '#fff';
+            tc.fillText(line[ci], x, y);
+          }
+        }
+      }
     }
 
     var textTexture = new THREE.Texture(textCanvas);
@@ -413,8 +419,8 @@
       'varying vec2 vUv;',
       'void main(void) {',
       '  vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);',
-      '  vec2 fMosaicScal = vec2(4.0, 2.0);',
-      '  vec2 vScreenSize = vec2(96.0, 96.0);',
+      '  vec2 fMosaicScal = vec2(3.0, 3.0);',
+      '  vec2 vScreenSize = vec2(120.0, 120.0);',
       '  vec2 grid = vec2(',
       '    floor(uv.x * vScreenSize.x / fMosaicScal.x) / (vScreenSize.x / fMosaicScal.x),',
       '    floor(uv.y * vScreenSize.y / fMosaicScal.y) / (vScreenSize.y / fMosaicScal.y)',
@@ -437,11 +443,11 @@
       '',
       '  float numCols = float(' + numCols + ');',
       '  float colIdx = floor(textUV.x * numCols);',
-      '  float revealCol = floor(time * 1.8);',
+      '  float revealCol = floor(time * 1.5);',
       '  float isRevealed = step(colIdx, revealCol);',
       '',
       '  float isLetter = step(0.5, texel.r);',
-      '  float isUnderscore = step(0.04, texel.r) * (1.0 - isLetter);',
+      '  float isUnderscore = step(0.03, texel.r) * (1.0 - isLetter);',
       '  float textMask = isUnderscore + isLetter * isRevealed;',
       '',
       '  float scanline = step(0.5, fract(gl_FragCoord.y * 0.5));',
@@ -470,11 +476,14 @@
       uniforms:       uniforms,
       vertexShader:   vertexShader,
       fragmentShader: fragmentShader,
+      depthWrite: false,
+      depthTest: false,
     });
     var mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    var renderer = new THREE.WebGLRenderer({ antialias: false });
+    var renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
+    renderer.setClearColor(0x000000, 0);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     mount.appendChild(renderer.domElement);
 
