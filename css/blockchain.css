@@ -10,7 +10,7 @@
   --cs-tag-bg:       rgba(0,234,228,0.15);
   --cs-tag-text:     #00EAE4;
   --cs-accent:       #00EAE4;
-  --cs-card-bg:      rgba(255,255,255,0.04);
+  --cs-card-bg:      #1D1B1E;
   --cs-white:        var(--cs-card-bg);
   background: #141115;
   color: #ffffff;
@@ -371,8 +371,8 @@
 .iv-page .hm-contact {
   padding-top: 64px;
 }
-.iv-page .hm-contact__graphic {
-  background: #2F343D;
+.iv-page .hm-contact__right {
+  background: var(--cs-card-bg);
 }
 
 /* ─── hm-work__row dark theme overrides ─── */

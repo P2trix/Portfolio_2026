@@ -10,7 +10,7 @@
   --cs-tag-bg: rgba(238, 255, 47, 0.12);
   --cs-tag-text: #EEFF2F;
   --cs-accent: #EEFF2F;
-  --cs-card-bg: rgba(23, 27, 33, 0.80);
+  --cs-card-bg: #15181E;
   background: #0B0E11;
   color: #ffffff;
 }
@@ -223,8 +223,8 @@
   color: #9DA4B1;
 }
 
-.f2-page .hm-contact__graphic {
-  background: #2F343D;
+.f2-page .hm-contact__right {
+  background: #15181E;
 }
 
 /* ─── Summary inline (5a, within grid) ─── */

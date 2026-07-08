@@ -953,16 +953,21 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) rotate(0deg);
   z-index: 2;
-  max-width: 60%;
-  max-height: 60%;
-  width: auto;
+  width: 55%;
+  max-width: 320px;
   height: auto;
-  object-fit: contain;
   pointer-events: none;
   opacity: 0;
   animation: sendFadeIn 1s ease 0.5s forwards;
+  color: var(--cs-accent);
+}
+#contact-send-icon svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
 }
 @keyframes sendFadeIn {
   to { opacity: 1; }
