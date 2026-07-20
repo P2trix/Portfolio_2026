@@ -18,8 +18,7 @@
 
 /* ─── Nav ─── */
 .iv-page .cs-nav {
-  background: rgba(20,17,21,0.85);
-  backdrop-filter: blur(16px);
+  background: rgba(20,17,21,0.97);
 }
 
 .iv-page .cs-nav--sticky {

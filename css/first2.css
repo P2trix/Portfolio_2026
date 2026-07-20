@@ -20,8 +20,7 @@
 }
 
 .f2-page .cs-nav--sticky {
-  background: rgba(11, 14, 17, 0.75);
-  backdrop-filter: blur(16px);
+  background: rgba(11, 14, 17, 0.92);
   border: 1px solid #494F5C;
   box-shadow: none;
 }
@@ -44,12 +43,6 @@
   background: #EEFF2F;
   color: #0B0E11 !important;
   border-color: #EEFF2F;
-}
-
-.f2-page .cs-nav--sticky {
-  background: rgba(11, 14, 17, 0.75);
-  backdrop-filter: blur(16px);
-  border-bottom-color: #494F5C;
 }
 
 /* ─── Hero Bento ─── */
@@ -412,8 +405,8 @@
 
 /* ─── Phone mockup responsive ─── */
 @media (max-width: 768px) {
-  .f2-phone-mockup { height: 360px !important; }
+  .f2-phone-mockup { height: 360px !important; width: 100% !important; object-fit: cover !important; }
 }
 @media (max-width: 480px) {
-  .f2-phone-mockup { height: 280px !important; }
+  .f2-phone-mockup { height: 280px !important; width: 100% !important; object-fit: cover !important; }
 }

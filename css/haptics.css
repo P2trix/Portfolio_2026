@@ -14,13 +14,11 @@
 }
 
 .hp-page .cs-nav {
-  background: rgba(242, 244, 248, 0.9);
-  backdrop-filter: blur(12px);
+  background: rgba(242, 244, 248, 0.98);
 }
 
 .hp-page .cs-nav--sticky {
-  background: rgba(242, 244, 248, 0.8);
-  backdrop-filter: blur(16px);
+  background: rgba(242, 244, 248, 0.95);
   box-shadow: none;
 }
 

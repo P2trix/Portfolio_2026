@@ -1108,6 +1108,7 @@
 
   .hm-about__stats { flex-wrap: wrap; gap: 12px; }
   .hm-stat { flex: 1; min-width: 100px; padding: 16px 20px; }
+  .hm-stat__icon { position: static; top: auto; left: auto; margin-bottom: auto; margin-top: 8px; }
   .hm-stat__number { font-size: 28px; }
 
   .hm-work__header { flex-direction: column; gap: 12px; margin-bottom: 24px; }
@@ -1160,6 +1161,7 @@
   .hm-about__content p { font-size: 15px; }
   .hm-about__stats { gap: 10px; padding-top: 24px; }
   .hm-stat { padding: 14px 16px; min-width: 80px; }
+  .hm-stat__icon { position: static; top: auto; left: auto; margin-bottom: auto; margin-top: 10px; }
   .hm-stat__number { font-size: 24px; }
   .hm-stat__label { font-size: 11px; }
 
