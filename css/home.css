@@ -1164,7 +1164,7 @@
   .hm-stat__number { font-size: 24px; }
   .hm-stat__label { font-size: 11px; }
 
-  .hm-work { padding: 40px 0; width: 100vw; }
+  .hm-work { padding: 40px 0; }
   .hm-work__pill { gap: 6px; padding: 4px 4px 4px 18px; }
   .hm-work__pill-text { align-items: flex-start; }
   .hm-work__pill-text span:first-child { font-size: 14px; }
