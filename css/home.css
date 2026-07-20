@@ -1113,8 +1113,8 @@
   .hm-work__pill-text { align-items: flex-start; }
   .hm-work__pill-text span:first-child { font-size: 14px; }
   .hm-work__pill-email { font-size: 13px; }
-  .hm-work__pill-avatar { width: 32px; height: 32px; }
-  .hm-work__pill { gap: 8px; padding: 5px 5px 5px 22px; }
+  .hm-work__pill-avatar { width: 44px; height: 44px; }
+  .hm-work__pill { gap: 10px; padding: 6px 6px 6px 24px; }
   .hm-work__list { gap: 24px; }
   .hm-work__row { grid-template-columns: 1fr; }
   .hm-work__row-body { padding: 24px; gap: 14px; }
