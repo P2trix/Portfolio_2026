@@ -532,7 +532,7 @@ body.cs-page {
 
 .cs-image-row-2 div,
 .cs-image-row-3 div {
-  border-radius: 12px;
+  border-radius: var(--cs-radius);
   overflow: hidden;
 }
 
