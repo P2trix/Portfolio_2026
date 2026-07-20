@@ -1132,6 +1132,10 @@
   .hm-contact__right { width: 100%; height: 300px; }
   .hm-contact__title { font-size: 28px; }
   .hm-contact__email { font-size: 18px; }
+  .hm-contact__actions { flex-direction: column; width: 100%; align-items: center; }
+  .hm-contact__email-btn,
+  .hm-contact__linkedin { width: 100%; justify-content: center; }
+  .hm-contact__or { margin: -4px 0; }
 }
 
 @media (max-width: 480px) {
