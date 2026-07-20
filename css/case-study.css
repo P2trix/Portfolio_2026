@@ -649,7 +649,7 @@ body.cs-page {
 }
 
 @media (max-width: 480px) {
-  .cs-page .container { padding: 0 16px; }
+  .cs-page .container { padding: 0 8px; }
   .cs-hero__title { font-size: 26px; line-height: 34px; }
   .cs-hero__image { padding: 16px; min-height: auto; border-radius: 12px; }
   .cs-hero__content { gap: 20px; }
