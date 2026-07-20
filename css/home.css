@@ -1044,7 +1044,6 @@
     grid-template-columns: 1fr;
     padding: 0;
     min-height: auto;
-    background: #060e18;
   }
   .hm-hero__text { padding: 48px 48px 36px; gap: 24px; }
   .hm-hero__pills { gap: 12px; }
@@ -1145,7 +1144,7 @@
   .hm-hero__text { padding: 28px 24px 24px; gap: 18px; }
   .hm-hero__pills { gap: 8px; }
   .hm-hero__pill { padding: 6px 14px; font-size: 12px; }
-  .hm-hero__title { font-size: 28px; letter-spacing: -0.02em; line-height: 1.15; }
+  .hm-hero__title { font-size: 34px; letter-spacing: -0.02em; line-height: 1.15; }
   .hm-hero__desc { font-size: 15px; line-height: 1.65; }
   .hm-hero__actions { flex-direction: column; gap: 10px; margin-top: 2px; }
   .hm-btn,
