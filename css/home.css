@@ -1117,12 +1117,12 @@
   .hm-work__pill { gap: 10px; padding: 6px 6px 6px 24px; }
   .hm-work__list { gap: 24px; }
   .hm-work__row { grid-template-columns: 1fr; }
-  .hm-work__row-body { padding: 24px; gap: 14px; }
+  .hm-work__row-body { padding: 24px; gap: 18px; }
   .hm-work__row-tags { gap: 6px; }
   .hm-work__row-tags span { font-size: 12px; padding: 4px 12px; }
-  .hm-work__row-bottom h3 { font-size: 28px; }
+  .hm-work__row-bottom h3 { font-size: 34px; }
   .hm-work__row-num { font-size: 28px; }
-  .hm-work__row-bottom { gap: 4px; }
+  .hm-work__row-bottom { gap: 12px; }
   .hm-work__row-body p { font-size: 14px; line-height: 1.6; }
   .hm-work__row-cta { font-size: 13px; }
 
@@ -1173,7 +1173,7 @@
   .hm-work__row { border-radius: 20px; }
   .hm-work__row-body { padding: 20px; gap: 12px; }
   .hm-work__row-tags span { font-size: 11px; padding: 4px 10px; }
-  .hm-work__row-bottom h3 { font-size: 22px; }
+  .hm-work__row-bottom h3 { font-size: 26px; }
   .hm-work__row-num { font-size: 22px; }
 
   .hm-gallery { padding: 40px 0 0; }
