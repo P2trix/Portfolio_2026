@@ -1044,6 +1044,7 @@
     grid-template-columns: 1fr;
     padding: 0;
     min-height: auto;
+    background: #060e18;
   }
   .hm-hero__text { padding: 48px 48px 36px; gap: 24px; }
   .hm-hero__pills { gap: 12px; }
@@ -1054,13 +1055,8 @@
   .hm-btn,
   .hm-btn--primary,
   .hm-btn--outline { justify-content: center; padding: 16px 28px; font-size: 15px; }
-  .hm-hero__visual { position: relative; width: 100%; height: 300px; border-radius: 0 0 28px 28px; background: #060e18; }
-  .hm-hero__visual iframe,
-  .hm-hero__visual.iframe-ready iframe {
-    opacity: 0 !important;
-    visibility: hidden !important;
-  }
-  .hm-hero__visual-img { display: block; }
+  .hm-hero__visual { position: relative; width: 100%; height: 300px; border-radius: 0 0 28px 28px; }
+  .hm-hero__visual-img { display: none; }
 
   .hm-about { padding: 80px 0; }
   .hm-about__grid {
@@ -1150,13 +1146,7 @@
   .hm-btn,
   .hm-btn--primary,
   .hm-btn--outline { justify-content: center; padding: 14px 24px; font-size: 14px; }
-  .hm-hero__visual { height: 200px; border-radius: 0 0 16px 16px; }
-  .hm-hero__visual iframe,
-  .hm-hero__visual.iframe-ready iframe {
-    opacity: 0 !important;
-    visibility: hidden !important;
-  }
-  .hm-hero__visual-img { display: block; }
+  .hm-hero__visual { height: 200px; }
 
   .hm-about { padding: 40px 0; }
   .hm-about__tags-box { min-height: 260px; border-radius: 14px; }
