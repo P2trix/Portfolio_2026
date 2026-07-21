@@ -273,15 +273,29 @@
 
 /* ─── Challenge cards (context) ─── */
 .iv-challenges .iv-challenge__img {
-  height: 130px;
-  background: rgba(255,255,255,0.04);
+  width: 80px;
+  height: 80px;
   border-radius: 12px;
-  border: 1px dashed rgba(255,255,255,0.1);
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.iv-challenges .iv-challenge__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.iv-challenges .cs-process__card {
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  background: none;
 }
 
 .iv-challenges .cs-process__body {
-  margin-top: auto;
+  flex: 1;
 }
 
 .iv-challenges .cs-process__body h3 {
