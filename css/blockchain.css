@@ -291,6 +291,9 @@
 
 .iv-challenges .cs-process__card {
   background: none;
+  height: auto;
+  justify-content: flex-start;
+  gap: 0;
 }
 
 .iv-challenges .cs-process__body {
