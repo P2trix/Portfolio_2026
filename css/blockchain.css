@@ -273,12 +273,13 @@
 
 /* ─── Challenge cards (context) ─── */
 .iv-challenges .iv-challenge__img {
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  max-width: 220px;
+  aspect-ratio: 1;
   border-radius: 12px;
   flex-shrink: 0;
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .iv-challenges .iv-challenge__img img {
