@@ -47,7 +47,7 @@
 
 /* ─── Hero Bento ─── */
 .f2-hero__bento {
-  background: url('../Figma/first2_hero1.webp') bottom/cover no-repeat !important;
+  background: url('../Figma/first2_hero1.webp') center/cover no-repeat !important;
   border: 1px solid #494F5C;
 }
 
@@ -88,6 +88,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: bottom;
   display: block;
 }
 
