@@ -278,6 +278,7 @@
   border-radius: 12px;
   flex-shrink: 0;
   overflow: hidden;
+  margin-bottom: 12px;
 }
 
 .iv-challenges .iv-challenge__img img {
@@ -288,14 +289,11 @@
 }
 
 .iv-challenges .cs-process__card {
-  flex-direction: row;
-  align-items: center;
-  gap: 20px;
   background: none;
 }
 
 .iv-challenges .cs-process__body {
-  flex: 1;
+  margin-top: auto;
 }
 
 .iv-challenges .cs-process__body h3 {
