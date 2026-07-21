@@ -317,7 +317,68 @@
     </div>
   </div>
 
-  <!-- Insight card: Signal -->
+  <!-- Insight card: Access -->
+  <div class="container">
+    <div class="cs-process" data-reveal style="border:none;padding:32px 0">
+      <div class="cs-process__card hp-anim-card">
+        <div class="hp-bg" aria-hidden="true">
+          <canvas id="hpMemCanvas"></canvas>
+        </div>
+        <script>(function(){
+          var c=document.getElementById('hpMemCanvas'),ctx=c.getContext('2d');
+          var W,H;
+          var WP=[{x:.12,y:.5},{x:.28,y:.28},{x:.46,y:.62},{x:.64,y:.22},{x:.84,y:.5}];
+          function resize(){var r=c.parentElement.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height;}
+          resize();new ResizeObserver(resize).observe(c.parentElement);
+          var CYCLE=3.2;
+          function frame(ts){var t=ts/1000;
+            ctx.clearRect(0,0,W,H);
+            var N=WP.length-1,ph=t%CYCLE,prog=Math.min(ph/(CYCLE*.82),1);
+            var fade=prog>=1?Math.max(0,1-(ph-CYCLE*.82)/(CYCLE*.18)):1;
+            WP.forEach(function(wp){
+              ctx.beginPath();ctx.arc(wp.x*W,wp.y*H,5,0,Math.PI*2);
+              ctx.fillStyle='#D0D3DB';ctx.fill();
+            });
+            ctx.save();ctx.globalAlpha=fade;
+            ctx.setLineDash([6,5]);ctx.strokeStyle='#1A1C23';ctx.lineWidth=2;
+            ctx.beginPath();ctx.moveTo(WP[0].x*W,WP[0].y*H);
+            var full=Math.floor(prog*N),partial=(prog*N)-full;
+            for(var i=1;i<=Math.min(full,N);i++) ctx.lineTo(WP[i].x*W,WP[i].y*H);
+            if(full<N){ctx.lineTo((WP[full].x+(WP[full+1].x-WP[full].x)*partial)*W,(WP[full].y+(WP[full+1].y-WP[full].y)*partial)*H);}
+            ctx.stroke();ctx.setLineDash([]);
+            WP.forEach(function(wp,i){
+              if(prog*N>=i){ctx.beginPath();ctx.arc(wp.x*W,wp.y*H,5,0,Math.PI*2);ctx.fillStyle='rgba(26,28,35,'+fade+')';ctx.fill();}
+            });
+            ctx.restore();
+            requestAnimationFrame(frame);}
+          requestAnimationFrame(frame);
+        })();</script>
+        <span class="cs-process__badge">03</span>
+        <div class="cs-process__body">
+          <h3>Access</h3>
+          <p>Universal design · Human variability · Primary channel</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3a: Not everyone's fingers work the same way -->
+  <div class="container">
+    <div class="cs-section" data-reveal id="s-3a">
+      <div class="cs-section__left">
+        <h3>Not everyone's fingers work the same way</h3>
+        <div class="cs-section__number">3a</div>
+      </div>
+      <div class="cs-section__right">
+        <p>There's another dimension to this that doesn't get talked about enough.</p>
+        <p>Capacitive touchscreens depend on conductivity. Sweaty hands. Cold hands. Gloves. Worn fingerprints — a real condition, more common than you'd think, that affects elderly users, people who work with their hands, certain chemotherapy patients. For these users, a flat glass surface isn't just less satisfying. It literally doesn't work.</p>
+        <p>Voice control solves some of this. But voice has its own failure modes: accents, ambient noise, the social discomfort of talking to your car in a parking garage. It's an additional channel, not a replacement.</p>
+        <p>The pattern here is the same one that shows up everywhere in design when you mistake preference for universal truth. "Touch is better" is a preference, held by people with typical hands, in typical conditions, who made the decision. Physical feedback isn't a legacy constraint — it's a human one.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insight card: Correction -->
   <div class="container">
     <div class="cs-process" data-reveal style="border:none;padding:32px 0">
       <div class="cs-process__card hp-anim-card">
@@ -359,27 +420,11 @@
             requestAnimationFrame(frame);}
           requestAnimationFrame(frame);
         })();</script>
-        <span class="cs-process__badge">03</span>
+        <span class="cs-process__badge">04</span>
         <div class="cs-process__body">
           <h3>Correction</h3>
           <p>Regulatory shift · Physical controls return · Course correction</p>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3a: Not everyone's fingers work the same way -->
-  <div class="container">
-    <div class="cs-section" data-reveal id="s-3a">
-      <div class="cs-section__left">
-        <h3>Not everyone's fingers work the same way</h3>
-        <div class="cs-section__number">3a</div>
-      </div>
-      <div class="cs-section__right">
-        <p>There's another dimension to this that doesn't get talked about enough.</p>
-        <p>Capacitive touchscreens depend on conductivity. Sweaty hands. Cold hands. Gloves. Worn fingerprints — a real condition, more common than you'd think, that affects elderly users, people who work with their hands, certain chemotherapy patients. For these users, a flat glass surface isn't just less satisfying. It literally doesn't work.</p>
-        <p>Voice control solves some of this. But voice has its own failure modes: accents, ambient noise, the social discomfort of talking to your car in a parking garage. It's an additional channel, not a replacement.</p>
-        <p>The pattern here is the same one that shows up everywhere in design when you mistake preference for universal truth. "Touch is better" is a preference, held by people with typical hands, in typical conditions, who made the decision. Physical feedback isn't a legacy constraint — it's a human one.</p>
       </div>
     </div>
   </div>
@@ -406,51 +451,6 @@
     <div class="cs-image-row-2" data-reveal>
       <div><img src="../Figma/v1haptic1.png" alt="" style="width:100%;height:auto;display:block"></div>
       <div><img src="../Figma/ferrari-luce-driver.webp" alt="" style="width:100%;height:auto;display:block"></div>
-    </div>
-  </div>
-
-  <!-- Insight card: Memory -->
-  <div class="container">
-    <div class="cs-process" data-reveal style="border:none;padding:32px 0">
-      <div class="cs-process__card hp-anim-card">
-        <div class="hp-bg" aria-hidden="true">
-          <canvas id="hpMemCanvas"></canvas>
-        </div>
-        <script>(function(){
-          var c=document.getElementById('hpMemCanvas'),ctx=c.getContext('2d');
-          var W,H;
-          var WP=[{x:.12,y:.5},{x:.28,y:.28},{x:.46,y:.62},{x:.64,y:.22},{x:.84,y:.5}];
-          function resize(){var r=c.parentElement.getBoundingClientRect();W=c.width=r.width;H=c.height=r.height;}
-          resize();new ResizeObserver(resize).observe(c.parentElement);
-          var CYCLE=3.2;
-          function frame(ts){var t=ts/1000;
-            ctx.clearRect(0,0,W,H);
-            var N=WP.length-1,ph=t%CYCLE,prog=Math.min(ph/(CYCLE*.82),1);
-            var fade=prog>=1?Math.max(0,1-(ph-CYCLE*.82)/(CYCLE*.18)):1;
-            WP.forEach(function(wp){
-              ctx.beginPath();ctx.arc(wp.x*W,wp.y*H,5,0,Math.PI*2);
-              ctx.fillStyle='#D0D3DB';ctx.fill();
-            });
-            ctx.save();ctx.globalAlpha=fade;
-            ctx.setLineDash([6,5]);ctx.strokeStyle='#1A1C23';ctx.lineWidth=2;
-            ctx.beginPath();ctx.moveTo(WP[0].x*W,WP[0].y*H);
-            var full=Math.floor(prog*N),partial=(prog*N)-full;
-            for(var i=1;i<=Math.min(full,N);i++) ctx.lineTo(WP[i].x*W,WP[i].y*H);
-            if(full<N){ctx.lineTo((WP[full].x+(WP[full+1].x-WP[full].x)*partial)*W,(WP[full].y+(WP[full+1].y-WP[full].y)*partial)*H);}
-            ctx.stroke();ctx.setLineDash([]);
-            WP.forEach(function(wp,i){
-              if(prog*N>=i){ctx.beginPath();ctx.arc(wp.x*W,wp.y*H,5,0,Math.PI*2);ctx.fillStyle='rgba(26,28,35,'+fade+')';ctx.fill();}
-            });
-            ctx.restore();
-            requestAnimationFrame(frame);}
-          requestAnimationFrame(frame);
-        })();</script>
-        <span class="cs-process__badge">04</span>
-        <div class="cs-process__body">
-          <h3>Access</h3>
-          <p>Universal design · Human variability · Primary channel</p>
-        </div>
-      </div>
     </div>
   </div>
 
