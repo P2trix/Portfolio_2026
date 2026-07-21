@@ -423,7 +423,7 @@
 
 /* ─── Responsive ─── */
 @media (max-width: 900px) {
-  .iv-project-block { grid-template-columns: 1fr; }
+  .iv-project-block { grid-template-columns: 1fr; height: auto; }
   .iv-project-block--reverse { direction: ltr; }
   .iv-project-block__body { padding: 32px; }
   .iv-takeaways-grid { grid-template-columns: 1fr; }
